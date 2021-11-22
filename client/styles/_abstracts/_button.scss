@@ -1,0 +1,41 @@
+@mixin button($color, $backgroundColor) {
+  background: $backgroundColor;
+  color: $color;
+  border: none;
+  &:hover {
+    cursor: pointer;
+  }
+  &:hover, &:focus {
+    background: lighten( $backgroundColor, 5 );
+  }
+  &:active {
+    background: lighten( $backgroundColor, 7.5 );
+  }
+}
+.buttonDark {
+  @include button($white-0, $black-1);
+
+}
+.buttonDarkL {
+  @include button($white-0, $black-1);
+  padding: .6em 1.25em;
+  font-size: 1rem;
+}
+
+.buttonBlockDark2{
+  @include button($white-0, $black-2);
+  border-radius: 0;
+  font-size: 1.15rem;
+  width: 100%;
+  height: 100%
+}
+
+.buttonRed {
+  @include button($white-0, $red-0);
+}
+.buttonRedL {
+  @include button($white-0, $red-0);
+  padding: .6em 1.25em;
+  font-size: 1rem;
+}
+

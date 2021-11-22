@@ -1,0 +1,7 @@
+{
+  "locales": ["en", "de", "fa"],
+  "defaultLocale": "en",
+  "pages": {
+    "*": ["common", "auth", "sidebar"]
+  }
+}

@@ -1,0 +1,37 @@
+@mixin forPhoneOnly {
+    @media (max-width: 599px) { @content; }
+}
+@mixin forTabletPortraitUp {
+    @media (min-width: 600px) { @content; }
+}
+@mixin forTabletLandscapeUp {
+    @media (min-width: 900px) { @content; }
+}
+@mixin forDesktopUp {
+    @media (min-width: 1200px) { @content; }
+}
+@mixin forBigDesktopUp {
+    @media (min-width: 1800px) { @content; }
+}
+
+$desktopMaxWidth: 1200px;
+$desktopMinWidth: 400px;
+$desktopWidth: 80%;
+
+// @mixin alignForDesktop {
+//     padding: 5vh 1.5rem 5vh 2rem;
+//     width: $desktopMinWidth;
+//     margin: 5vh auto;
+//     border-radius: .4rem;
+//     min-height: 75vh;
+//     height: 75vh;
+//     overflow-y: scroll;
+//     background-color: $black-0;
+// }
+
+// @mixin alignForMobile {
+//     padding: 2rem;
+//     width: 100%;
+//     height: 100%;
+//     margin: 0;
+// }

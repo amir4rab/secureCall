@@ -1,0 +1,24 @@
+//** white colors **//
+$white-0: #F5F5F5;
+$white-0-25: transparentize($white-0, .75);
+$white-0-50: transparentize($white-0, .5);
+$white-0-75: transparentize($white-0, .25);
+
+//** black colors **//
+$black-0: #000000;
+$black-1: #1F1F1F;
+$black-2: #252525;
+$lightenBlack: lighten( $black-1, 7.5);
+
+//** light grey colors **//
+$grey-0: #B8B8B8;
+
+//** accent colors **//
+$highlight: #ce7aff;
+$highlight-dis: #644a74;
+
+
+//** event colors **//
+$red-0: #BA181B;
+$yellow-0: #F2C94C;
+$green-0: #38B000;
