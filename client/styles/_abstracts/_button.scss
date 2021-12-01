@@ -12,14 +12,19 @@
     background: lighten( $backgroundColor, 7.5 );
   }
 }
-.buttonDark {
-  @include button($white-0, $black-1);
 
-}
-.buttonDarkL {
-  @include button($white-0, $black-1);
+@mixin largeBtn {
   padding: .6em 1.25em;
   font-size: 1rem;
+}
+
+.buttonDark {
+  @include button($white-0, $black-1);
+}
+
+.buttonDarkL {
+  @include button($white-0, $black-1);
+  @include largeBtn;
 }
 
 .buttonBlockDark2{
@@ -28,6 +33,15 @@
   font-size: 1.15rem;
   width: 100%;
   height: 100%
+}
+
+.buttonWhite {
+  @include button($black-1, $white-0);
+} 
+
+.buttonWhiteL {
+  @include button($black-1, $white-0);
+  @include largeBtn;
 }
 
 .buttonRed {
