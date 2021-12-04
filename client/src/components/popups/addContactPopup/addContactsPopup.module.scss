@@ -1,0 +1,36 @@
+@import '../../../../styles/baseStyles';
+
+.addContactsPopupInner {
+  padding: 2rem 1rem;
+  .title{
+    font-size: 1.25rem;
+    text-align: center;
+    padding: 1rem 0;
+  }
+  .form{
+    padding: 1rem;
+    label {
+      display: block;
+      padding-bottom: 1.5rem;
+    }
+    input {
+      width: 100%;
+      background: $black-1;
+      color: $white-0;
+      border: .1rem solid lighten( $black-1, 10 );
+      margin-bottom: 1rem;
+    }
+    .response {
+      min-height: 3rem;
+      .loading{
+        opacity: .75;
+      }
+      .error{
+        color: $red-0;
+      }
+      .response{
+        color: $green-0;
+      }
+    }
+  }
+}
