@@ -1,5 +1,5 @@
 {
-  "name": "e2ee-caller",
+  "name": "securecall",
   "private": true,
   "scripts": {
     "dev": "next dev",
