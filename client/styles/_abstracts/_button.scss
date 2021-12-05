@@ -2,6 +2,7 @@
   background: $backgroundColor;
   color: $color;
   border: none;
+  transition: opacity .3s ease-in-out;
   &:hover {
     cursor: pointer;
   }
@@ -10,6 +11,11 @@
   }
   &:active {
     background: lighten( $backgroundColor, 7.5 );
+  }
+  &:disabled {
+    background: lighten( $backgroundColor, 7.5);
+    opacity: .5;
+    cursor: default;
   }
 }
 
@@ -49,7 +55,14 @@
 }
 .buttonRedL {
   @include button($white-0, $red-0);
-  padding: .6em 1.25em;
-  font-size: 1rem;
+  @include largeBtn;
+}
+
+.buttonGreen {
+  @include button($black-1, $green-0);
+}
+.buttonGreenL {
+  @include button($black-1, $green-0);
+  @include largeBtn;
 }
 
