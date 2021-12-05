@@ -13,15 +13,19 @@ const contactRequest = async ( data, callback, { client, userDbData, socketEmail
   if( reciver === null ) { //** checks if the recipient does not exists **//
     await client.close();
     callback({
+      recipientEmail,
       status: 'error',
-      response: 'User does not exists!'
+      response: 'User does not exists!',
+      responseCode: 'userDNE'
     });
     return;
   } else if ( recipientEmail === userDbData.email ) { //** checks if the recipient email is wrong **//
     await client.close();
     callback({
+      recipientEmail,
       status: 'error',
-      response: "You can't sent a request to yourself!"
+      response: "You can't sent a request to yourself!",
+      responseCode: 'selfReq'
     });
     return;
   }
@@ -31,8 +35,10 @@ const contactRequest = async ( data, callback, { client, userDbData, socketEmail
     await client.close();
 
     callback({
+      recipientEmail,
       status: 'error',
-      response: `${recipientEmail} inbox is full!`
+      response: `${recipientEmail} inbox is full!`,
+      responseCode: 'fullInbox'
     });
 
   } else if ( typeof reciver.requests.find( request => request.email === userDbData.email ) !== 'undefined' ) { //** recipient already has a request from sender **//
@@ -40,8 +46,10 @@ const contactRequest = async ( data, callback, { client, userDbData, socketEmail
     await client.close();
 
     callback({
+      recipientEmail,
       status: 'successful',
-      response: `${recipientEmail} already has a request from you!`
+      response: `${recipientEmail} already has a request from you!`,
+      responseCode: 'dupReq'
     });
 
   } else if ( typeof reciver.contacts.find( contact => contact.email === userDbData.email ) !== 'undefined' ) { //** recipient is already a contact **//
@@ -49,8 +57,10 @@ const contactRequest = async ( data, callback, { client, userDbData, socketEmail
     await client.close();
 
     callback({
+      recipientEmail,
       status: 'successful',
-      response: `${recipientEmail} is in your contacts!`
+      response: `${recipientEmail} is in your contacts!`,
+      responseCode: 'dupCon'
     });
 
   } else { //** adding request to recipient's request inbox  **//
@@ -77,11 +87,6 @@ const contactRequest = async ( data, callback, { client, userDbData, socketEmail
 
     const recipientSocketId = activeUsers.get(recipientEmail);
     if ( recipientSocketId ) { //** sending recipient the request event **//
-      console.log(`sending request to ${recipientEmail}:${recipientSocketId}`);
-      console.log({
-        name: userDbData.name,
-        email: userDbData.email
-      })
       socket.to(recipientSocketId).emit('contactingRequest', ({
         name: userDbData.name,
         email: userDbData.email
@@ -89,8 +94,10 @@ const contactRequest = async ( data, callback, { client, userDbData, socketEmail
     }
 
     callback({
+      recipientEmail,
       status: 'successful',
-      response: 'Request has been sent.'
+      response: 'Request has been sent.',
+      responseCode: 'successful'
     });
   }
 }
