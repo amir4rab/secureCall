@@ -2,6 +2,6 @@
   "locales": ["en", "de", "fa"],
   "defaultLocale": "en",
   "pages": {
-    "*": ["common", "auth", "sidebar"]
+    "*": [ "common", "auth", "sidebar", "addContactPopup", "contactCard", "contactDisplay" ]
   }
 }

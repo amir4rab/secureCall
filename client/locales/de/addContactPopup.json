@@ -1,0 +1,11 @@
+{
+  "addContacts": "Kontakte hinzufügen",
+  "rEmailAddress": "Empfänger E-Mail-Adresse",
+  "sendRequest": "Anfrage senden",
+  "userDNE": "Benutzer existiert nicht!",
+  "selfReq": "Sie können keine Anfrage an sich selbst senden!",
+  "fullInbox": "{{email}}'s Posteingang ist voll!",
+  "dupReq": "{{email}} haben bereits eine Anfrage von Ihnen!",
+  "dupCon": "{{email}} sind in Ihren Kontakten! ",
+  "successful": "Anfrage wurde gesendet."
+}
