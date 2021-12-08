@@ -1,0 +1,13 @@
+@import '../../../../styles/baseStyles';
+
+.notificationInner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  align-content: center;
+  .right {
+    button:not(:last-child) {
+      margin: .5rem;
+    }
+  }
+}
