@@ -40,10 +40,10 @@ const requestResponse = async ( data, callback, { client, userDbData, activeUser
     });
     return;
   } else { //** accepted request **//
-    const queryReciver = { email: recipientEmail };
-    const reciver = await users.findOne(queryReciver);
+    const queryReceiver = { email: recipientEmail };
+    const receiver = await users.findOne(queryReceiver);
 
-    if ( reciver === null ) {
+    if ( receiver === null ) {
       await client.close();
       callback({
         status: 'error',
@@ -56,8 +56,8 @@ const requestResponse = async ( data, callback, { client, userDbData, activeUser
     const senderContacts = [
       ...sender.contacts,
       {
-        name: reciver.name,
-        email: reciver.email,
+        name: receiver.name,
+        email: receiver.email,
       }
     ];
     const updateSenderDocument = {
@@ -67,13 +67,13 @@ const requestResponse = async ( data, callback, { client, userDbData, activeUser
       },
     };
 
-    const updateReciverDocument = {
+    const updateReceiverDocument = {
       $set: {
         contacts: [
-          ...reciver.contacts,
+          ...receiver.contacts,
           {
-            name: reciver.name,
-            email: reciver.email,
+            name: userDbData.name,
+            email: userDbData.email,
           }
         ]
       },
@@ -81,7 +81,7 @@ const requestResponse = async ( data, callback, { client, userDbData, activeUser
 
     await Promise.all([
       users.updateOne({ _id: sender._id }, updateSenderDocument ),
-      users.updateOne({ _id: reciver._id }, updateReciverDocument )
+      users.updateOne({ _id: receiver._id }, updateReceiverDocument )
     ]);
 
     await client.close();

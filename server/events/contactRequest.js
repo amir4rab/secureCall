@@ -8,9 +8,9 @@ const contactRequest = async ( data, callback, { client, userDbData, socketEmail
   const query = {
     email: recipientEmail
   };
-  const reciver = await users.findOne(query);
+  const receiver = await users.findOne(query);
 
-  if( reciver === null ) { //** checks if the recipient does not exists **//
+  if( receiver === null ) { //** checks if the recipient does not exists **//
     await client.close();
     callback({
       recipientEmail,
@@ -30,7 +30,7 @@ const contactRequest = async ( data, callback, { client, userDbData, socketEmail
     return;
   }
 
-  if ( reciver.requests.length > 10 ) { //** recipient request inbox is full **//
+  if ( receiver.requests.length > 10 ) { //** recipient request inbox is full **//
 
     await client.close();
 
@@ -41,7 +41,7 @@ const contactRequest = async ( data, callback, { client, userDbData, socketEmail
       responseCode: 'fullInbox'
     });
 
-  } else if ( typeof reciver.requests.find( request => request.email === userDbData.email ) !== 'undefined' ) { //** recipient already has a request from sender **//
+  } else if ( typeof receiver.requests.find( request => request.email === userDbData.email ) !== 'undefined' ) { //** recipient already has a request from sender **//
 
     await client.close();
 
@@ -52,7 +52,7 @@ const contactRequest = async ( data, callback, { client, userDbData, socketEmail
       responseCode: 'dupReq'
     });
 
-  } else if ( typeof reciver.contacts.find( contact => contact.email === userDbData.email ) !== 'undefined' ) { //** recipient is already a contact **//
+  } else if ( typeof receiver.contacts.find( contact => contact.email === userDbData.email ) !== 'undefined' ) { //** recipient is already a contact **//
 
     await client.close();
 
@@ -72,7 +72,7 @@ const contactRequest = async ( data, callback, { client, userDbData, socketEmail
         email: userDbData.email,
         name: userDbData.name
       },
-      ...reciver.requests
+      ...receiver.requests
     ];
   
     const updateDocument = {
@@ -81,7 +81,7 @@ const contactRequest = async ( data, callback, { client, userDbData, socketEmail
       },
     };
   
-    await users.updateOne({ _id: reciver._id }, updateDocument );
+    await users.updateOne({ _id: receiver._id }, updateDocument );
     await client.close();
 
 
