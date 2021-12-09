@@ -2,39 +2,16 @@ import { createContext, useEffect, useState, useRef } from 'react';
 
 export const ContactsContext = createContext();
 
-const boilerPlateContacts = [
-  {
-    "name": "Maryam",
-    "email": "maryam@tes.com",
-    "image": null,
-    "id": "maryam@tes.com"
-  },
-  {
-    "name": "Hesam",
-    "email": "hesam@tes.com",
-    "image": null,
-    "id": "hesam@tes.com"
-  },
-  {
-    "name": "Max",
-    "email": "max@tes.com",
-    "image": null,
-    "id": "max@tes.com"
-  },
-  {
-    "name": "Jack",
-    "email": "jack@tes.com",
-    "image": null,
-    "id": "jack@tes.com"
-  },
-];
-
 export const ContactsProvider = ({ children }) => {
   const [ contacts, setContacts ] = useState([]);
   const [ requests, setRequests ] = useState([]);
 
   const [ activeContact, setActiveContact ] = useState(null);
-  const addContact = (newContact) => {
+  const addContact = ( newContact, init = false ) => {
+    if ( init ) {
+      setContacts([ ...newContact ]);
+      return;
+    }
     if ( Array.isArray(newContact) ) {
       setContacts(oldContacts => [
         ...oldContacts,
@@ -50,22 +27,29 @@ export const ContactsProvider = ({ children }) => {
       return;
     } 
   };
-  const addRequest = (newContact) => {
-    if ( Array.isArray(newContact) ) {
+  const addRequest = ( newRequest, init = false ) => {
+    if ( init ) {
+      setRequests([ ...newRequest ]);
+      return;
+    }
+    if ( Array.isArray(newRequest) ) {
       setRequests(oldContacts => [
         ...oldContacts,
-        ...newContact
+        ...newRequest
       ])
       return;
     }
-    if( typeof newContact === 'object' ) {
+    if( typeof newRequest === 'object' ) {
       setRequests(oldContacts => [
         ...oldContacts,
-        newContact
+        newRequest
       ])
       return;
     } 
   };
+  const removeRequest = ( requestEmail ) => {
+    setRequests(oldRequests => oldRequests.filter( request => request.email !== requestEmail ));
+  }
 
   const getContact = (id) => {
     const contact = contacts.find(contact => contact.id === id);
@@ -82,6 +66,7 @@ export const ContactsProvider = ({ children }) => {
     getContact,
     setActiveContact,
     addRequest,
+    removeRequest,
     requests,
     activeContact,
     contacts,
