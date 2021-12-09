@@ -1,0 +1,44 @@
+@import '../../../styles/baseStyles';
+
+@mixin alignCenter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}
+
+.sidebar {
+  width: 20%;
+  min-width: 200px;
+  background: $black-2;
+  height: 100%;
+  .header{
+    @include alignCenter();
+    @include headingFont;
+    height: 20%;
+    padding: 2rem 1rem;
+    h1 {
+      user-select: none;
+      transition: color .3s ease-in-out;
+      &:hover {
+        cursor: pointer;
+      }
+      &:hover, &:focus {
+        color: $highlight;
+      }
+    }
+
+    text-align: center;
+    font-size: 1.25rem;
+  }
+  .contacts{
+    height: 60%;
+
+  }
+  .footer{
+    @include alignCenter();
+    flex-direction: column;
+    height: 20%;
+
+  }
+}
