@@ -1,4 +1,4 @@
-const duration = .3;
+const duration = .4;
 const transitionDistance = '1rem'
 
 export const fadeUp = {
@@ -6,7 +6,7 @@ export const fadeUp = {
     y: 0,
     opacity: 1,
     transition: {
-      duration: .3
+      duration
     }
   },
   hidden: {
@@ -23,7 +23,7 @@ export const fadeDown = {
     y: 0,
     opacity: 1,
     transition: {
-      duration: .3
+      duration
     }
   },
   hidden: {
@@ -40,7 +40,7 @@ export const fadeLeft = {
     x: 0,
     opacity: 1,
     transition: {
-      duration: .3
+      duration
     }
   },
   hidden: {
@@ -57,7 +57,7 @@ export const fadeRight = {
     x: 0,
     opacity: 1,
     transition: {
-      duration: .3
+      duration
     }
   },
   hidden: {

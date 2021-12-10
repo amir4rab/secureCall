@@ -66,3 +66,10 @@
   @include largeBtn;
 }
 
+.buttonPrimary {
+  @include button($black-1, $highlight);
+}
+.buttonPrimaryL {
+  @include button($black-1, $highlight);
+  @include largeBtn;
+}
