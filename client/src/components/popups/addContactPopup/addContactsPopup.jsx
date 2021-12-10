@@ -1,14 +1,16 @@
 import { useRef, useContext, useState } from 'react'
 import { SocketsContext } from '../../../providers/socketsProvider/socketsProvider';
-
+import useTranslation from 'next-translate/useTranslation';
 import Popup from '../popup/popup';
 
 import classes from './addContactsPopup.module.scss';
 
 function AddContactsPopup({ displayState, setDisplayState }) {
+  const { t } = useTranslation('addContactPopup');
   const { contactRequest } = useContext(SocketsContext);
   const [ isLoading, setIsLoading ] = useState(false);
   const [ error, setError ] = useState(null);
+  const [ errorObj, setErrorObj ] = useState(null);
   const [ response, setResponse ] = useState(null);
 
   const inputRef = useRef();
@@ -23,9 +25,9 @@ function AddContactsPopup({ displayState, setDisplayState }) {
     contactRequest(inputRef.current.value)
       .then( res => {
         if( res.status === 'error' ) {
-          setError(res.response)
+          setError(res)
         } else {
-          setResponse(res.response)
+          setResponse(res)
         }
         setIsLoading(false);
       });
@@ -38,7 +40,7 @@ function AddContactsPopup({ displayState, setDisplayState }) {
     >
       <div className={ classes.addContactsPopupInner }> 
         <h3 className={ classes.title }>
-          Add contacts
+          { t('addContacts') }
         </h3>
         <form 
           className={ classes.form }
@@ -46,19 +48,19 @@ function AddContactsPopup({ displayState, setDisplayState }) {
         >
           <div className={ classes.inputGroup }>
             <label>
-              Recipient EmailAddress
+              { t('rEmailAddress') }
             </label>
             <input ref={ inputRef } type="email" required placeholder='securecall@protonmail.com' />
           </div>
           <div className={ classes.response }>
             {
-              isLoading ? <p className={ classes.loading }>Loading</p> :
-              error !== null ? <p className={ classes.error }>{ error }</p> :
-              response !== null ? <p className={ classes.response }>{ response }</p> : null
+              isLoading ? <p className={ classes.loading }>{ t('loading') }</p> :
+              error !== null ? <p className={ classes.error }>{ t(error.responseCode, { email: error.recipientEmail }) }</p> :
+              response !== null ? <p className={ classes.response }>{ t(response.responseCode, { email: response.recipientEmail }) }</p> : null
             }
           </div>
           <button className={ classes.buttonWhite }>
-            Send Request
+            { t('sendRequest') }
           </button>
         </form>
       </div>
