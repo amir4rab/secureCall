@@ -1,0 +1,46 @@
+@import '../../../../styles/baseStyles';
+
+.selector {
+  position: relative;
+  display: inline-block;
+  padding: .5rem 0;
+  .activeOption{
+    padding: .4rem 1rem;
+    background: none;
+    border: none;
+    color: $white-0;
+    &:hover {
+      cursor: pointer;
+    }
+    &:hover, :focus {
+      background-color: transparentize($white-0, .75);
+    }
+  }
+  .options{
+    background: transparentize($white-0, .75);
+    backdrop-filter: blur(.5rem);
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    border-radius: .4rem;
+    .option{
+      background: none;
+      color: $white-0;
+      border: none;
+      &:hover{
+        cursor: pointer;
+      }
+      &:hover, &:focus {
+        background-color: $highlight;
+        color: $black-0;
+      }
+    }
+  }
+
+  &.horizontal {
+  display: inline-flex;
+    .options{
+      flex-direction: row;
+    }
+  }
+}

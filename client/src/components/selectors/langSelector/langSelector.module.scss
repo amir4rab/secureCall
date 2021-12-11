@@ -1,0 +1,14 @@
+@import '../../../../styles/baseStyles';
+
+.wrapper {
+  display: inline-block;
+  .langSelector {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    p {
+      padding-right: .5rem;
+    }
+  }
+}
