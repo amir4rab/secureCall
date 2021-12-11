@@ -19,6 +19,14 @@
   }
 }
 
+@mixin buttonShadow( $shadowColor ) {
+  transition: box-shadow .3s ease-in-out;
+  box-shadow: 0 0 1rem transparent;
+  &:hover, &:focus {
+    box-shadow: 0 0 1rem $shadowColor;
+  }
+}
+
 @mixin largeBtn {
   padding: .6em 1.25em;
   font-size: 1rem;
@@ -68,8 +76,10 @@
 
 .buttonPrimary {
   @include button($black-1, $highlight);
+  @include buttonShadow($highlight)
 }
 .buttonPrimaryL {
   @include button($black-1, $highlight);
   @include largeBtn;
+  @include buttonShadow($highlight)
 }
