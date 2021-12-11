@@ -3,5 +3,5 @@
   "eTEE": "Ende-zu-Ende verschlüsselt",
   "fast": "Schnell",
   "mPlatform": "Multiplattform",
-  "readMore": "Mehr informationen über {{secureCall}}"
+  "readMore": "Mehr informationen über <0>{{name}}</0>"
 }
