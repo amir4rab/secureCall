@@ -1,0 +1,168 @@
+@import '../../../styles/baseStyles';
+
+.hero {
+  padding: 2rem;
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  .title {
+    @include headingFont;
+    font-size: 5rem;
+    color: $highlight;
+    padding-top: 5vh;
+    padding-bottom: 2vh;
+    cursor: default;
+    user-select: none;
+    transition: text-shadow .3s ease-in-out;
+    text-shadow: 0 0 1rem transparent;
+    &:hover, &:focus {
+      text-shadow: 0 0 1rem transparentize( $highlight, .5 );
+    }
+  }
+  .info {
+    padding-bottom: 5vh;
+    font-size: 1.5rem;
+    strong {
+      background: $highlight;
+      color: $highlight;
+      padding: .1rem;
+      transition: color .1s ease-in-out;
+      &:hover {
+        color: $black-2;
+      }
+    }
+  }
+  .features{
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+    .feature{
+      width: 100%;
+      display: flex;
+      align-items: center;
+      margin-bottom: 1.25rem;
+      p {
+        margin-left: 1rem;
+      }
+      svg {
+        width: 1.25rem;
+        height: 1.25rem;
+      }
+    }
+  }
+  .buttonSection{
+    padding-top: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    button:not(:last-child) {
+      margin-bottom: 1rem;
+    }
+  }
+  .footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: 2rem;
+    flex-direction: column;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-content: flex-start;
+    align-items: flex-start;
+
+    .subText {
+      display: flex;
+      justify-content: space-between;
+      align-content: center;
+      align-items: center;
+      a {
+        color: $highlight;
+        padding-left: .25rem;
+        text-shadow: 0 0 1rem transparent;
+        transition: text-shadow .3s ease-in-out;
+        &:hover, &:focus {
+          text-shadow: 0 0 1rem $highlight;
+        }
+      }
+    }
+
+  }
+  .column:not(:first-child){
+    display: none;
+  }
+}
+
+@include forDesktopUp {
+  .hero {
+    min-height: auto;
+    padding: 2rem 5vw;
+    width: 80vw;
+    height: 80vh;
+    max-width: 1200px;
+    margin: 10vh auto;
+    background: transparentize( $black-2, .25 );
+    backdrop-filter: blur(1rem);
+    border-radius: 2rem;
+    position: relative;
+    .title {
+      font-size: 5rem;
+      padding-top: 0;
+    }
+    .imagesWrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      width: 100%;
+      height: 100%;
+      img {
+        position: absolute;
+        object-fit: contain;
+        width: 70%;
+        // height: 15vh;
+        top: 50%;
+        left: 50%;
+        &:nth-child(1) {
+          transform: translate(-60%, -70%);
+        }
+        &:nth-child(2) {
+          transform: translate(-40%, -30%);
+        }
+      }
+    } 
+    .info {
+      padding-bottom: 15vh;
+    }
+    .features{
+      margin-bottom: 2rem;
+      .feature{
+        width: 50%;
+        svg {
+          width: 1.5rem;
+          height: 1.5rem;
+        }
+      }
+    }
+    .columnsWrapper {
+      width: 100%;
+      display: flex;
+      flex-wrap: nowrap;
+      height: 100%;
+      .column{
+        display: flex;
+        justify-content: center;
+        align-content: center;
+        flex-direction: column;
+        overflow: hidden;
+        height: 100%;
+        width: 50%;
+      }
+    }
+    .footer {
+      flex-direction: row;
+      padding: 2rem 5vw;
+    }
+  }
+}
