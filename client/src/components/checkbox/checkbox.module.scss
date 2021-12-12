@@ -1,0 +1,14 @@
+@import '../../../styles/baseStyles';
+
+.checkbox {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  p {
+    margin-left: .5rem;
+  }
+  strong {
+    color: $highlight;
+  }
+}
