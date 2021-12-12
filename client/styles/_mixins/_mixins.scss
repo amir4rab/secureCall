@@ -1,1 +1,17 @@
 @import './breakpointmixins', './functions';
+
+
+@mixin title {
+  font-size: 3rem;
+  color: $highlight;
+  cursor: default;
+  user-select: none;
+  transition: text-shadow .3s ease-in-out;
+  text-shadow: 0 0 1rem transparent;
+  &:hover, &:focus {
+    text-shadow: 0 0 1rem transparentize( $highlight, .5 );
+  }
+  @include forDesktopUp {
+    font-size: 5rem;
+  }
+}
