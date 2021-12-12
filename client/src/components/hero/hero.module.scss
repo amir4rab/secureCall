@@ -1,22 +1,15 @@
 @import '../../../styles/baseStyles';
 
 .hero {
-  height: 100%;
+  // height: 100%;
   width: 100%;
+  height: 90vh;
   position: relative;
   .title {
     @include headingFont;
-    font-size: 5rem;
-    color: $highlight;
+    @include title;
     padding-top: 5vh;
     padding-bottom: 2vh;
-    cursor: default;
-    user-select: none;
-    transition: text-shadow .3s ease-in-out;
-    text-shadow: 0 0 1rem transparent;
-    &:hover, &:focus {
-      text-shadow: 0 0 1rem transparentize( $highlight, .5 );
-    }
   }
   .info {
     padding-bottom: 5vh;
@@ -96,8 +89,8 @@
 @include forDesktopUp {
   .hero {
     position: relative;
+    height: 100%;
     .title {
-      font-size: 5rem;
       padding-top: 0;
     }
     .imagesWrapper {
