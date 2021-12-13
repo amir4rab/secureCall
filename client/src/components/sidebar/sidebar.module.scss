@@ -33,7 +33,27 @@
   }
   .contacts{
     height: 60%;
-
+    .addNewContact {
+      padding: 1rem 0;
+      text-align: center;
+      user-select: none;
+      width: 100%;
+      background: $black-2;
+      color: $white-0;
+      border: none;
+      border-radius: 0;
+      transition: background-color .15s ease-in-out;
+      p {
+        display: block;
+        font-weight: 500;
+      }
+      &:hover {
+        cursor: pointer;
+      }
+      &:hover, &:focus {
+        color: $highlight;
+      }
+    }
   }
   .footer{
     @include alignCenter();

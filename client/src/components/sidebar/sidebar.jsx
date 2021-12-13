@@ -2,6 +2,7 @@ import React from 'react'
 import Contacts from '../contacts/contacts';
 import classes from './sidebar.module.scss';
 import useTranslation from 'next-translate/useTranslation'
+import PopupButtons from './popupButtons';
 
 function Sidebar({ setAddContactPopup, setShowRequestsPopup }) {
   const { t } = useTranslation('sidebar');
@@ -13,19 +14,18 @@ function Sidebar({ setAddContactPopup, setShowRequestsPopup }) {
         </h1>
       </div>
       <div className={ classes.contacts }>
-        <Contacts 
-          setAddContactPopup={ setAddContactPopup } 
-          setShowRequestsPopup={ setShowRequestsPopup } 
+        <PopupButtons 
+          setAddContactPopup={ setAddContactPopup }
+          setShowRequestsPopup={ setShowRequestsPopup }
         />
+        <Contacts />
       </div>
       <div className={ classes.footer }>
         <button className={ classes.buttonBlockDark2 }>
-          {/* Settings */}
           { t('settings') }
         </button>
         <button className={ classes.buttonBlockDark2 }>
           { t('about') }
-          {/* About */}
         </button>
       </div>
     </div>
