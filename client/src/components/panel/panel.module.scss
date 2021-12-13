@@ -1,0 +1,28 @@
+@import '../../../styles/baseStyles';
+
+.panel {
+  min-height: 100vh;
+}
+
+@include forDesktopUp {
+  .panel {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .inner {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: $black-1;
+      overflow: hidden;
+      margin: auto;
+      max-width: $desktopMaxWidth;
+      min-width: $desktopMinWidth;
+      height: 80vh;
+      border-radius: 1rem;
+      width: $desktopWidth;
+    }
+  }
+}

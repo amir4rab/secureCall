@@ -3,7 +3,7 @@ import GithubProvider from 'next-auth/providers/github'
 import GoogleProvider from 'next-auth/providers/google'
 
 import generateUser from '../../../src/utils/backend/generateUser/generateUser';
-import getUserJWT from '../../../src/utils/backend/getUserJWT/getUserJWT';
+// import getUserJWT from '../../../src/utils/backend/getUserJWT/getUserJWT';
 
 
 export default NextAuth({
@@ -24,12 +24,6 @@ export default NextAuth({
       await generateUser(user);
 
       return true
-    },
-    async session({ session, user, token }) {
-
-      
-      session.user.jwt = await getUserJWT(session.user.email);
-      return session    
     }
   }
 })
