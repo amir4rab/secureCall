@@ -1,7 +1,8 @@
 import { motion } from 'framer-motion';
-import Panel from '../src/components/panel/panel'
 
-function PanelPage() {
+import Panel from '../../src/components/panel/panel';
+
+function IndexPage() {
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -11,6 +12,6 @@ function PanelPage() {
       <Panel />
     </motion.div>
   )
-}
+};
 
-export default PanelPage
+export default IndexPage

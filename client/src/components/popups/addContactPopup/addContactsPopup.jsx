@@ -1,9 +1,12 @@
-import { useRef, useContext, useState } from 'react'
+import { useRef, useContext, useState } from 'react';
+import { motion } from 'framer-motion';
 import { SocketsContext } from '../../../providers/socketsProvider/socketsProvider';
 import useTranslation from 'next-translate/useTranslation';
-import Popup from '../popup/popup';
+import Popup from '../popup/slPopup';
 
 import classes from './addContactsPopup.module.scss';
+
+const layoutId = 'addContacts';
 
 function AddContactsPopup({ displayState, setDisplayState }) {
   const { t } = useTranslation('addContactPopup');
@@ -35,13 +38,14 @@ function AddContactsPopup({ displayState, setDisplayState }) {
 
   return (
     <Popup
+      layoutId={ layoutId }
       displayState={ displayState } 
       setDisplayState={ setDisplayState }
     >
       <div className={ classes.addContactsPopupInner }> 
-        <h3 className={ classes.title }>
+        <motion.h3 layoutId={`${layoutId}-title`} className={ classes.title }>
           { t('addContacts') }
-        </h3>
+        </motion.h3>
         <form 
           className={ classes.form }
           onSubmit={ formHandler }

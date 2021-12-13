@@ -1,0 +1,45 @@
+@import '../../../../styles/baseStyles';
+
+.requestsPopupInner {
+  padding: 2rem 1rem;
+  .title{
+    font-size: 1.25rem;
+    text-align: center;
+    display: block;
+    padding: 1rem 0;
+    height: 30%;
+  }
+  .requests{
+    // background: red;
+    overflow-y: scroll;
+    min-height: 40vh;
+    max-height: 40vh;
+    scrollbar-width: thin;
+    // height: 40vh;
+    .request {
+      width: 100%;
+      padding: 1rem .5rem;
+      display: flex;
+      justify-content: space-between;
+      align-content: center;
+      align-items: center;
+      // background: red;
+      .mainDetails{
+        .name{
+          font-weight: 600;
+          font-size: 1.25rem;
+          text-transform: capitalize;
+        }
+        .email{
+          opacity: .75;
+        }
+      }
+      .buttons {
+        button:not(:last-child) {
+          margin-right: .5rem;
+        }
+      }
+    }
+
+  }
+}
