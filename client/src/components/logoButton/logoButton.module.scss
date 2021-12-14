@@ -3,46 +3,50 @@
 .logoButton {
   display: block;
   background: transparent;
-  position: relative;
-  border-radius: 50%;
-  transition: background-color .3s ease-in-out;
-  width: 2.5rem;
-  height: 2.5rem;
+  border-radius: .4rem;
+  transition: 
+    background-color .3s ease-in-out,
+    opacity .3s ease-in-out;
   padding: 0;
   cursor: pointer;
   border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
   .imageWrapper {
-    opacity: .5;
-    width: 2.5rem;
-    height: 2.5rem;
     padding: .5rem;
     transition: opacity .3s ease-in-out;
     z-index: 10;
+    svg {
+      color: $white-0;
+      width: 1.5rem;
+      height: 1.5rem;
+      transition: color .3s ease-in-out;
+    }
   }
   .name {
-    opacity: 0;
-    left: 50%;
-    top: 50%;
-    transform: translate(0%,-50%);
+    transition: color .3s ease-in-out;
     color: $white-0;
-    flex-grow: 1;
-    // background-color: red;
-    white-space: nowrap;
-    pointer-events: none;
-    position: absolute;
-    z-index: 1;
-    transition: left .3s ease-in-out, opacity .3s ease-in-out;
+    padding: .5rem;
   }
   &:hover{
-    background: transparentize( $highlight, .5 );
-    // width: 12rem;
-    // border-radius: .4rem;
-    .imageWrapper {
-      opacity: 1;
+    background: $highlight;
+    .name, svg {
+      color: $black-0;
     }
-    .name {
-      left: 125%;
-      opacity: 1;
+  }
+  &:hover {
+    cursor: pointer;
+  }
+  &:disabled {
+    opacity: .5;
+    &:hover{
+      cursor: not-allowed;
+      background: transparent;
+      .name, svg {
+        color: $white-0;
+      }
     }
   }
 }
