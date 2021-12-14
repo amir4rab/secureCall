@@ -2,6 +2,7 @@
 
 .addContactsPopupInner {
   padding: 2rem 1rem;
+  height: 100%;
   .title{
     font-size: 1.25rem;
     text-align: center;
@@ -9,16 +10,34 @@
   }
   .form{
     padding: 1rem;
+    display: flex;
+    height: 100%;
+    flex-direction: column;
     label {
       display: block;
       padding-bottom: 1.5rem;
     }
-    input {
-      width: 100%;
-      background: $black-1;
-      color: $white-0;
-      border: .1rem solid lighten( $black-1, 10 );
+    .input {
       margin-bottom: 1rem;
+      position: relative;
+      input {
+        min-height: 2rem;
+        width: 100%;
+        background: $black-1;
+        color: $white-0;
+        border: .1rem solid lighten( $black-1, 10 );
+      }
+      svg {
+        opacity: .5;
+        user-select: none;
+        pointer-events: none;
+        height: 1rem;
+        width: 1rem;
+        position: absolute;
+        top: 50%;
+        right: 1rem;
+        transform: translate(0, -50%);
+      }
     }
     .response {
       min-height: 3rem;
@@ -30,6 +49,78 @@
       }
       .response{
         color: $green-0;
+      }
+    }
+    .buttonWrapper{
+      flex-grow: 1;
+      display: flex;
+      padding-bottom: 2rem;
+      align-items: flex-end;
+      height: 100%;
+      .submitBtn{
+        border: none;
+        display: inline-block;
+        position: relative;
+        width: 100%;
+        height: 2rem;
+        background-color: $highlight;
+        transition: background-color .3s ease-in-out;
+        overflow: hidden;
+        &:disabled {
+          background: transparent;
+          &:hover {
+            cursor: progress;
+          }
+          &:hover, &:focus {
+            background: transparent;
+          }
+        }
+        &:hover {
+          cursor: pointer;
+        }
+        &:hover, &:focus {
+          background-color: darken($highlight, 10);
+        }
+
+        p {
+          white-space: nowrap;
+          position: absolute;
+          left: 50%;
+          top: -50%;
+          transform: translate(-50%, -50%);
+          transition: top .15s ease-in-out;
+          &.visible {
+            top: 50%;
+          }
+          &.loading svg {
+            @keyframes rotate {
+              from {
+                transform: rotateZ(0deg);
+              }
+              to {
+                transform: rotateZ(360deg);
+              }
+            }
+            color: $white-0;
+            transform-origin: center;
+            animation: rotate .8s ease infinite forwards;
+          }
+        }
+      }
+    }
+  }
+}
+
+@include forDesktopUp {
+  .addContactsPopupInner {
+    flex-grow: 1;
+    .form{
+      .buttonWrapper{
+        justify-content: flex-end;
+        align-content: flex-end;
+        .submitBtn {
+          width: 25%;
+        }
       }
     }
   }
