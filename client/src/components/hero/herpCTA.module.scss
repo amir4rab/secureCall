@@ -1,0 +1,39 @@
+@import '../../../styles/baseStyles';
+
+.ctaButton {
+  position: relative;
+  display: inline-block;
+  width: 14rem;
+  height: 2.5rem;
+  .singUp, .toPanel, .loadingSpinner{
+    position: absolute;
+    top: -50%;
+    left: 50%;
+    width: 100%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: 
+      top .15s ease-in-out,
+      opacity .15s ease-in-out;
+  }
+  .loadingSpinner {
+    @keyframes spin {
+      from {
+        transform: rotate(0deg);
+      }
+      to {
+        transform: rotate(360deg);
+      }
+    }
+    svg {
+      animation: spin .5s ease infinite;
+    }
+  }
+  // .toPanelCTA .toPanel{
+
+  // }
+  &.signUpCTA .singUp, &.toPanelCTA .toPanel, &.loading .loadingSpinner{
+    top: 50%;
+    opacity: 1;
+  }
+}

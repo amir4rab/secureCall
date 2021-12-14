@@ -11,6 +11,7 @@ import { fadeLeft, fadeRight, fadeDown, fadeUp } from '../../animations/fade';
 
 import classes from './hero.module.scss';
 import Box from '../box/box';
+import HeroCTA from './heroCTA';
 
 const featuresVariants = {
   hidden: { 
@@ -98,9 +99,7 @@ function Hero() {
               initial='hidden'
               animate='visible'
             >
-              <button className={ classes.buttonPrimaryL } role='link' onClick={ _ => router.push('/auth') }>
-                { authT('prompt') }
-              </button>
+              <HeroCTA />
             </motion.div>
           </div>
           <div className={ classes.column }>
