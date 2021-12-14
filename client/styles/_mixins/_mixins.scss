@@ -15,3 +15,18 @@
     font-size: 5rem;
   }
 }
+
+@mixin textImg( $size ) {
+  width: $size;
+  height: $size;
+  padding: calc($size/5);
+  border-radius: 50%;
+  background: $highlight;
+  color: $black-0;
+  display: flex;
+  font-size: calc($size/2);
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  user-select: none;
+}
