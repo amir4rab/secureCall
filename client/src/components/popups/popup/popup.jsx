@@ -4,6 +4,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import classes from './popup.module.scss'
 import { generateFade } from '../../../animations/fade';
 
+import { IoCloseCircle } from 'react-icons/io5';
+
 const fadeAnimation = generateFade({ 
   from:'up', 
   distance: '1rem',
@@ -19,6 +21,18 @@ const outerLayerVariants = {
     opacity: 0
   }
 };
+
+const buttonVariants = {
+  'visible': {
+    opacity: 1,
+    transition: {
+      delay: .3
+    }
+  },
+  'hidden': {
+    opacity: 0
+  }
+}
 
 function Popup({ displayState, setDisplayState, children }) {
 
@@ -50,6 +64,15 @@ function Popup({ displayState, setDisplayState, children }) {
               exit='hidden'
               className={ classes.popup }
             >
+              <motion.button 
+                variants={buttonVariants} 
+                initial="hidden" 
+                animate="visible" 
+                className={ classes.closeBtn } 
+                onClick={ _ => setDisplayState(false) }
+              >
+                <IoCloseCircle />
+              </motion.button>
               { children }
             </motion.div>
           </motion.div> : null
