@@ -8,18 +8,16 @@ function PopupButtons({ setAddContactPopup, setShowRequestsPopup }) {
   return (
     <>
       <motion.div
-        layoutId="addContacts-body"
         className={ classes.addNewContact }
         onClick={ _ => setAddContactPopup(true) }
       >
-        <motion.p layout="addContacts-title">{ t('addContact') }</motion.p>
+        <motion.p>{ t('addContact') }</motion.p>
       </motion.div>
       <motion.div
         className={ classes.addNewContact }
         onClick={ _ => setShowRequestsPopup(true) }
-        layoutId="showRequests-body"
       >
-        <motion.p layout="showRequests-title">{ t('requests') }</motion.p>
+        <motion.p>{ t('requests') }</motion.p>
       </motion.div>
     </>
   )
