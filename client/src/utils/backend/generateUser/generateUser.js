@@ -21,20 +21,37 @@ export const generateUser = async ( user ) => {
     process.env.JWT_SHARED_SECRET,
     { algorithm: 'HS512'}
   );
-    
-  const doc = {
-    email: user.email,
-    name: user.name,
-    contacts: [],
-    requests: [],
-    secret,
-    signedSecret: userJwt
-  };
 
-  const query = { email: user.email };
-  const newData = { $set: doc };
-  const options = { upsert: true };
-  await users.updateOne(query, newData, options);
+  const query = {
+    email: user.email
+  }
+  const userData = await users.findOne(query);
+
+  console.log(userData);
+    
+  if ( userData === null ) { //** new user **//
+    const doc = {
+      email: user.email,
+      name: user.name,
+      contacts: [],
+      requests: [],
+      secret,
+      signedSecret: userJwt
+    };
+  
+    const newData = { $set: doc };
+
+    await users.updateOne( query, newData );
+  } else {
+    const doc = {
+      secret,
+      signedSecret: userJwt
+    }
+
+    const newData = { $set: doc };
+    
+    await users.updateOne( query, newData );
+  }
 
   await client.close();
 };
