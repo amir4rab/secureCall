@@ -1,6 +1,6 @@
 const nextTranslate = require('next-translate')
 const withPlugins = require('next-compose-plugins');
-const optimizedImages = require('next-optimized-images');
+// const optimizedImages = require('next-optimized-images');
 
 
 // module.exports = nextTranslate({
@@ -10,12 +10,12 @@ const optimizedImages = require('next-optimized-images');
 module.exports = withPlugins([
   [ 
     nextTranslate(),
-    [
-      optimizedImages, 
-      {
+    // [
+    //   optimizedImages, 
+    //   {
         
-      }
-    ]
+    //   }
+    // ]
   ],
   {
     reactStrictMode: true,
