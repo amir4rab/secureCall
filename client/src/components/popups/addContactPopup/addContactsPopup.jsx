@@ -4,10 +4,11 @@ import { SocketsContext } from '../../../providers/socketsProvider/socketsProvid
 import useTranslation from 'next-translate/useTranslation';
 import Popup from '../popup/popup';
 
-import { IoMail } from 'react-icons/io5';
+import { IoMail, IoShare } from 'react-icons/io5';
 import { AiOutlineLoading3Quarters } from 'react-icons/ai';
 
 import classes from './addContactsPopup.module.scss';
+import ShareBtn from '../../buttons/shareBtn/shareBtn';
 
 function AddContactsPopup({ displayState, setDisplayState }) {
   const { t } = useTranslation('addContactPopup');
@@ -59,6 +60,14 @@ function AddContactsPopup({ displayState, setDisplayState }) {
           </div>
           <div className={ classes.response }>
             {
+              error?.responseCode === "userDNE" ? 
+              <div className={ classes.invite }>
+                <p className={ classes.text }>
+                  { t('invite', { email: error.recipientEmail }) }
+                </p>
+                <ShareBtn copyValue={ process.env.NEXT_PUBLIC_WEBSTITE_URL } />
+              </div>
+              :
               error !== null ? <p className={ classes.error }>{ t(error.responseCode, { email: error.recipientEmail }) }</p> :
               response !== null ? <p className={ classes.response }>{ t(response.responseCode, { email: response.recipientEmail }) }</p> : null
             }

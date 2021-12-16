@@ -4,6 +4,8 @@ import { useRouter } from 'next/router';
 import Notification from '../notification/notification';
 import { SocketsContext } from '../../../providers/socketsProvider/socketsProvider';
 
+import { IoVideocam, IoClose, IoCall } from 'react-icons/io5';
+
 import classes from './callNotification.module.scss';
 
 function CallNotification() {
@@ -15,9 +17,11 @@ function CallNotification() {
     declineCall
   } = useContext(SocketsContext);
 
+  console.log(receivingCall);
+
   const answerCallEvent = _ => {
     answerCall(receivingCall.from);
-    router.push(`/call?to=${receivingCall.from}&type=${receivingCall.type}&calling=false`);
+    router.push(`panel/call?callTo=${receivingCall.from}&type=${receivingCall.type}&calling=false`);
   }
 
   const declineCallEvent = _ => {
@@ -28,17 +32,30 @@ function CallNotification() {
     <Notification isVisible={ receivingCall !== null && !callIsAnswered }>
       <div className={ classes.notificationInner }>
         <div className={ classes.left }>
-          {
-            `${receivingCall?.name} is calling you`
-          }
+          <p className={ classes.name }>{`${receivingCall?.name}`}</p>
+          <p className={ classes.email }>{`${receivingCall?.from}`}</p>
         </div>
         <div className={ classes.right }>
-          <button onClick={ answerCallEvent } className={ classes.buttonGreen }>
-            Answer
-          </button>
-          <button onClick={ declineCallEvent } className={ classes.buttonRed }>
-            Decline
-          </button>
+          {
+            receivingCall?.type === 'video' ?
+            <>
+              <button onClick={ answerCallEvent } className={ classes.buttonGreen }>
+                <IoVideocam />
+              </button>
+              <button onClick={ declineCallEvent } className={ classes.buttonRed }>
+                <IoClose />
+              </button>
+            </>
+            :
+            <>
+              <button onClick={ answerCallEvent } className={ classes.buttonGreen }>
+                <IoCall />
+              </button>
+              <button onClick={ declineCallEvent } className={ classes.buttonRed }>
+                <IoClose />
+              </button>
+            </>
+          }
         </div>
       </div>
     </Notification>

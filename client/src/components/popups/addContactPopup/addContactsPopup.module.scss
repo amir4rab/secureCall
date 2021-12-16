@@ -40,7 +40,7 @@
       }
     }
     .response {
-      min-height: 3rem;
+      // min-height: 3rem;
       .loading{
         opacity: .75;
       }
@@ -49,6 +49,13 @@
       }
       .response{
         color: $green-0;
+      }
+      .invite {
+        line-height: 150%;
+        .text {
+          display: block;
+          padding-bottom: 1rem;
+        }
       }
     }
     .buttonWrapper{

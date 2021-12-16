@@ -5,15 +5,26 @@
   top: 0;
   left: 0;
   width: 100%;
-  padding: 2rem 0;
+  pointer-events: none;
   .notification{
-    box-shadow: 0 0 1rem 1rem #0000007e;
+    pointer-events: all;
+    margin: 2rem;
+    box-shadow: 0 0 1rem #0000007e;
     padding: .8rem 2rem;
-    width: 100%;
-    max-width: 600px;
+    width: calc(100% - 4rem);
     margin: 0 auto;
-    background: $black-2;
-    border-radius: .4rem;
+    background: transparentize(  $black-2, .05 );
+    backdrop-filter: blur(1rem);
+    border-radius: 1rem;
   }
-  z-index: 50;
+  z-index: 300;
+}
+
+@include forDesktopUp {
+  .notificationWrapper {
+    .notification {
+      width: 100%;
+      max-width: 600px;
+    }
+  }
 }
