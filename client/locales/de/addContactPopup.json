@@ -7,5 +7,9 @@
   "fullInbox": "{{email}}'s Posteingang ist voll!",
   "dupReq": "{{email}} haben bereits eine Anfrage von Ihnen!",
   "dupCon": "{{email}} sind in Ihren Kontakten! ",
-  "successful": "Anfrage wurde gesendet."
+  "successful": "Anfrage wurde gesendet.",
+  "hasReq": "Sie haben bereits eine Anfrage von {{email}}!",
+  "invite": "{{email}} hat sich noch nicht angemeldet, möchten sie sie vielleicht einladen?",
+  "share": "Share Secure URL teilen",
+  "invalidInput": "Ihre Eingabe ist keine gültige E-Mail-Adresse!"
 }

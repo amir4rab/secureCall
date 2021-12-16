@@ -1,5 +1,7 @@
 {
   "websiteName": "Secure Call",
   "websiteDescription": "تماس های صوتی و تصویری سرتاسر رمزگذاری شده.",
-  "loading": "بارگذاری"
+  "loading": "بارگذاری",
+  "copy": "کپی",
+  "copied": "کپی شد"
 }
