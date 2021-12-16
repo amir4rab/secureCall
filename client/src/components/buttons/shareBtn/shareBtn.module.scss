@@ -1,0 +1,24 @@
+@import '../../../../styles/baseStyles';
+
+.shareBtn {
+  background: none;
+  display: inline-block;
+  border: none;
+  display: flex;
+  align-items: center;
+  color: $white-0;
+  padding: 0;
+  &:hover {
+    cursor: pointer;
+  }
+  &:focus, &:hover {
+    color: $highlight;
+  }
+  font-size: 1rem;
+  svg {
+    color: $highlight;
+    width: 1.5rem;
+    height: 1.5rem;
+    margin-right: .5rem;
+  }
+}
