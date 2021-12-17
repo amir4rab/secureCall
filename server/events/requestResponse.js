@@ -1,23 +1,44 @@
-const requestResponse = async ( data, callback, { client, userDbData, activeUsers, socket } ) => {
-  
+const isEmailValid = require('../utils/isEmailValid');
+const getIdFromEmail = require('../utils/getIdFromEmail');
+
+const requestResponse = async ( data, callback, { client, activeUsers, socket } ) => {
+  const socketEmail = activeUsers.get(socket.id);
   const {
     recipientEmail,
     isAccepted
   } = data;
+  const isValid = isEmailValid(recipientEmail, callback);
+  if ( !isValid ) {
+    return;
+  }
+  if ( typeof isAccepted !== 'boolean' ) {
+    try {
+      callback({
+        status: 'error',
+        response: 'false inputs'
+      });
+    } catch {};
+    return;
+  };
+
   await client.connect();
   const database = client.db('secureCall');
   const users = database.collection('users');
 
-  
+  const userDbData = await users.findOne({ email: socketEmail });
+
+
   const querySender = { email: userDbData.email };
   const sender = await users.findOne(querySender); //** sender has a request from reciver **//
   
   if ( sender === null ) {
     await client.close();
-    callback({
-      status: 'error',
-      response: 'User does not exists!'
-    });
+    try {
+      callback({
+        status: 'error',
+        response: 'User does not exists!'
+      });
+    } catch {};
     return;
   }
 
@@ -45,10 +66,12 @@ const requestResponse = async ( data, callback, { client, userDbData, activeUser
 
     if ( receiver === null ) {
       await client.close();
-      callback({
-        status: 'error',
-        response: 'User does not exists!'
-      });
+      try {
+        callback({
+          status: 'error',
+          response: 'User does not exists!'
+        });
+      } catch {};
       return;
     }
 
@@ -86,18 +109,19 @@ const requestResponse = async ( data, callback, { client, userDbData, activeUser
 
     await client.close();
 
-    const recipientSocketId = activeUsers.get(recipientEmail);
-    if ( recipientSocketId ) { //** sending recipient the contact accept event **//
+    const recipientSocketId = getIdFromEmail( recipientEmail, activeUsers );
+    if ( recipientSocketId !== null ) { //** sending recipient the contact accept event **//
       socket.to(recipientSocketId).emit('acceptedContactRequest', ({
         name: sender.name,
         email: sender.email
       }));
     }
-
-    callback({
-      status: 'successful',
-      response: 'Successfully accepted the request.'
-    });
+    try {
+      callback({
+        status: 'successful',
+        response: 'Successfully accepted the request.'
+      });
+    } catch {};
   }
 };
 
