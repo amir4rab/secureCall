@@ -17,7 +17,7 @@ function CallNotification() {
     declineCall
   } = useContext(SocketsContext);
 
-  console.log(receivingCall);
+  // console.log(receivingCall);
 
   const answerCallEvent = _ => {
     answerCall(receivingCall.from);

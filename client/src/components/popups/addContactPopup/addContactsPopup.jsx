@@ -30,7 +30,8 @@ function AddContactsPopup({ displayState, setDisplayState }) {
         if( res.status === 'error' ) {
           setError(res)
         } else {
-          setResponse(res)
+          setResponse(res);
+          inputRef.current.value = '';
         }
         setIsLoading(false);
       });
