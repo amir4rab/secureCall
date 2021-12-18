@@ -1,0 +1,13 @@
+@import '../../../styles/baseStyles';
+
+.contacts {
+  height: 100%;
+  overflow-y: scroll;
+}
+
+@include forDesktopUp {
+  .contacts {
+    flex-grow: 1;
+    overflow-y: scroll;
+  }
+}
