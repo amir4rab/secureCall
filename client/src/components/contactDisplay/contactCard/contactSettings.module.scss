@@ -1,0 +1,87 @@
+@import '../../../../styles/baseStyles';
+
+.contactSettings {
+  position: absolute;
+  right: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: $black-0;
+  clip-path: circle(0% at 0 0);
+  overflow: hidden;
+  transition: clip-path .3s ease-in-out;
+  z-index: 15;
+  &.open {
+    clip-path: circle(150% at 0 0);
+  }
+  .inner {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    .close{
+      background: none;
+      border: none;
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      padding: .5rem;
+      svg {
+        color: $white-0;
+        width: 1.25rem;
+        height: 1.25rem;
+        transition: color .15s ease-in-out;
+      }
+      &:hover {
+        cursor: pointer;
+      }
+      &:hover svg, &:focus svg {
+        color: $red-0;
+      }
+    }
+    .title{
+      font-size: 1.25rem;
+      padding-bottom: 2rem;
+    }
+    .settingsGroup{
+      width: 100%;
+      display: flex;
+      justify-content: flex-start;
+      flex-direction: column;
+      label {
+        display: block;
+        padding-bottom: 1rem;
+        min-width: 100%;
+      }
+      .buttonWrapper {
+        display: flex;
+        justify-content: flex-end;
+        button {
+          display: flex;
+          justify-content: center;
+          align-content: center;
+          background-color: $red-0;
+          color: $white-0;
+          border: none;
+          svg {
+            margin-right: 1rem;
+            width: 1rem;
+            height: 1rem;
+          }
+        }
+      }
+    }
+  }
+}
+
+@include forDesktopUp {
+  .contactSettings {
+    background: $black-2;
+    .inner .settingsGroup{
+        width: 40%;
+    }
+  }
+}
