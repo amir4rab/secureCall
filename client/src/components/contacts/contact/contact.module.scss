@@ -1,0 +1,53 @@
+@import '../../../../styles/baseStyles';
+
+.contact {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  align-content: center;
+
+  transition: background-color .15s ease-in-out;
+  &:hover {
+    cursor: pointer;
+  }
+  &:hover, &:focus {
+    background-color: transparentize($highlight, .75);
+  }
+  &:active {
+    background-color: transparentize($highlight, .65);
+  }
+  &:not(:last-child) {
+    margin-bottom: 1rem;
+  }
+
+  .imageWrapper{
+    width: 2.5rem;
+    height: 2.5rem;
+    padding: .25rem;
+    .image, .imagePlaceHolder{
+      @include textImg(2rem);
+    }
+    .imagePlaceHolder{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      align-content: center;
+      user-select: none;
+    }
+  }
+  .nameWrapper{
+    padding-left: .5rem;
+    height: 2.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    user-select: none;
+  }
+}
+
+@include forDesktopUp {
+  .contact {
+    padding: .5rem 1rem;
+  }
+}
