@@ -1,0 +1,44 @@
+@import '../../../styles/baseStyles';
+
+.contactDisplay {
+  padding: 2rem;
+  min-height: 100vh;
+  width: 100%;
+  transition: opacity .3s ease-in-out;
+  position: absolute;
+  right: 0;
+  top: 0;
+  opacity: 1;
+  &.hidden {
+    opacity: 0;
+    pointer-events: none;
+  }
+  .prompt{
+    display: none;
+  }
+  // background: red;
+}
+
+@include forDesktopUp {
+  .contactDisplay {
+    min-height: auto;
+    width: 80%;
+    height: 100%;
+    position: relative;
+    padding: 0;
+    &.hidden {
+      opacity: 1;
+      pointer-events: all;
+    }
+    .prompt {
+      display: block;
+      padding: .5rem 1rem;
+      border-radius: .4rem;
+      background: $black-0;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+}
