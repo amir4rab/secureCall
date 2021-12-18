@@ -1,14 +1,19 @@
-import { useState } from 'react'
+import { useState, useContext } from 'react'
+import { useRouter } from 'next/router';
 
 import useTranslation from 'next-translate/useTranslation';
-import { IoAdd, IoClose, IoPersonAdd, IoArchive, IoSettings } from 'react-icons/io5';
+import { ContactsContext } from '../../providers/contactsProvider/contactsProvider';
+
+import { IoAdd, IoClose, IoPersonAdd, IoMail, IoSettings, IoMailUnread } from 'react-icons/io5';
 
 import classes from './mobileMenu.module.scss';
 
 
 function MobileMenu({ setAddContactPopup, setShowRequestsPopup }) {
+  const { requests } = useContext(ContactsContext);
   const { t } = useTranslation('sidebar');
   const [ modalState, setModalState ] = useState(false);
+  const router = useRouter();
 
   const overlayEventHandler = e => {
     console.log(e.target.id);
@@ -35,11 +40,11 @@ function MobileMenu({ setAddContactPopup, setShowRequestsPopup }) {
           </button>
           <button onClick={ setShowRequestsPopup } className={ classes.imageBtn }>
             <div className={ classes.svgWrapper }>
-              <IoArchive />
+              { requests.length === 0 ? <IoMail /> : <IoMailUnread /> }
             </div>
             <p>{ t('requests') }</p>
           </button>
-          <button className={ classes.imageBtn }>
+          <button onClick={ _ => router.push('panel/settings') } className={ classes.imageBtn }>
             <div className={ classes.svgWrapper }>
               <IoSettings />
             </div>

@@ -1,6 +1,6 @@
 import useTranslation from 'next-translate/useTranslation';
 import { useEffect, useState } from 'react';
-import { IoShare } from 'react-icons/io5';
+import { IoDocuments } from 'react-icons/io5';
 
 import classes from './shareBtn.module.scss';
 
@@ -31,7 +31,7 @@ function ShareBtn({ copyValue }) {
 
   return (
     <button type="button" onClick={ eventHandler } className={ classes.shareBtn }>
-      <IoShare />
+      <IoDocuments />
         {
           isCopied ?
           <p>

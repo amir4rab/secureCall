@@ -20,9 +20,8 @@ function Panel() {
         isConnected ?
         <div className={ classes.panel } >
           <div className={ classes.inner } >
-
-              <Sidebar />
-              <ContactDisplay />
+            <Sidebar />
+            <ContactDisplay />
           </div>
         </div>
         : null
