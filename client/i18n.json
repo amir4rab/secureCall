@@ -3,6 +3,7 @@
   "defaultLocale": "en",
   "pages": {
     "*": [ "common", "auth", "sidebar", "addContactPopup", "contactCard", "contactDisplay", "hero" ],
-    "/panel": [ "requests" ]
+    "/panel": [ "requests" ],
+    "/panel/settings": [ "settings" ]
   }
 }

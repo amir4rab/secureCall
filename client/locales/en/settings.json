@@ -1,0 +1,12 @@
+{
+  "settings": "Settings",
+  "about": "About",
+  "help": "Help",
+  "sourceCode": "Source code",
+  "developer": "Developer",
+  "language": "Language",
+  "account": "Account",
+  "logout": "Logout",
+  "theme": "Theme",
+  "bToPanel": "Back to Panel"
+}
