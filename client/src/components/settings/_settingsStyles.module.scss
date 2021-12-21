@@ -1,0 +1,29 @@
+@import '../../../styles/baseStyles';
+
+@mixin titleBox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 5vh;
+  padding-bottom: 10vh;
+  .backButton{
+    margin-right: .5rem;
+    padding: 0;
+    border: none;
+    background: none;
+    svg {
+      color: $white-0;
+      width: 1.75rem;
+      height: 1.75rem;
+    }
+  }
+  .title{
+    font-size: 2rem;
+  }
+
+  @include forDesktopUp {
+    .backButton {
+      display: none;
+    }
+  }
+}

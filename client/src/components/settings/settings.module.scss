@@ -1,0 +1,182 @@
+@import '../../../styles/baseStyles';
+
+
+.inner {
+  // padding: 2rem;
+  .leftColumn, .rightColumn {
+    padding: 5vh 2rem;
+    min-height: 100vh;
+    width: 100%;
+    position: absolute;
+    top: 0;
+  }
+  
+  .titleArea {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 5vh;
+    padding-bottom: 10vh;
+    text-align: center;
+    .mobileBackButton {
+      background: none;
+      border: none;
+      color: $white-0;
+      padding: 0;
+      svg {
+        width: 2.5rem;
+        height: 2.5rem;
+      }
+    }
+    .title {
+      @include headingFont;
+      @include title;
+      font-size: 2rem;
+      @include forDesktopUp {
+        font-size: 3rem;
+      }
+      padding-left: .5rem;
+    }
+  }
+  .buttons {
+    display: flex;
+    flex-direction: column;
+    .button, .desktopBackButton {
+      align-items: center;
+      background: $black-2;
+      color: $white-0;
+      border: none;
+      font-size: 1.05rem;
+      padding: 1rem 1.5rem;
+      transition: background-color .15s ease-in-out;
+      &:not(:last-child) {
+        margin-bottom: .5rem;
+      }
+      .svgWrapper {
+        margin-right: 1rem;
+        border-radius: .4rem;
+        width: 2rem;
+        height: 2rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        svg {
+          height: 1.25rem;
+          width: 1.25rem;
+          color: $white-0;
+        }
+      }
+      &:nth-child(2) .svgWrapper {
+        background-color: #3867d6;
+      }
+      &:nth-child(3) .svgWrapper {
+        background-color: #4b6584;
+      }
+      &:nth-child(4) .svgWrapper {
+        background-color: #8854d0;
+      }
+      &:nth-child(5) .svgWrapper {
+        background-color: #2f3640;
+      }
+      &:nth-child(6) .svgWrapper {
+        background-color: #01e3bb;
+        svg {
+          color: $black-0;
+        }
+      }
+      &:hover {
+        cursor: pointer;
+      }
+      &:focus, &:hover {
+        background-color: lighten($black-2, 5);
+      }
+      &:active {
+        background-color: lighten($black-2, 7.5);
+      }
+    }
+  }
+  .desktopBackButton {
+    display: none;
+  }
+  .button {
+    display: flex;
+  }
+  .leftColumn {
+    transition: left .3s ease-in-out;
+    z-index: 250;
+    left: 0;
+    &.hidden {
+      left: -100%;
+    }
+  }
+  .rightColumn {
+    transition: opacity .3s ease-in-out;
+    right: 0;
+    opacity: 1;
+    &.hidden {
+      opacity: 0;
+    }
+  }
+}
+
+@include forDesktopUp {
+  .inner {
+    display: flex;
+    .leftColumn, .rightColumn {
+      padding: 2rem;
+      min-height: 100%;
+      width: 50%;
+      position: static;
+      top: 0;
+    }
+    .titleArea {
+      padding-top: 2.5vh;
+      padding-bottom: 5vh;
+      .mobileBackButton {
+        display: none;
+      }
+    }
+    .buttons {
+      display: flex;
+      flex-direction: column;
+      .desktopBackButton {
+        display: flex;
+      }
+      .button {
+        transition: color .15s ease-in-out;
+        .svgWrapper {
+          // background: $highlight;
+          transition: background-color .15s ease-in-out;
+          svg {
+            transition: color .15s ease-in-out;
+          }
+        }
+        &.active {
+          color: $highlight;
+          .svgWrapper {
+            background: $highlight;
+            svg {
+              color: $black-1;
+            }
+          }
+        }
+      }
+    }
+    .leftColumn {
+      transition: left .3s ease-in-out;
+      z-index: 250;
+      left: 0;
+      &.hidden {
+        left: -100%;
+      }
+    }
+    .rightColumn {
+      transition: opacity .3s ease-in-out;
+      right: 0;
+      opacity: 1;
+      &.hidden {
+        opacity: 0;
+      }
+    }
+  }
+}
