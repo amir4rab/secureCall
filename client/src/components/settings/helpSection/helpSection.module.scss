@@ -1,0 +1,8 @@
+@import '../../../../styles/baseStyles';
+@import '../settingsStyles.module';
+
+.helpSection {
+  .titleBox {
+    @include titleBox;
+  }
+}
