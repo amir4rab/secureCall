@@ -1,4 +1,4 @@
-import { createContext, useContext ,useState, useEffect } from 'react';
+import { createContext, useContext ,useState, useEffect, useCallback } from 'react';
 import { io } from "socket.io-client";
 
 import { ContactsContext } from '../contactsProvider/contactsProvider';
@@ -8,22 +8,20 @@ export const SocketsContext = createContext();
 export const SocketsProvider = ({ children }) => {
   const {
     addContact,
+    removeContact,
     addRequest,
     removeRequest
   } = useContext(ContactsContext);
   const [ isConnected, setIsConnected ] = useState(false);
   const [ socket, setSocket ] = useState(null);
-  const [ isInitialized, setIsInitialized ] = useState(false);
 
-  // const [ receivingCall, setReceivingCall ] = useState(false);
+  const [ callDeclined, setCallDeclined ] = useState(false);
+  const [ callEnded, setCallEnded ] = useState(null);
   const [ receivingCall, setReceivingCall ] = useState(null);
   const [ callIsAnswered, setCallIsAnswered ] = useState(false);
+  const [ isInCall, setIsInCall ] = useState(false);
 
   const connect = async ( userData ) => {
-    console.log({
-      email: userData.email,
-      accessToken: userData.jwt
-    })
     const socket = io( process.env.NEXT_PUBLIC_SOCKET_IO_SERVER_URL, {
       auth: {
         email: userData.email,
@@ -46,18 +44,36 @@ export const SocketsProvider = ({ children }) => {
     socket.on('acceptedContactRequest', contact => addContact(contact) );
 
     socket.on('receivingCall', callDetails => {
-      console.log(`Receiving call from ${callDetails.from}`)
-      setReceivingCall(callDetails)
+      console.log(`Receiving call from ${callDetails.from}`);
+      if( !isInCall ) {
+        console.warn(`Setting receiving call!`)
+        setReceivingCall(callDetails)
+      } else {
+        console.log(`Call has been failed!, reason: Receiver is busy!`);
+        socket.emit('callDeclined', {
+          to: callDetails.from,
+          reason: 'Receiver is busy'
+        })
+      }
     });
 
+    socket.on('callEnd', ({ from, reason }) => {
+      console.log('Call end event')
+      setCallEnded({
+        from,
+        reason
+      })
+    })
+
     socket.on('callAnswered', _ => setCallIsAnswered(true));
+
+    socket.on('contactRemoval', email => removeContact(email));
 
     console.log('setting socket')
     setSocket(socket);
   }
 
   const contactRequest = ( recipientEmail ) => {
-    // console.log(socket)
     return new Promise((resolve) => {
       socket.emit(
         'contact request', 
@@ -67,7 +83,6 @@ export const SocketsProvider = ({ children }) => {
         response => resolve(response)
       );
     })
-    // socket.on('request contact response', _ => console.log('Successful contact request!'))
   }
 
   const responseToRequest = ( email, isAccepted ) => {
@@ -121,17 +136,49 @@ export const SocketsProvider = ({ children }) => {
     setCallIsAnswered(true);
   }
 
-  const declineCall = ( to ) => {
-    socket.emit('declineCall', {
-      to
+  const declineCall = useCallback(( to, reason= 'not answered' ) => {
+    socket.emit('endCall', {
+      to,
+      reason
     })
     setReceivingCall(null);
+  }, [ socket ])
+
+  const deleteContact = async ( contactEmail ) => new Promise((resolve) => {
+    socket.emit(
+      'deleteContact', 
+      {
+        email: contactEmail
+      },
+      res => {
+        resolve(res);
+        removeContact(contactEmail);
+      })
+  })
+
+  const clearCallingInfo = () => {
+    console.log('call cleared!')
+    setIsInCall(false);
+    setCallIsAnswered(false);
+    setReceivingCall(null);
+    setCallDeclined(false);
+    setCallEnded(null);
   }
+  
+  const endCall = ( to, reason= 'not answered' ) => new Promise(( resolve ) => {
+    socket.emit('callEnd', {
+      to,
+      reason
+    }, res => {
+      console.log(res)
+      clearCallingInfo();
+      resolve(null);
+    });
+  })
   
   const value = {
     connect,
     socket,
-    isInitialized,
     contactRequest,
     isConnected,
     responseToRequest,
@@ -139,7 +186,12 @@ export const SocketsProvider = ({ children }) => {
     answerCall,
     receivingCall,
     callIsAnswered,
-    declineCall
+    declineCall,
+    callDeclined,
+    deleteContact,
+    endCallEvent: endCall,
+    callEnded,
+    clearCallingInfo
   };
 
   return (

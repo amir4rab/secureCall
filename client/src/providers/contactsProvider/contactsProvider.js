@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState, useRef } from 'react';
+import { createContext, useState } from 'react';
 
 export const ContactsContext = createContext();
 
@@ -47,12 +47,17 @@ export const ContactsProvider = ({ children }) => {
       return;
     } 
   };
+
+  const removeContact = ( contactEmail ) => {
+    setContacts(oldContacts => oldContacts.filter( contact => contact.email !== contactEmail ));
+    if ( contactEmail === activeContact?.email ) setActiveContact(null)
+  };
   const removeRequest = ( requestEmail ) => {
     setRequests(oldRequests => oldRequests.filter( request => request.email !== requestEmail ));
   }
 
-  const getContact = (id) => {
-    const contact = contacts.find(contact => contact.id === id);
+  const getContact = (email) => {
+    const contact = contacts.find(contact => contact.email === email);
     return contact;
   }
 
@@ -70,6 +75,7 @@ export const ContactsProvider = ({ children }) => {
     requests,
     activeContact,
     contacts,
+    removeContact
   }
 
   return (
