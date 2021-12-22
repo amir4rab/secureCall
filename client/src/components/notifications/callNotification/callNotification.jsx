@@ -1,4 +1,4 @@
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 import { useRouter } from 'next/router';
 
 import Notification from '../notification/notification';
@@ -17,16 +17,26 @@ function CallNotification() {
     declineCall
   } = useContext(SocketsContext);
 
-  // console.log(receivingCall);
-
   const answerCallEvent = _ => {
     answerCall(receivingCall.from);
-    router.push(`panel/call?callTo=${receivingCall.from}&type=${receivingCall.type}&calling=false`);
+    router.push(`panel/call?callTo=${receivingCall.from}&callType=${receivingCall.type}&calling=false`);
   }
 
   const declineCallEvent = _ => {
     declineCall(receivingCall.from);
   }
+
+  useEffect( _ => {
+    let timeout;
+    if ( !callIsAnswered && receivingCall !== null ) {
+      timeout = setTimeout( _ => {
+        declineCall(receivingCall.from);
+      }, 10000)
+    }
+    return () => {
+      clearTimeout(timeout);
+    }
+  }, [ receivingCall, callIsAnswered, declineCall ])
 
   return (
     <Notification isVisible={ receivingCall !== null && !callIsAnswered }>
