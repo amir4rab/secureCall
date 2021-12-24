@@ -6,7 +6,8 @@ import { fadeDown, fadeUp } from '../../animations/fade';
 import useTranslation from 'next-translate/useTranslation';
 import Trans from 'next-translate/Trans';
 
-import { IoLogoApple, IoLogoGoogle, IoLogoTwitter } from 'react-icons/io5'
+import { IoLogoApple, IoLogoGoogle, IoLogoTwitter } from 'react-icons/io5';
+
 import Box from '../box/box';
 import tos from '../../utils/frontend/placeholder/tos';
 
@@ -38,10 +39,6 @@ const buttonsSectionVariants = {
   }
 };
 
-// const signInOptions = (local) => ({
-//   callbackUrl: `http://localhost:3000/${local}/panel`
-// });
-
 function Auth() {
   const [ signInOptions, setSignInOptions ] = useState({
     callbackUrl: `http://localhost:3000/panel`
@@ -54,14 +51,13 @@ function Auth() {
   const session = useSession();
 
   useEffect( _ => {
+    router.prefetch('/panel')
     if( router.locale !== 'en' ) {
       setSignInOptions({
         callbackUrl: `http://localhost:3000/${router.locale}/panel`
       })
     }
-  }, [ router ])
-
-  // console.log(router);
+  }, [ router ]);
 
   return (
     <Box>
@@ -94,7 +90,7 @@ function Auth() {
               <Trans 
                 i18nKey='auth:aTos'
                 components={[
-                  <strong/>
+                  <strong key="aTos"/>
                 ]}
               />
             </Checkbox>

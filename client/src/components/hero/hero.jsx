@@ -1,5 +1,4 @@
 import { motion } from 'framer-motion';
-import { useRouter } from 'next/router';
 
 import Link from 'next/link';
 import Trans from 'next-translate/Trans';
@@ -50,8 +49,6 @@ const Feature = ({ children }) => {
 function Hero() {
   const { t } = useTranslation('common');
   const { t: heroT } = useTranslation('hero');
-  const { t: authT } = useTranslation('auth');
-  const router = useRouter();
 
   return (
     <Box>
@@ -125,7 +122,7 @@ function Hero() {
               <Trans
                 i18nKey='hero:readMore'
                 components={[
-                  <Link href='/about' />
+                  <Link href='/about' key="0" />
                 ]}
                 values={{ name: 'Secure Call' }}
               />
