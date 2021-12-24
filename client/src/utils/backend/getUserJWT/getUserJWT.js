@@ -2,20 +2,14 @@ const { MongoClient } = require("mongodb");
 
 export const getUserJWT = async ( email ) => {
   const client = new MongoClient(process.env.MONGODB_URI);
-      
   await client.connect();
-  
   const database = client.db('secureCall');
   const users = database.collection('users');
-  
-  const doc = {
-    email
-  };
-  const userData = await users.findOne(doc);
-
+  const userData = await users.findOne({ email });
   await client.close();
-
-  return userData.signedSecret;
+  
+  const websiteTokens = userData.tokens.find(token => token.name === 'website');
+  return websiteTokens.signedSecret;
 };
 
 export default getUserJWT;

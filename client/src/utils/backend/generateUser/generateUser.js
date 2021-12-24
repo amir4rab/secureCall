@@ -3,14 +3,16 @@ const { MongoClient } = require("mongodb");
 const jwt = require('jsonwebtoken');
 
 
-export const generateUser = async ( user ) => {
-  const client = new MongoClient(process.env.MONGODB_URI);
+export const generateUser = async ( user, account ) => {
 
+  const client = new MongoClient(process.env.MONGODB_URI);
   await client.connect();
   
   const database = client.db('secureCall');
   const users = database.collection('users');
 
+  const userData = await users.findOne({ email: user.email });
+  
   const secret = randomBytes(128).toString('base64');
 
   const userJwt = jwt.sign(
@@ -22,38 +24,56 @@ export const generateUser = async ( user ) => {
     { algorithm: 'HS512'}
   );
 
-  const query = {
-    email: user.email
-  }
-  const userData = await users.findOne(query);
-
-  console.log(userData);
-    
   if ( userData === null ) { //** new user **//
     const doc = {
       email: user.email,
       name: user.name,
       contacts: [],
       requests: [],
-      secret,
-      signedSecret: userJwt
+      currentOauthProvider: account.provider,
+      acceptedProviders: [ account.provider ],
+      tokens: [
+        {
+          name: "website",
+          secret,
+          signedSecret: userJwt
+        }
+      ],
     };
-  
-    const newData = { $set: doc };
 
-    await users.updateOne( query, newData );
-  } else {
-    const doc = {
-      secret,
-      signedSecret: userJwt
-    }
+    await users.insertOne( doc );
 
-    const newData = { $set: doc };
-    
-    await users.updateOne( query, newData );
+    await client.close();
+    return ({
+      status: 'successful',
+      reason: null 
+    });
   }
 
+  if ( !userData.acceptedProviders.includes(account.provider) ) { //** provider is not accepted by user **// 
+    await client.close();
+    return {
+      status: 'error',
+      reason: 'falseProvider' 
+    };
+  }
+
+  const newTokens = userData.tokens.filter(token => token.name !== 'website');
+  newTokens.push({
+    secret,
+    signedSecret: userJwt,
+    name: 'website'
+  })
+
+  const updateDocument = { $set: { tokens: newTokens } };
+    
+  await users.updateOne({ email: user.email }, updateDocument);
+
   await client.close();
+  return {
+    status: 'successful',
+    reason: null 
+  }
 };
 
 export default generateUser;
