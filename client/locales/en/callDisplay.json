@@ -1,0 +1,9 @@
+{
+  "endCall": "End call",
+  "mute": "mute",
+  "unmute": "unmute",
+  "cameraOn": "turn camera on",
+  "cameraOff": "turn camera off",
+  "audioOn": "turn audio on",
+  "audioOff": "turn audio off"
+}
