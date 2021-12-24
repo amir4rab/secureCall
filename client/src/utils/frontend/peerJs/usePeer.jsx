@@ -1,9 +1,11 @@
 import { useEffect, useState, useRef } from 'react'
 import Peer from 'peerjs'
 
-export const usePeer = ( peerVideoRef ) => {
+export const usePeer = ( peerVideoRef, setCallIsAnswered ) => {
   const [ peerId, setPeerId ] = useState(null);
+  const [ isInitialized, setIsInitialized ] = useState(false);
   const peerRef = useRef(null);
+  const callRef = useRef(null);
   const selfStreamRef = useRef(null);
   const [ callDetails, setCallDetails ] = useState();
 
@@ -19,46 +21,74 @@ export const usePeer = ( peerVideoRef ) => {
       setPeerId( id )
       emitPeerId( id );
     });
+    peer.on( 'connection', conn => {
+      conn.on('close', _ => console.log('Conn closed'))
+    })
+    peer.on('disconnected', _ => console.log('Disconnected!'))
+    peer.on('close', _ => console.warn('Closed!'))
   }
 
   useEffect( _ => {
-    if( peerId === null ) return;
+    if( peerId === null && !isInitialized ) return;
     if ( !callDetails.calling ) {
-
-      console.log(`peerJs onCall added!`)
+      // console.log(`peerJs onCall added!`)
       peerRef.current.on('call', call => {
-        console.log('Receiving call from peerJs');
+        // console.log('Receiving call from peerJs');
+        setCallIsAnswered(true);
+        callRef.current = call;
+
         call.answer(selfStreamRef.current);
+
         call.on('stream', peerStream => {
           peerVideoRef.srcObject = peerStream;
         })
+        call.on('close', _ => console.log('Closed 0!'))
       });
 
     } else {
-
       console.log('Calling from peerJs')
       const call = peerRef.current.call( callDetails.recipientPeerId, selfStreamRef.current )
       call.on('stream', peerStream => {
+        setCallIsAnswered(true);
         peerVideoRef.srcObject = peerStream;
       })
-
+      call.on('close', _ => console.log('Closed 1!'))
+      callRef.current = call;
     }
-  }, [ peerId ])
-
-  useEffect( _ => {
-    return () => {
-      if ( peerRef.current !== null ) peerRef.current.destroy();
-    }
-  }, []);
+    setIsInitialized(true);
+  }, [ peerId, callDetails, peerVideoRef, selfStreamRef, setCallIsAnswered, isInitialized ]);
 
   const peerCall = async ( recipientPeerId ) => {
     console.log( peerRef.current, peerId )
   }
 
+  const destroy = () => {
+    if ( callRef.current !== null ) {
+      for (let conns in peerRef.current.connections) {
+        peerRef.current.connections[conns].forEach((conn, index, array) => {
+        console.log(`closing ${conn.connectionId} peerConnection (${index + 1}/${array.length})`, conn.peerConnection);
+        conn.peerConnection.close();
+        if (conn.close) {
+          conn.close();
+        }
+        });
+      }
+    };
+    if ( peerRef.current !== null ) peerRef.current.destroy();
+    callRef.current= null;
+    peerRef.current= null;
+  }
+
+  useEffect( _ => {
+    return () => {
+      destroy()
+    }
+  }, [ peerRef, callRef ]);
 
   return ({
     init,
     peerCall,
-    id: peerId
+    id: peerId,
+    destroy
   })
 }
