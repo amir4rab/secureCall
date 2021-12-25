@@ -2,12 +2,15 @@ import { useState } from 'react';
 
 import { IoMic, IoMicOff, IoVideocam, IoVideocamOff, IoVolumeHigh, IoVolumeMute } from 'react-icons/io5';
 
+import useTranslation from 'next-translate/useTranslation';
+
 import classes from './callButtons.module.scss';
 
 function CallButtons({ changeMedia, isAudio, setIsAudio, endCall, audioOnly = false }) {
   const [ microphoneState, setMicrophoneState ] = useState(true);
   const [ cameraState, setCameraState ] = useState(true);
   const [ isLoading, setIsLoading ] = useState(false);
+  const { t } = useTranslation('callDisplay');
 
   const toggleAudio = async () => {
     await changeMedia('audio', !microphoneState );
@@ -29,6 +32,9 @@ function CallButtons({ changeMedia, isAudio, setIsAudio, endCall, audioOnly = fa
         >
           <IoMic className={ classes.activeImg }/>
           <IoMicOff className={ classes.inactiveImg }/>
+          <div className={ classes.hint }>
+            { cameraState ? t('mute') : t('unmute') }
+          </div>
         </button>
         <button 
           disabled={ isLoading }
@@ -37,6 +43,9 @@ function CallButtons({ changeMedia, isAudio, setIsAudio, endCall, audioOnly = fa
         >
           <IoVideocam className={ classes.activeImg }/>
           <IoVideocamOff className={ classes.inactiveImg }/>
+          <div className={ classes.hint }>
+            { cameraState ? t('cameraOff') : t('cameraOn') }
+          </div>
         </button>
         <button 
           disabled={ isLoading }
@@ -45,11 +54,14 @@ function CallButtons({ changeMedia, isAudio, setIsAudio, endCall, audioOnly = fa
         >
           <IoVolumeHigh className={ classes.activeImg }/>
           <IoVolumeMute className={ classes.inactiveImg }/>
+          <div className={ classes.hint }>
+            { isAudio ? t('audioOff') : t('audioOn') }
+          </div>
         </button>
       </div>
       <div className={ classes.right }>
         <button onClick={ endCall } className={ classes.buttonRed }>
-          End call
+          { t('endCall') }
         </button>
       </div>
     </div>
