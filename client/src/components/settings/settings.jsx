@@ -5,12 +5,14 @@ import { motion, AnimatePresence } from 'framer-motion'
 import useTranslation from 'next-translate/useTranslation';
 
 import Box from '../box/box';
-import { IoSettings, IoInformation, IoChevronBack, IoArrowBack, IoHelpBuoy, IoLogoGithub, IoCodeSlash } from 'react-icons/io5';
+import { IoSettings, IoInformation, IoChevronBack, IoArrowBack, IoHelpBuoy, IoLogoGithub, IoCodeSlash, IoPerson, IoLink } from 'react-icons/io5';
 
-import classes from './settings.module.scss';
+import AccountSection from './accountSection/accountSection';
 import SettingsSection from './settingsSection/settingsSection';
 import AboutSection from './aboutSection/aboutSection';
 import HelpSection from './helpSection/helpSection';
+
+import classes from './settings.module.scss';
 
 const motionWrapperVariants = {
   visible: {
@@ -63,6 +65,12 @@ function Settings() {
               </div>
               <p>{t('settings')}</p>
             </button>
+            <button onClick={ _ => setSelectedItem('account') } className={[ classes.button, selectedItem === 'account' ? classes.active : null ].join(' ')}>
+              <div className={ classes.svgWrapper }>
+                <IoPerson />
+              </div>
+              <p>{t('account')}</p>
+            </button>
             <button onClick={ _ => setSelectedItem('about') } className={[ classes.button, selectedItem === 'about' ? classes.active : null ].join(' ')}>
               <div className={ classes.svgWrapper }>
                 <IoInformation />
@@ -80,12 +88,14 @@ function Settings() {
                 <IoLogoGithub />
               </div>
               <p>{t("sourceCode")}</p>
+              <IoLink className={ classes.link }/>
             </a>
             <a href="https://amir4rab.com" target="_blank" rel="noreferrer" className={ classes.button }>
               <div className={ classes.svgWrapper }>
                 <IoCodeSlash />
               </div>
               <p>{t("developer")}</p>
+              <IoLink className={ classes.link }/>
             </a>
           </div>
         </div>
@@ -102,6 +112,9 @@ function Settings() {
             }
             {
               selectedItem === 'help' ? <MotionWrapper><HelpSection close={ closeItem } /></MotionWrapper> : null
+            }
+            {
+              selectedItem === 'account' ? <MotionWrapper><AccountSection close={ closeItem } /></MotionWrapper> : null 
             }
           </AnimatePresence>
         </div>

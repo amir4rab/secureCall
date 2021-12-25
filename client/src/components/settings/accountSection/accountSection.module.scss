@@ -1,0 +1,62 @@
+@import '../../../../styles/baseStyles';
+@import '../settingsStyles.module.scss';
+
+
+.accountSection {
+  .titleBox{
+    @include titleBox;
+  }
+  .items{
+    .groupItem{
+      &:not(:last-child){
+        padding-bottom: 3rem;
+      }
+      &.alignLeft {
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+        flex-direction: column;
+      }
+      .groupTitle{
+        width: 100%;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        .svgWrapper {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 2rem;
+          height: 2rem;
+          background-color: $black-2;
+          border-radius: .5rem;
+          margin-right: 1rem;
+          svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            color: $highlight;
+          }
+        }
+        font-size: 1.25rem;
+        padding-bottom: 1.5rem;
+      }
+      .logoutBtn{
+        background: transparent;
+        color: lighten( $red-0, 10 );
+        padding: 0;
+        border: none;
+        font-size: 1rem;
+        transition: border .15s ease-in-out;
+        padding-bottom: .25rem;
+        border-bottom: .15rem solid transparent;
+        border-radius: 0;
+        &:hover {
+          cursor: pointer;
+        }
+        &:hover, &:focus {
+          border-bottom: .15rem solid transparentize($red-0, .5);
+        }
+      }
+    }
+  }
+}
