@@ -58,10 +58,12 @@ export const SocketsProvider = ({ children }) => {
     });
 
     socket.on('callEnd', ({ from, reason }) => {
-      console.log('Call end event')
+      console.log('Call end event');
+      const time = new Date();
       setCallEnded({
         from,
-        reason
+        reason,
+        time: time.valueOf()
       })
     })
 
@@ -154,7 +156,11 @@ export const SocketsProvider = ({ children }) => {
         resolve(res);
         removeContact(contactEmail);
       })
-  })
+  });
+
+  const clearEndedCall = _ => {
+    setCallEnded(null);
+  }
 
   const clearCallingInfo = () => {
     console.log('call cleared!')
@@ -191,7 +197,8 @@ export const SocketsProvider = ({ children }) => {
     deleteContact,
     endCallEvent: endCall,
     callEnded,
-    clearCallingInfo
+    clearCallingInfo,
+    clearEndedCall
   };
 
   return (
