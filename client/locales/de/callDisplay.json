@@ -5,5 +5,7 @@
   "cameraOn": "Kamera einschalten",
   "cameraOff": "Kamera ausschalten ",
   "audioOn": "Audio einschalten",
-  "audioOff": "Audio ausschalten"
+  "audioOff": "Audio ausschalten",
+  "me": "Mich",
+  "callEnded": "Anruf beendet"
 }
