@@ -1,0 +1,105 @@
+@import '../../../../styles/baseStyles';
+
+.waitingDisplay {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  .nameWrapper{
+    margin-bottom: 2rem;
+    position: relative;
+    &::before, &::after {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      background-color: $highlight;
+      content: '';
+      border-radius: 50%;
+      width: 100%;
+      height: 100%;
+      z-index: 10;
+      transform-origin: center;
+    }
+    @keyframes scale {
+      0% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: .75;
+      }
+      75% {
+        opacity: 0;
+      }
+      100% {
+        transform: translate(-50%, -50%) scale(2);
+        opacity: 0;
+      }
+    }
+    &::before {
+      animation: scale 2s .5s ease-in-out infinite;
+    }
+    &::after {
+      animation: scale 2s 0s ease-in-out infinite;
+    }
+    width: 5rem;
+    height: 5rem;
+    .name {
+      display: none;
+      position: absolute;
+      z-index: 100;
+      @include textImg(5rem);
+    }
+  }
+  .text{
+    margin-bottom: 2rem;
+  }
+  .buttonWrapper {
+    button {
+      background: none;
+      border: none;
+      color: $white-0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      svg {
+        margin-right: .5rem;
+      }
+      opacity: 1;
+      &:disabled {
+        opacity: .5;
+      }
+    }
+  }
+}
+
+@include forDesktopUp {
+  .waitingDisplay {
+    .nameWrapper{
+      width: 7.5vw;
+      height: 7.5vw;
+      .name {
+        display: none;
+        position: absolute;
+        z-index: 100;
+        @include textImg(7.5vw);
+      }
+    }
+    .buttonWrapper {
+      button {
+        transition: 
+          color .15s ease-in-out,
+          background-color .15s ease-in-out
+        ;
+        &:hover {
+          cursor: pointer;
+        }
+        &:hover, &:focus {
+          background: $black-1;
+        }
+        &:active {
+          color: $highlight;
+        }
+      }
+    }
+  }
+}
