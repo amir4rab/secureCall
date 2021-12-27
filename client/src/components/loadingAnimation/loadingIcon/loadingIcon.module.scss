@@ -1,0 +1,63 @@
+@import '../../../../styles/baseStyles';
+
+.svg {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  @keyframes svgAnimation {
+    0% {
+      opacity: 0;
+    }
+    10% {
+      opacity: 1;
+    }
+    90% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+  animation: svgAnimation 5s ease-in-out infinite forwards;
+  .body {
+    @keyframes bodyAnimation {
+      60% {
+        fill: transparent;
+      }
+      80%, 100% {
+        fill: $highlight;
+      }
+    }
+    animation: bodyAnimation 5s ease-in-out infinite forwards;
+  }
+  .lockHandle {
+    @keyframes lockHandleAnimation {
+      20% {
+        d: path("M218.5 233.5V188.5C218.5 178.554 222.451 169.016 229.483 161.983C236.516 154.951 246.054 151 256 151C265.946 151 275.484 154.951 282.517 161.983C289.549 169.016 293.5 178.554 293.5 188.5V191.273");
+      }
+      30% {
+        d: path("M218.5 233.5V188.5C218.5 178.554 222.451 169.016 229.483 161.983C236.516 154.951 246.054 151 256 151C265.946 151 275.484 154.951 282.517 161.983C289.549 169.016 293.5 178.554 293.5 188.5V231.5");
+      }
+      60% {
+        d: path("M218.5 233.5V188.5C218.5 178.554 222.451 169.016 229.483 161.983C236.516 154.951 246.054 151 256 151C265.946 151 275.484 154.951 282.517 161.983C289.549 169.016 293.5 178.554 293.5 188.5V231.5");
+        stroke: $highlight;
+      }
+      80%, 100% {
+        d: path("M218.5 233.5V188.5C218.5 178.554 222.451 169.016 229.483 161.983C236.516 154.951 246.054 151 256 151C265.946 151 275.484 154.951 282.517 161.983C289.549 169.016 293.5 178.554 293.5 188.5V231.5");
+        stroke: $black-0;
+      }
+    }
+    animation: lockHandleAnimation 5s ease-in-out infinite forwards;
+  }
+  .lockBody {
+    @keyframes lockBodyAnimation {
+      0%, 60% {
+        stroke: $highlight;
+      }
+      80%, 100% {
+        stroke: $black-0;
+      }
+    }
+    animation: lockBodyAnimation 5s ease-in-out infinite forwards;
+  }
+}
