@@ -4,5 +4,7 @@
   "loading": "Loading",
   "copy": "Copy",
   "copied": "Copied",
-  "backToPanel": "Back to panel"
+  "backToPanel": "Back to panel",
+  "connecting": "Connecting",
+  "longLoading": "Is loading taking to long? <0>click here</0> to check servers status."
 }
