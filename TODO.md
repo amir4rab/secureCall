@@ -13,6 +13,6 @@
 - [X] adding loading screen
 
 ## Bug fixes
-- [ ] Call ended before answer bug fix
+- [X] Call ended before answer bug fix
 - [ ] Fix waiting display bug
 - [ ] Fix notifications
