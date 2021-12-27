@@ -15,4 +15,4 @@
 ## Bug fixes
 - [X] Call ended before answer bug fix
 - [ ] Fix waiting display bug
-- [ ] Fix notifications
+- [X] Fix notifications

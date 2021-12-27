@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { useRouter } from 'next/router';
 
 import Notification from '../notification/notification';
@@ -9,12 +9,15 @@ import { IoVideocam, IoClose, IoCall } from 'react-icons/io5';
 import classes from './callNotification.module.scss';
 
 function CallNotification() {
+  const [ isClosed, setIsClosed ] = useState(false);
+  console.log(isClosed);
   const router = useRouter();
   const { 
     receivingCall, 
     callIsAnswered,
     answerCall,
-    declineCall
+    declineCall,
+    callEnded
   } = useContext(SocketsContext);
 
   const answerCallEvent = _ => {
@@ -29,6 +32,7 @@ function CallNotification() {
   useEffect( _ => {
     let timeout;
     if ( !callIsAnswered && receivingCall !== null ) {
+      setIsClosed(false);
       timeout = setTimeout( _ => {
         declineCall(receivingCall.from);
       }, 10000)
@@ -36,10 +40,17 @@ function CallNotification() {
     return () => {
       clearTimeout(timeout);
     }
-  }, [ receivingCall, callIsAnswered, declineCall ])
+  }, [ receivingCall, callIsAnswered, declineCall ]);
+
+  useEffect( _ => {
+    console.log(callEnded); 
+    if( callEnded !== null ) {
+      setIsClosed(true);
+    }
+  }, [ callEnded ])
 
   return (
-    <Notification isVisible={ receivingCall !== null && !callIsAnswered }>
+    <Notification isVisible={ receivingCall !== null && !callIsAnswered && !isClosed }>
       <div className={ classes.notificationInner }>
         <div className={ classes.left }>
           <p className={ classes.name }>{`${receivingCall?.name}`}</p>
