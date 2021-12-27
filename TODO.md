@@ -10,7 +10,7 @@
 - [ ] Banning users
 - [ ] Add Translation and Call time to Ended call display
 - [ ] Add more options to call display
-- [ ] adding loading screen
+- [X] adding loading screen
 
 ## Bug fixes
 - [ ] Call ended before answer bug fix

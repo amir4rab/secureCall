@@ -1,0 +1,27 @@
+@import '../../../styles/baseStyles';
+
+.loadingDisplay {
+  width: 100vw;
+  height: 100vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  flex-direction: column;
+  position: relative;
+
+  .loadingIcon{
+    max-width: 50vw;
+    max-height: 50vw;
+  }
+  .text {
+    padding-top: 1rem;
+  }
+  @include forDesktopUp {
+    .loadingIcon{
+      width: 25vh;
+      max-height: 25vh;
+    }
+  }
+}
