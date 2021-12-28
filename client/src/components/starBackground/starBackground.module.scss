@@ -1,0 +1,53 @@
+@import '../../../styles/baseStyles';
+
+.starBackground {
+  width: 100vw;
+  height: 100vh;
+  opacity: .4;
+  overflow: hidden;
+  .svg {
+    padding: 0;
+    width: 100vw;
+    height: 100%;
+    object-fit: cover;
+    filter: blur(.25rem);
+    g {
+      width: 100%;
+      height: 100%;
+    }
+  }
+  .star {
+    fill: $highlight;
+    // transition: opacity 2s ease;
+    // opacity: 0;
+    &.visible {
+      @keyframes animateIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+      animation: animateIn 2s ease-in-out 0s forwards;
+      // opacity: 0;
+    }
+    &.hidden {
+      @keyframes animateOut {
+        from {
+          opacity: 1;
+        }
+        to {
+          opacity: 0;
+        }
+      }
+      animation: animateOut 2s ease-in-out 0s forwards;
+    }
+  }
+}
+
+@include forDesktopUp {
+  .starBackground {
+    opacity: 1;
+  }
+}

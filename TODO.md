@@ -16,3 +16,4 @@
 - [X] Call ended before answer bug fix
 - [X] Fix waiting display bug
 - [X] Fix notifications
+- [X] Live background for landing page

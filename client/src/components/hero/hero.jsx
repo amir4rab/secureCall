@@ -11,6 +11,7 @@ import { fadeLeft, fadeRight, fadeDown, fadeUp } from '../../animations/fade';
 import classes from './hero.module.scss';
 import Box from '../box/box';
 import HeroCTA from './heroCTA';
+import StarBackground from '../starBackground/starBackground';
 
 const featuresVariants = {
   hidden: { 
@@ -51,87 +52,92 @@ function Hero() {
   const { t: heroT } = useTranslation('hero');
 
   return (
-    <Box>
-      <div className={ classes.hero }>
-        <div className={ classes.columnsWrapper }>
-          <div className={ classes.column }>
-            <motion.h1 //** Title **//
-              className={ classes.title }
-              variants={ fadeUp }
+    <>
+      <div className={ classes.boxWrapper }>
+        <Box>
+          <div className={ classes.hero }>
+            <div className={ classes.columnsWrapper }>
+              <div className={ classes.column }>
+                <motion.h1 //** Title **//
+                  className={ classes.title }
+                  variants={ fadeUp }
+                  initial='hidden'
+                  animate='visible'
+                >
+                  {t('websiteName')}
+                </motion.h1>
+                <motion.h4 //** Website description **//
+                  className={ classes.info }
+                  variants={ fadeLeft }
+                  initial='hidden'
+                  animate='visible'
+                >
+                  {t('websiteDescription')}
+                </motion.h4>
+                <motion.div //** Features **//
+                  variants={ featuresVariants }
+                  initial='hidden'
+                  animate='visible'
+                  className={ classes.features }
+                >
+                  <Feature>
+                    <IoLogoGithub/> <p>{ heroT('openSource') }</p>
+                  </Feature>
+                  <Feature>
+                    <IoLockClosed/> <p>{ heroT('eTEE') }</p>
+                  </Feature>
+                  <Feature>
+                    <IoFlash/> <p>{ heroT('fast') }</p>
+                  </Feature>
+                  <Feature>
+                    <IoLaptop/> <p>{ heroT('mPlatform') }</p>
+                  </Feature>
+                </motion.div>
+                <motion.div
+                  className={ classes.buttonsSection }
+                  variants={ fadeLeft }
+                  initial='hidden'
+                  animate='visible'
+                >
+                  <HeroCTA />
+                </motion.div>
+              </div>
+              <div className={ classes.column }>
+                <motion.div
+                  className={ classes.imagesWrapper }
+                  variants={ fadeRight }
+                  initial='hidden'
+                  animate='visible'
+                >
+                  <img className={ classes.image } src={require('../../../public/assets/hero_img_0.png').default.src} alt={'hero_img_0'} />
+                  <img className={ classes.image } src={require('../../../public/assets/hero_img_1.png').default.src} alt={'hero_img_1'} />
+                </motion.div>
+              </div>
+            </div>
+            <motion.div //** footer **//
+              variants={ fadeDown }
               initial='hidden'
               animate='visible'
-            >
-              {t('websiteName')}
-            </motion.h1>
-            <motion.h4 //** Website description **//
-              className={ classes.info }
-              variants={ fadeLeft }
-              initial='hidden'
-              animate='visible'
-            >
-              {t('websiteDescription')}
-            </motion.h4>
-            <motion.div //** Features **//
-              variants={ featuresVariants }
-              initial='hidden'
-              animate='visible'
-              className={ classes.features }
-            >
-              <Feature>
-                <IoLogoGithub/> <p>{ heroT('openSource') }</p>
-              </Feature>
-              <Feature>
-                <IoLockClosed/> <p>{ heroT('eTEE') }</p>
-              </Feature>
-              <Feature>
-                <IoFlash/> <p>{ heroT('fast') }</p>
-              </Feature>
-              <Feature>
-                <IoLaptop/> <p>{ heroT('mPlatform') }</p>
-              </Feature>
-            </motion.div>
-            <motion.div
-              className={ classes.buttonsSection }
-              variants={ fadeLeft }
-              initial='hidden'
-              animate='visible'
-            >
-              <HeroCTA />
+              className={ classes.footer }
+            > 
+              <div className={ classes.subText }>
+                <p>
+                  <Trans
+                    i18nKey='hero:readMore'
+                    components={[
+                      <Link href='/about' key="0" />
+                    ]}
+                    values={{ name: 'Secure Call' }}
+                  />
+                </p>
+              </div>
+              <LangSelector horizontal/>
             </motion.div>
           </div>
-          <div className={ classes.column }>
-            <motion.div
-              className={ classes.imagesWrapper }
-              variants={ fadeRight }
-              initial='hidden'
-              animate='visible'
-            >
-              <img className={ classes.image } src={require('../../../public/assets/hero_img_0.png').default.src} alt={'hero_img_0'} />
-              <img className={ classes.image } src={require('../../../public/assets/hero_img_1.png').default.src} alt={'hero_img_1'} />
-            </motion.div>
-          </div>
-        </div>
-        <motion.div //** footer **//
-          variants={ fadeDown }
-          initial='hidden'
-          animate='visible'
-          className={ classes.footer }
-        > 
-          <div className={ classes.subText }>
-            <p>
-              <Trans
-                i18nKey='hero:readMore'
-                components={[
-                  <Link href='/about' key="0" />
-                ]}
-                values={{ name: 'Secure Call' }}
-              />
-            </p>
-          </div>
-          <LangSelector horizontal/>
-        </motion.div>
+        </Box>
       </div>
-    </Box>
+      <div className={ classes.background }><StarBackground /></div>
+    </>
   )
 }
 
