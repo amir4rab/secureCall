@@ -1,11 +1,13 @@
 import { useContext, useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
-import { SocketsContext } from '../../../providers/socketsProvider/socketsProvider';
-import EndedDisplay from '../endedDisplay/endedDisplay';
-import LoadingDisplay from '../../loadingAnimation/loadingDisplay';
 
-const DynamicVideoCall = dynamic(
-  () => import('../videoCall/videoCall'),
+import { SocketsContext } from '../../../providers/socketsProvider/socketsProvider';
+
+import LoadingDisplay from '../../loadingAnimation/loadingDisplay';
+import EndedDisplay from '../endedDisplay/endedDisplay';
+
+const DynamicCallDisplay = dynamic(
+  () => import('../callDisplay/callDisplay'),
   { 
     ssr: false,
     loading: () => <LoadingDisplay />,
@@ -16,6 +18,7 @@ function CallManager({ callTo, calling, callType }) {
   const [ callHaveEnded, setCallHaveEnded ] = useState(false); 
   const [ lastCallIsCleared, setLastCallIsCleared ] = useState(false);
   const { callEnded, clearCallingInfo, clearEndedCall } = useContext(SocketsContext);
+  const [ callStartTime, setCallStartTime ] = useState(null);
 
   useEffect( _ => {
     clearEndedCall();
@@ -33,9 +36,9 @@ function CallManager({ callTo, calling, callType }) {
     <>
       {
         callHaveEnded ? 
-        <EndedDisplay email={ callTo } /> 
+        <EndedDisplay callStartTime={ callStartTime } email={ callTo } /> 
         :
-        <DynamicVideoCall audioOnly={ callType === 'audio' } callTo={ callTo } calling={ calling } />
+        <DynamicCallDisplay setCallStartTime={ setCallStartTime } audioOnly={ callType === 'audio' } callTo={ callTo } calling={ calling } />
       }
     </>
   )

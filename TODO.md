@@ -8,7 +8,7 @@
 - [x] Complete translation of call displays
 - [ ] About page
 - [ ] Banning users
-- [ ] Add Translation and Call time to Ended call display
+- [X] Add Translation and Call time to Ended call display
 - [ ] Add more options to call display
 - [X] adding loading screen
 
