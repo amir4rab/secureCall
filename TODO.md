@@ -14,5 +14,5 @@
 
 ## Bug fixes
 - [X] Call ended before answer bug fix
-- [ ] Fix waiting display bug
+- [X] Fix waiting display bug
 - [X] Fix notifications

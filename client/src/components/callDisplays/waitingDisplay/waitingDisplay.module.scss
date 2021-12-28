@@ -10,7 +10,7 @@
   .nameWrapper{
     margin-bottom: 2rem;
     position: relative;
-    &::before, &::after {
+    &::after {
       position: absolute;
       top: 50%;
       left: 50%;
@@ -34,9 +34,6 @@
         transform: translate(-50%, -50%) scale(2);
         opacity: 0;
       }
-    }
-    &::before {
-      animation: scale 2s .5s ease-in-out infinite;
     }
     &::after {
       animation: scale 2s 0s ease-in-out infinite;
