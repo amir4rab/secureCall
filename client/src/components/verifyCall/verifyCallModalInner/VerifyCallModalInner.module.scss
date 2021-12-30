@@ -1,0 +1,113 @@
+@import '../../../../styles/baseStyles';
+
+.verifyCallModalInner {
+  width: 100%;
+  margin: 0 2rem;
+  padding: 2rem;
+  border-radius: .4rem;
+  background: $black-1;
+
+  .title {
+    padding-bottom: 1rem;
+    font-size: 1.15rem;
+    text-align: center;
+    line-height: 150%;
+  }
+
+  .emojiSection {
+    padding-top: 2rem;
+  }
+
+  .emojisWrapper{
+    position: relative;
+    width: 100%;
+    height: 2rem;
+    overflow: hidden;
+    .group{
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 100%;
+      align-items: center;
+      text-align: center;
+      transition: transform .15s ease-in-out, opacity .15s ease-in-out;
+      .item{
+        &:not(:last-child) {
+          margin-right: .5rem;
+        }
+        font-size: 1.25rem;
+        display: inline;
+      }
+    }
+  }
+
+  .position {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .item {
+      width: .5rem;
+      height: .5rem;
+      background: $white-0;
+      border-radius: 50%;
+      transform: scale(.7);
+      opacity: .25;
+      transition: background-color .15s ease-in-out, transform .3s ease-in-out, opacity .15s ease-in-out;
+      &:not(:last-child) {
+        margin-right: 1rem;
+      }
+      &.done {
+        opacity: 1;
+        background-color: $green-0;
+        transform: scale(1.25);
+      }
+    }
+  }
+
+  .confirmButton {
+    background-color: $green-0;
+    color: $white-0;
+    border: none;
+  }
+
+  .buttonsSection {
+    padding-top: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+    .backButton, .nextButton {
+      padding: .5rem;
+      border-radius: 50%;
+      width: 2.25rem;
+      height: 2.25rem;
+      display: block;
+      border: none;
+      position: relative;
+      svg {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        width: 1rem;
+        height: 1rem;
+      }
+      &:disabled {
+        background-color: $black-1;
+        opacity: .5;
+      }
+    }
+    .backButton {
+      background: $red-0;
+      color: $white-0;
+    }
+    .nextButton {
+      background: $green-0;
+    }
+  }
+}
+
+@include forDesktopUp {
+  .verifyCallModalInner {
+    max-width: 500px;
+  }
+}
