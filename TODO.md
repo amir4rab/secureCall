@@ -11,6 +11,7 @@
 - [X] Add Translation and Call time to Ended call display
 - [ ] Add more options to call display
 - [X] adding loading screen
+- [X] verifying call helper added
 
 ## Bug fixes
 - [X] Call ended before answer bug fix
