@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef } from 'react'
 import Peer from 'peerjs'
 
-export const usePeer = ( peerVideoRef, setCallIsAnswered ) => {
+export const usePeer = ( peerVideoRef, setCallIsAnswered, setRecipientPeerId ) => {
   const [ peerId, setPeerId ] = useState(null);
   const [ isInitialized, setIsInitialized ] = useState(false);
   const peerRef = useRef(null);
@@ -19,6 +19,7 @@ export const usePeer = ( peerVideoRef, setCallIsAnswered ) => {
     peerRef.current = peer;
     peer.on('open', id => {
       setPeerId( id )
+      console.log(`self id: ${id}`);
       emitPeerId( id );
     });
     peer.on( 'connection', conn => {
@@ -34,6 +35,8 @@ export const usePeer = ( peerVideoRef, setCallIsAnswered ) => {
       // console.log(`peerJs onCall added!`)
       peerRef.current.on('call', call => {
         // console.log('Receiving call from peerJs');
+        // console.log(`other peer id is: ${call.peer}`);
+        setRecipientPeerId(call.peer);
         setCallIsAnswered(true);
         callRef.current = call;
 
@@ -46,7 +49,7 @@ export const usePeer = ( peerVideoRef, setCallIsAnswered ) => {
       });
 
     } else {
-      console.log('Calling from peerJs')
+      // console.log('Calling from peerJs');
       const call = peerRef.current.call( callDetails.recipientPeerId, selfStreamRef.current )
       call.on('stream', peerStream => {
         setCallIsAnswered(true);
@@ -56,7 +59,7 @@ export const usePeer = ( peerVideoRef, setCallIsAnswered ) => {
       callRef.current = call;
     }
     setIsInitialized(true);
-  }, [ peerId, callDetails, peerVideoRef, selfStreamRef, setCallIsAnswered, isInitialized ]);
+  }, [ peerId, callDetails, peerVideoRef, selfStreamRef, setCallIsAnswered, isInitialized, setRecipientPeerId ]);
 
   const peerCall = async ( recipientPeerId ) => {
     console.log( peerRef.current, peerId )
