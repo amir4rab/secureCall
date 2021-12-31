@@ -58,7 +58,7 @@
     &:disabled {
       cursor: loading;
     }
-    .activeImg, .inactiveImg {
+    .activeImg, .inactiveImg, .img {
       position: absolute;
       top: 50%;
       left: 50%;
@@ -66,6 +66,9 @@
       opacity: 0;
       transition: opacity .15s ease-in-out;
       user-select: none;
+    }
+    .img {
+      opacity: 1;
     }
     &.active .activeImg{
       opacity: 1;

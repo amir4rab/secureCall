@@ -1,26 +1,41 @@
 import { useState } from 'react';
 
-import { IoMic, IoMicOff, IoVideocam, IoVideocamOff, IoVolumeHigh, IoVolumeMute } from 'react-icons/io5';
+import { IoMic, IoMicOff, IoVideocam, IoVideocamOff, IoVolumeHigh, IoVolumeMute, IoDesktop } from 'react-icons/io5';
 
 import useTranslation from 'next-translate/useTranslation';
 
 import classes from './callButtons.module.scss';
 
-function CallButtons({ changeMedia, isAudio, setIsAudio, endCall, audioOnly = false }) {
+function CallButtons({ changeMedia, isAudio, setIsAudio, endCall, audioOnly = false, initialVideoStream = 'camera' }) {
   const [ microphoneState, setMicrophoneState ] = useState(true);
   const [ cameraState, setCameraState ] = useState(true);
   const [ isLoading, setIsLoading ] = useState(false);
+  const [ videoStream, setVideoStream ] = useState(initialVideoStream);
   const { t } = useTranslation('callDisplay');
 
   const toggleAudio = async () => {
-    await changeMedia('audio', !microphoneState );
-    setMicrophoneState(!microphoneState)
+    setIsLoading(true);
+    const successful = await changeMedia('audio', !microphoneState );
+    if ( successful) setMicrophoneState(!microphoneState)
+    setIsLoading(false);
   };
 
   const toggleVideo = async () => {
-    await changeMedia('camera', !cameraState );
-    setCameraState(!cameraState)
+    setIsLoading(true);
+    const successful = await changeMedia('camera', !cameraState );
+    if ( successful) setCameraState(!cameraState)
+    setIsLoading(false);
   };
+
+  // const toggleSharedMedia = async () => {
+  //   if ( videoStream === 'camera' ) {
+  //     await changeMedia('switchToDisplay');
+  //     setVideoStream('display')
+  //   } else if ( videoStream === 'display' ) {
+  //     await changeMedia('switchToCamera');
+  //     setVideoStream('camera')
+  //   }
+  // }
 
   return (
     <div className={ classes.callButtons }>
@@ -37,7 +52,7 @@ function CallButtons({ changeMedia, isAudio, setIsAudio, endCall, audioOnly = fa
           </div>
         </button>
         <button 
-          disabled={ isLoading }
+          disabled={ isLoading || videoStream !== 'camera' }
           onClick={ toggleVideo }
           className={[ classes.controlBtn, cameraState ? classes.active : classes.inactive, audioOnly ? classes.hidden : null ].join(' ')}  
         >
@@ -58,6 +73,17 @@ function CallButtons({ changeMedia, isAudio, setIsAudio, endCall, audioOnly = fa
             { isAudio ? t('audioOff') : t('audioOn') }
           </div>
         </button>
+        {/* <button 
+          disabled={ isLoading }
+          onClick={ _ => toggleSharedMedia() }
+          className={[ classes.controlBtn, videoStream !== 'display' ? classes.active : classes.inactive ].join(' ')}  
+        >
+          <IoDesktop className={ classes.activeImg }/>
+          <IoVideocam className={ classes.inactiveImg }/>
+          <div className={ classes.hint }>
+            { initialVideoStream !== 'display' ? 'share your screen' : 'share your camera' }
+          </div>
+        </button> */}
       </div>
       <div className={ classes.right }>
         <button onClick={ endCall } className={ classes.buttonRed }>
