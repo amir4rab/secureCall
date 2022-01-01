@@ -7,7 +7,7 @@ function AuthPage() {
   return (
     <>
       <Head>
-        <title>Secure Call - Authentication</title>
+        <title>Authentication - Secure Call</title>
       </Head>
       <motion.div
         initial={{ opacity: 0 }}
