@@ -6,5 +6,6 @@
   "copied": "Copied",
   "backToPanel": "Back to panel",
   "connecting": "Connecting",
-  "longLoading": "Is loading taking to long? <0>click here</0> to check servers status."
+  "longLoading": "Is loading taking to long? <0>click here</0> to check servers status.",
+  "confirm": "confirm"
 }

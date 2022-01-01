@@ -5,6 +5,6 @@
     "*": [ "common", "auth", "sidebar", "addContactPopup", "contactCard", "contactDisplay", "hero" ],
     "/panel": [ "requests" ],
     "/panel/settings": [ "settings" ],
-    "/panel/call": [ "callDisplay", "waitingDisplay" ]
+    "/panel/call": [ "callDisplay", "waitingDisplay", "verifyCall" ]
   }
 }
