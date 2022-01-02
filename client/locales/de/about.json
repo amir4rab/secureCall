@@ -1,0 +1,11 @@
+{
+  "aboutText": "Secure Call ist eine <0>'Open-Source'</0>, <1>'Private'</1>, <2>'End-to-End Encrypted'</2> Kommunikations-Webanwendung. Starten Sie jetzt Ihre private Reise",
+  "e2ee": "End-to-end Encrypted",
+  "e2eeText": "Jeder Video- und Audioanruf ist Ende-zu-Ende-verschlüsselt, daher können nur Sie und Ihr Partner auf die freigegebenen Medien zugreifen.",
+  "open-source": "Open-Source",
+  "open-source-text": "Der Quellcode unserer Webanwendung ist vollständig Open Source und steht jedem zur Überprüfung und Prüfung zur Verfügung. Sie können ihn gerne <0>selbst</0> überprüfen.",
+  "private": "Private",
+  "privateText": "Wir verkaufen keinerlei Nutzerdaten an Dritte.",
+  "risks": "Risiken",
+  "risksText": "Please do not communicate with someone, whom you don’t traust, or use a VPN while making a call. Due to the nature of peer-to-peer communication, your public ip address ( which gives a rough estimate about your location ) will be shared with other Peer."
+}

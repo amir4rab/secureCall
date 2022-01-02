@@ -7,5 +7,9 @@
   "backToPanel": "Zurück zum Panel",
   "connecting": "Verbinden",
   "longLoading": "Dauert das Laden zu lange? <0>Klicken hier</0>, um den Serverstatus zu überprüfen.",
-  "confirm": "konfirmieren"
+  "confirm": "konfirmieren",
+  "about": "Über",
+  "signUp": "Anmelden",
+  "toPanel": "Zum Panel",
+  "home": "Home"
 }

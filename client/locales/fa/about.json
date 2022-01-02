@@ -1,0 +1,11 @@
+{
+  "aboutText": "تماس ایمن یک برنامه وب ارتباطی <0>'منبع باز'</0>، <1>'خصوصی'</1>، <2>'سرتاسر رمزگذاری شده'</2> است. سفر خصوصی خود را همین الان شروع کنید ",
+  "e2ee": "سرتاسر رمزگذاری شده",
+  "e2eeText": "تمامی تماس های تصویری و صوتی رمزگذاری شده است، بنابراین تنها کسی که می‌تواند به رسانه اشتراک یافته دسترسی داشته باشد شما و همتایانتان هستید.",
+  "open-source": "منبع باز",
+  "open-source-text": "کد منبع برنامه وب ما کاملاً منبع باز است و برای بررسی و ممیزی برای همه در دسترس است، به راحتی آن را <0>خودتان</0> بررسی کنید.",
+  "private": "خصوصی",
+  "privateText": "ما هیچ نوع داده های کاربر را به اشخاص ثالث نمی فروشیم. ",
+  "risks": "خطرات",
+  "risksText": "Please do not communicate with someone, whom you don’t traust, or use a VPN while making a call. Due to the nature of peer-to-peer communication, your public ip address ( which gives a rough estimate about your location ) will be shared with other Peer."
+}
