@@ -1,7 +1,8 @@
 import { useCallback, useState } from 'react';
 
-import classes from './VerifyCallModalInner.module.scss';
+import useTranslation from 'next-translate/useTranslation';
 
+import classes from './VerifyCallModalInner.module.scss';
 import { IoChevronBack, IoChevronForward } from 'react-icons/io5';
 
 const calcPosition = ( index, activeIndex ) => `translate(-50%,-50%) translateX(${ activeIndex === index ? '-0%' : `${( activeIndex - index) * - 100}%` })`;
@@ -9,6 +10,8 @@ const calcPosition = ( index, activeIndex ) => `translate(-50%,-50%) translateX(
 function VerifyCallModalInner({ emojiArr, setIsVerified }) {
   const [ chunks, setChunks ] = useState([]);
   const [ activeIndex, setActiveIndex ] = useState(0);
+  const { t } = useTranslation('verifyCall');
+  const { t: commonT } = useTranslation('common');
 
   const fragmenter = useCallback((emojiArr) => {
     const chunkedArr = [];
@@ -36,7 +39,10 @@ function VerifyCallModalInner({ emojiArr, setIsVerified }) {
   return (
     <div className={ classes.verifyCallModalInner }>
       <p className={ classes.title }>
-        Verify these emojis to be as same az your other Peer
+        {t('verifyPrompt')}
+      </p>
+      <p className={ classes.subtitle }>
+        {t('error')}
       </p>
       <div className={ classes.emojiSection }>
         <div className={ classes.emojisWrapper }>
@@ -51,7 +57,7 @@ function VerifyCallModalInner({ emojiArr, setIsVerified }) {
           }
           <div className={ classes.group } style={{ transform: calcPosition( chunks.length, activeIndex ), opacity: chunks.length === activeIndex ? 1 : 0 }}>
             <button onClick={ setIsVerified } className={ classes.confirmButton }>
-              Confirm
+              {commonT('confirm')}
             </button>
           </div>
         </div>

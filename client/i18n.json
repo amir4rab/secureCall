@@ -4,6 +4,7 @@
   "pages": {
     "*": [ "common", "auth", "sidebar", "addContactPopup", "contactCard", "contactDisplay", "hero" ],
     "/panel": [ "requests" ],
+    "/about": [ "about" ],
     "/panel/settings": [ "settings" ],
     "/panel/call": [ "callDisplay", "waitingDisplay", "verifyCall" ]
   }
