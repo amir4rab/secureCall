@@ -1,0 +1,40 @@
+@import '../../../../styles/baseStyles';
+
+.sectionTitle {
+  @include title(3rem, clamp(2rem, 4vw, 3rem));
+  text-align: center;
+  padding: 2rem 0;
+}
+
+.sectionIcon {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translate(-25%, -25%);
+  user-select: none;
+  pointer-events: none;
+  svg {
+    width: 50vh;
+    height: 50vh;
+    opacity: .15;
+  }
+}
+
+.sectionBody {
+  padding: 10vh 0;
+  min-height: 100vh;
+}
+
+.sectionText {
+  padding-top: 10vh;
+  line-height: 175%;
+}
+
+@include forDesktopUp {
+  .sectionBody {
+    padding: 0;
+    min-height: 75vh;
+    max-height: 75vh;
+    overflow-x: hidden;
+  }
+}
