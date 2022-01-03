@@ -1,0 +1,41 @@
+@import '../../../../styles/baseStyles';
+
+.ctaButton {
+  position: relative;
+  display: inline-block;
+  // display: none;
+  width: 10vw;
+  height: 2rem;
+  .loading, .prompt{
+    opacity: 1;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+  }
+  .prompt{
+    white-space: nowrap;
+  }
+  background-color: $highlight;
+  border: none;
+  box-shadow: 0 0 1rem transparent;
+  text-transform: capitalize;
+  transition: box-shadow .15s ease-in-out;
+  &:hover {
+    cursor: pointer;
+  }
+  &:hover, &:focus-visible {
+    box-shadow: 0 0 1rem $highlight;
+  }
+  .loading svg {
+    @keyframes rotate {
+      from {
+        transform: rotateZ(-45deg);
+      }
+      to {
+        transform: rotateZ(315deg);
+      }
+    }
+    animation: rotate .8s ease-in-out infinite forwards;
+  }
+}
