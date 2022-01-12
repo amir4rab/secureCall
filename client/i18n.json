@@ -2,7 +2,7 @@
   "locales": ["en", "de", "fa"],
   "defaultLocale": "en",
   "pages": {
-    "*": [ "common", "auth", "sidebar", "addContactPopup", "contactCard", "contactDisplay", "hero" ],
+    "*": [ "common", "auth", "sidebar", "addContactPopup", "contactCard", "contactDisplay", "hero", "about" ],
     "/panel": [ "requests" ],
     "/about": [ "about" ],
     "/panel/settings": [ "settings" ],

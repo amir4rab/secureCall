@@ -7,5 +7,5 @@
   "private": "Private",
   "privateText": "We do not sell any sort of user’s data to third parties.",
   "risks": "Risks",
-  "risksText": "Please do not communicate with someone, whom you don’t traust, or use a VPN while making a call. Due to the nature of peer-to-peer communication, your public ip address ( which gives a rough estimate about your location ) will be shared with other Peer."
+  "risksText": "Please do not communicate with someone, whom you don’t trust, or use a VPN while making a call. Due to the nature of peer-to-peer communication, your public ip address ( which gives a rough estimate about your location ) will be shared with other Peer."
 }
