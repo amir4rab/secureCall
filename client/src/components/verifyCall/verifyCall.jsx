@@ -8,7 +8,7 @@ import emojiObj from './emojiObj.json';
 import classes from './verifyCall.module.scss';
 import VerifyCallModalInner from './verifyCallModalInner/verifyCallModalInner';
 
-function VerifyCall({ selfId= null, otherId= null, isCalling }) {
+function VerifyCall({ hashObj }) {
   const [ emojiArr, setEmojiArr ] = useState([]);
   const [ callIsVerified, setCallIsVerified ] = useState(false);
   const [ isModalOpen, setIsModalOpen ] = useState(false);
@@ -19,17 +19,14 @@ function VerifyCall({ selfId= null, otherId= null, isCalling }) {
     if( e.target.id === 'verifyCallModalWrapper' ) setIsModalOpen(false);
   }
 
-  const generateEmojiString = useCallback(( selfId, otherId, isCalling, logTime= false ) => {
+  const generateEmojiString = useCallback(( hash, logTime= false ) => {
     const startTime = performance.now();
-    let combinedId;
-    isCalling ? combinedId = selfId + otherId : combinedId = otherId + selfId;
-
-    combinedId = combinedId.replaceAll('-', '');
+    console.log(hash);
 
     // const combinedIdArr = [];
     const mappedArr = [];
-    for ( let i = 0 ; i < combinedId.length ; i = i+2 ) {
-      const char = combinedId.slice(i, i+2);
+    for ( let i = 0 ; i < hash.length ; i = i+2 ) {
+      const char = hash.slice(i, i+2);
       // combinedIdArr.push(char);
       mappedArr.push({ char, emoji: emojiObj[char] })
     }
@@ -39,13 +36,13 @@ function VerifyCall({ selfId= null, otherId= null, isCalling }) {
   }, []);
 
   useEffect( _ => {
-    console.log(selfId, otherId)
-    if( selfId !== null && otherId !== null ) generateEmojiString( selfId ,otherId , isCalling , true);
-  }, [ generateEmojiString, selfId, otherId, isCalling ]);
+    console.log(hashObj);
+    if( hashObj !== null ) generateEmojiString( hashObj.hash , true );
+  }, [ generateEmojiString, hashObj ]);
 
   useEffect( _ => {
     let timeout;
-    if ( callIsVerified ) setTimeout(_ => {
+    if ( callIsVerified ) setTimeout( _ => {
       setRemoveModal(true);
     }, 500);
     return () => {

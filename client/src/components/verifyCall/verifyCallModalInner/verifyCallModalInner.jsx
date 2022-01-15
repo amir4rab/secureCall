@@ -7,6 +7,8 @@ import { IoChevronBack, IoChevronForward } from 'react-icons/io5';
 
 const calcPosition = ( index, activeIndex ) => `translate(-50%,-50%) translateX(${ activeIndex === index ? '-0%' : `${( activeIndex - index) * - 100}%` })`;
 
+const calcWidth = ( activeIndex, length ) => `translate(-50%, -50%) translateX(${(( activeIndex / length ) * 100) - 50}%)`;
+
 function VerifyCallModalInner({ emojiArr, setIsVerified }) {
   const [ chunks, setChunks ] = useState([]);
   const [ activeIndex, setActiveIndex ] = useState(0);
@@ -35,6 +37,8 @@ function VerifyCallModalInner({ emojiArr, setIsVerified }) {
       if ( activeIndex - 1 >= 0 ) setActiveIndex( activeIndex - 1 );
     }
   };
+
+  console.log( 50 - (( activeIndex / chunks.length ) * 100) );
 
   return (
     <div className={ classes.verifyCallModalInner }>
@@ -65,17 +69,18 @@ function VerifyCallModalInner({ emojiArr, setIsVerified }) {
           <button disabled={!( activeIndex - 1 >= 0 )} onClick={ _ => changeActiveIndex(false) } className={ classes.backButton }>
             <IoChevronBack />
           </button>
-          <div className={ classes.position }>
+          <button disabled={!( activeIndex + 1 <= chunks.length )} onClick={ _ => changeActiveIndex(true) } className={ classes.nextButton }>
+            <IoChevronForward />
+          </button>
+        </div>
+        <div className={ classes.position }>
           {
             chunks.map(( _, i ) => (
               <div className={[ classes.item, activeIndex > i ? classes.done : null ].join(' ')} key={ i }></div>
             ))
           }
         </div>
-          <button disabled={!( activeIndex + 1 <= chunks.length )} onClick={ _ => changeActiveIndex(true) } className={ classes.nextButton }>
-            <IoChevronForward />
-          </button>
-        </div>
+        <div className={ classes.progress } style={{ transform: calcWidth( activeIndex, chunks.length ) }} />
       </div>
     </div>
   )

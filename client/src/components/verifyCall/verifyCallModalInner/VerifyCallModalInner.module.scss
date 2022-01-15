@@ -4,8 +4,10 @@
   width: 100%;
   margin: 0 2rem;
   padding: 2rem;
-  border-radius: .4rem;
+  border-radius: 1rem;
   background: $black-1;
+  position: relative;
+  overflow: hidden;
 
   .title, .subtitle {
     padding-bottom: 1rem;
@@ -21,6 +23,18 @@
 
   .emojiSection {
     padding-top: 2rem;
+  }
+
+  .progress {
+    position: absolute;
+    left: 0;
+    bottom: -.25rem;
+    height: .25rem;
+    width: 105%;
+    background: $highlight;
+    transition: transform .3s ease-in-out;
+    box-shadow: 0 0 1rem 0 $highlight;
+    border-radius: 1rem;
   }
 
   .emojisWrapper{
@@ -47,6 +61,11 @@
   }
 
   .position {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2.5rem;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -55,7 +74,7 @@
       height: .5rem;
       background: $white-0;
       border-radius: 50%;
-      transform: scale(.7);
+      transform: scale(.7) translateY(2rem);
       opacity: .25;
       transition: background-color .15s ease-in-out, transform .3s ease-in-out, opacity .15s ease-in-out;
       &:not(:last-child) {
@@ -63,7 +82,7 @@
       }
       &.done {
         opacity: 1;
-        background-color: $green-0;
+        background-color: $highlight;
         transform: scale(1.25);
       }
     }
@@ -102,11 +121,12 @@
       }
     }
     .backButton {
-      background: $red-0;
+      background: transparent;
       color: $white-0;
     }
     .nextButton {
-      background: $green-0;
+      background: $highlight;
+      color: $black-1;
     }
   }
 }
@@ -114,5 +134,16 @@
 @include forDesktopUp {
   .verifyCallModalInner {
     max-width: 500px;
+
+    .emojisWrapper {
+      .group {
+        .item {
+          &:not(:last-child) {
+            margin-right: .75rem;
+          }
+          font-size: 1.75rem;
+        }
+      }
+    }
   }
 }
