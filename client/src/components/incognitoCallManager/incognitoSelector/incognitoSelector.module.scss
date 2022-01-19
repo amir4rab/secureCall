@@ -1,0 +1,57 @@
+@import '../../../../styles/baseStyles';
+
+.incognitoSelector {
+  margin-bottom: 5vh;
+  .titles { 
+    border-radius: .5rem;
+    background: $black-2;
+    display: flex;
+    padding: .5rem .5rem .65rem .5rem;
+    justify-content: space-between;
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    .title {
+      width: 30%;
+      padding: .5rem;
+      border: none;
+      color: $white-0;
+      font-size: 1rem;
+      font-weight: 400;
+      background: transparent;
+      transition: background .3s ease-in-out, color .3s ease-in-out;
+      &:hover {
+        cursor: pointer;
+      }
+      &:hover, &:focus {
+        background: lighten( $black-2, 2.5 );
+      }
+      &.active {
+        background: lighten( $black-2, 5 );
+      }
+    }
+    .activeIndex {
+      width: 33.34%;
+      background: $highlight;
+      height: .15rem;
+      position: absolute;
+      bottom: 0;
+      transition: left .3s ease-in-out;
+    }
+  }
+  .items {
+    min-height: 17.5rem;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    .item {
+      text-align: center;
+      transition: transform .3s ease-in-out, opacity .25s ease-in-out;
+      width: 100%;
+      min-height: 17.5rem;
+      position: absolute;
+      top: 0%;
+      left: 50%;
+    }
+  }
+}
