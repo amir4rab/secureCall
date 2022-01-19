@@ -12,6 +12,7 @@ import classes from './hero.module.scss';
 import Box from '../box/box';
 import HeroCTA from './heroCTA';
 import StarBackground from '../starBackground/starBackground';
+import IncognitoCallBtn from './incognitoCallBtn/incognitoCallBtn';
 
 const featuresVariants = {
   hidden: { 
@@ -100,6 +101,7 @@ function Hero() {
                   animate='visible'
                 >
                   <HeroCTA />
+                  <IncognitoCallBtn />
                 </motion.div>
               </div>
               <div className={ classes.column }>

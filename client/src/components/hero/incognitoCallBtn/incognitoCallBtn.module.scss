@@ -1,0 +1,22 @@
+@import '../../../../styles/baseStyles';
+
+.incognitoCallBtn {
+  background: none;
+  color: $highlight;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.05rem;
+  border: none;
+  svg {
+    width: 1.5rem;
+    height: 1.5rem;
+    margin-right: 1rem;
+  }
+  &:hover {
+    cursor: pointer;
+  }
+  &:hover, &:focus {
+    background-color: transparentize($highlight, .75);
+  }
+}
