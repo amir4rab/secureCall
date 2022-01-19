@@ -1,0 +1,163 @@
+@import '../../../../styles/baseStyles';
+
+.qrCodePopup {
+  height: 100%;
+  padding: 10vh 2rem;
+  .title{
+    text-transform: capitalize;
+    width: 100%;
+    font-size: 1.25rem;
+    text-align: center;
+    height: 10vh;
+  }
+  .imageWrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    width: 100%;
+    overflow: hidden;
+    height: 40vh;
+    img {
+      border-radius: 1rem;
+      display: block;
+      border: $white-0 .5rem solid;
+      background-color: $white-0;
+      max-width: 60vw;
+      max-height: 60vw;
+    }
+  }
+  .buttonsSection{
+    height: 30vh;
+    flex-grow: 1;
+    align-content: flex-end;
+    align-items: flex-end;
+    display: flex;
+    justify-content: space-between;
+  }
+  .imageBtn{
+    width: 33%;
+    background: none;
+    border: none;
+    padding: 0;
+    color: $white-0;
+  }
+  .button{
+    display: block;
+    padding: 0;
+    border-radius: .4rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    transition: background .15s ease-in-out, color .3s ease-in-out;
+    &:disabled {
+      opacity: .5;
+    }
+    .svgWrapper{
+      border-radius: .4rem;
+      background: $highlight;
+      width: 3.25rem;
+      height: 3.25rem;
+      padding: .5rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: .5rem;
+      svg {
+        transition: transform .15s ease-in-out;
+        pointer-events: none;
+        color: $black-1;
+        width: 1.5rem;
+        height: 1.5rem;
+      }
+    }
+    font-size: 1rem;
+    width: 33%;
+    background: transparent;
+    color: $white-0;
+    border: none;
+    &:not(:disabled):active .svgWrapper svg {
+      transform: scale(1.2);
+    }
+  }
+}
+
+@include forDesktopUp {
+  .qrCodePopup {
+    display: flex;
+    flex-direction: row-reverse;
+    padding: 4rem;
+    .title{
+      width: auto;
+      height: auto;
+      position: absolute;
+      top: 5rem;
+      left: 50%;
+      transform: translate(-50%, -50%);
+
+      font-size: 2rem;
+      text-align: center;
+    }
+    .imageWrapper{
+      height: auto;
+      img {
+        max-width: 20vh;
+        max-height: 20vh;
+      }
+    }
+    .buttonsSection{
+      height: 100%;
+      min-width: 50%;
+      flex-grow: 0 !important;
+      align-content: center;
+      align-items: stretch;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .button{
+      padding: .4rem;
+      flex-direction: row;
+      justify-content: center;
+      align-content: center;
+      align-items: center;
+      width: auto;
+      background: transparent;
+      width: 100%;
+      border: none;
+      color: $black-1;
+      background: $highlight;
+      &:not(:disabled):hover {
+        cursor: pointer;
+      }
+      &:not(:disabled):hover, &:focus {
+        background-color: darken($highlight, 7.5);
+      }
+      &:not(:disabled):active {
+        .svgWrapper svg {
+          transform: scale(1);
+          color: $highlight;
+        }
+        color: $highlight;
+      }
+      .svgWrapper{
+        border-radius: 0;
+        background: transparent;
+        width: auto;
+        height: auto;
+        padding-right: .5rem;
+        margin-bottom: 0;
+        svg {
+          transition: color .1s ease-in-out;
+          pointer-events: none;
+          color: $black-1;
+          width: 1.25rem;
+          height: 1.25rem;
+        }
+      }
+      &:not(:last-child) {
+        margin-bottom: 1rem;
+      }
+    }
+  }
+}
