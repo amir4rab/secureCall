@@ -1,0 +1,12 @@
+{
+  "title": "Connect to your Peer",
+  "shareUrl": "Share Url",
+  "url": "Url",
+  "shareCallDetails": "Share call details",
+  "id": "ID",
+  "secret": "Secret",
+  "info": "Click on the items to Copy them to your clipboard.",
+  "helpTitle": "Help",
+  "helpText": "Share your incognito call session with one of mentioned ways, with your peer.",
+  "qrCode": "Qr-Code"
+}

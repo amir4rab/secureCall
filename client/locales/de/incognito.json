@@ -1,0 +1,11 @@
+{
+  "title": "Incognito Securecall",
+  "subtitle": "Sicherer Anruf bietet kostenlose Videoanrufe auch ohne Anmeldung!",
+  "warning": "Incognito mood does not cover your Ip address, please you it with a VPN to mask your Ip address.",
+  "remoteId": "Ihr Ausweis",
+  "remoteIdPlaceholder": "Andere Peer-ID",
+  "remoteSecret": "Ihr Geheimnis",
+  "remoteSecretPlaceholder": "16 words like 9099aef0baf16d8c",
+  "getCall": "Einen Anruf bekommen",
+  "getCallPrompt": "Wenn Sie jemand anrufen wird, beginnen Sie mit der Schaltfläche hier unten."
+}

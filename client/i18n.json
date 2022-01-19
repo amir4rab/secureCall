@@ -2,10 +2,11 @@
   "locales": ["en", "de", "fa"],
   "defaultLocale": "en",
   "pages": {
-    "*": [ "common", "auth", "sidebar", "addContactPopup", "contactCard", "contactDisplay", "hero", "about" ],
+    "*": [ "common", "auth", "sidebar", "addContactPopup", "contactCard", "contactDisplay", "hero", "about", "qrCodeItem" ],
     "/panel": [ "requests" ],
     "/about": [ "about" ],
     "/panel/settings": [ "settings" ],
-    "/panel/call": [ "callDisplay", "waitingDisplay", "verifyCall" ]
+    "/panel/call": [ "callDisplay", "waitingDisplay", "verifyCall" ],
+    "/incognito/call": [ "callDisplay", "waitingDisplay", "verifyCall", "incognitoWaiting" ]
   }
 }
