@@ -50,7 +50,7 @@ function IncognitoSelector({ selfSecret,selfId }) {
           <DetailsShare selfSecret={ selfSecret } selfId={ selfId } />
         </div>
         <div className={ classes.item } style={{ ...calcStateStyle( 2, activeIndex ) }} >
-          <QrCodeShare url={`http://localhost/incognito/call?calling=true#id=${selfId}&secret=${selfSecret}`} displayState={ activeIndex === 2 } />
+          <QrCodeShare url={`${window.location.href}/incognito/call?calling=true#id=${selfId}&secret=${selfSecret}`} displayState={ activeIndex === 2 } />
         </div>
       </div>
     </div>

@@ -9,11 +9,11 @@ function UrlShare({ selfId, selfSecret }) {
     <div className={ classes.shareItem }>
       <label htmlFor="incognitoId">Url</label>
       <button
-        onClick={ _ => copyToClipboard(`https://localhost:3000/incognito/call?calling=true#id=${selfId}&secret=${selfSecret}`) }
+        onClick={ _ => copyToClipboard(`${window.location.href}/incognito/call?calling=true#id=${selfId}&secret=${selfSecret}`) }
         className={ classes.itemBox }
       >
         <IoGlobeOutline />
-        <p>{`https://localhost:3000/incognito/call?calling=true#id=${selfId}&secret=${selfSecret}`}</p>
+        <p>{`${window.location.href}/incognito/call?calling=true#id=${selfId}&secret=${selfSecret}`}</p>
       </button>
     </div>
   )

@@ -8,11 +8,14 @@ import { qrCodeGenerator } from '../../../utils/frontend/qrCodeGenerator/qrCodeG
 
 import classes from './shareOptions.module.scss';
 
+import useTranslation from 'next-translate/useTranslation';
+
 function QrCodeShare({ url, displayState, fileName='qr code' }) {
   const [ cashedValue, setCashedValue ] = useState({ url: null, imageData: null }); 
   const [ availability, setAvailability ] = useState({ share: false, copy: false })
   const downloadRef = useRef();
   const imageRef = useRef();
+  const { t } = useTranslation('qrCodeItem');
 
   const init = useCallback(
     async ( url ) => {
@@ -55,19 +58,19 @@ function QrCodeShare({ url, displayState, fileName='qr code' }) {
               <div className={ classes.svgWrapper }>
                 <IoShareSocial />
               </div>
-              <p>Share</p>
+              <p>{t('share')}</p>
             </button>
             <a target='_blank' rel='noreferrer' ref={ downloadRef } download={ fileName } className={ classes.button }>
               <div className={ classes.svgWrapper }>
                 <IoDownload />
               </div>
-              <p>Download</p>
+              <p>{t('download')}</p>
             </a>
             <button disabled={ !availability.copy } onClick={ _ => copyToClipboard( cashedValue.imageData ) } className={ classes.button }>
               <div className={ classes.svgWrapper }>
                 <IoClipboard />
               </div>
-              <p>Copy</p>
+              <p>{t('copy')}</p>
             </button>
           </div>
         </div>
