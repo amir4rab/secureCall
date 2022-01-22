@@ -1,3 +1,4 @@
+import useTranslation from 'next-translate/useTranslation';
 import { useState } from 'react'
 import DetailsShare from '../shareOptions/detailsShare';
 import QrCodeShare from '../shareOptions/qrCodeShare';
@@ -28,17 +29,19 @@ function IncognitoSelector({ selfSecret,selfId }) {
     setActiveIndex(value);
   }
 
+  const { t } = useTranslation('incognitoWaiting');
+
   return (
     <div className={ classes.incognitoSelector }>
       <div className={ classes.titles }>
         <button onClick={ _ => clickEvent(0) } className={[ classes.title, 0 === activeIndex ? classes.active : null ].join(' ')}>
-          Url
+          {t('url')}
         </button>
         <button onClick={ _ => clickEvent(1) } className={[ classes.title, 1 === activeIndex ? classes.active : null ].join(' ')}>
-          Call Details
+          {t('shareCallDetails')}
         </button>
         <button onClick={ _ => clickEvent(2) } className={[ classes.title, 2 === activeIndex ? classes.active : null ].join(' ')}>
-          Qr-Code
+          {t('qrCode')}
         </button>
         <div className={ classes.activeIndex } style={{ ...calcActiveIndex(activeIndex) }} />
       </div>

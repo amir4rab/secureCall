@@ -8,6 +8,6 @@
     "/panel/settings": [ "settings" ],
     "/panel/call": [ "callDisplay", "waitingDisplay", "verifyCall" ],
     "/incognito/call": [ "callDisplay", "waitingDisplay", "verifyCall", "incognitoWaiting" ],
-    "/incognito": [ "incognitoFeatureSlider" ]
+    "/incognito": [ "incognitoFeatureSlider", "incognito" ]
   }
 }
