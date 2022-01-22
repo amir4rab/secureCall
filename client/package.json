@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "@amir4rab/usevisibility": "^1.0.0",
-    "@amir4rab/web-rtc-connector-client": "^0.2.2",
+    "@amir4rab/web-rtc-connector-client": "^0.3.0",
     "events": "^3.3.0",
     "framer-motion": "^5.3.0",
     "jsonwebtoken": "^8.5.1",
