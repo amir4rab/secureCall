@@ -9,18 +9,19 @@ import FeatureItem from './featureItem';
 
 import classes from './featureSlider.module.scss';
 
-import { IoLogoGithub, IoVolumeMute, IoShield, IoWarning } from 'react-icons/io5';
+import { IoLogoGithub, IoVolumeMute, IoShield } from 'react-icons/io5';
 import FeatureIndicators from './featureIndicators';
 
 const calcPosition = ( index, activeIndex ) => `translate(-50%,-50%) translateX(${ activeIndex === index ? '-0%' : `${( activeIndex - index) * - 100}%` })`;
 
-function FeaturesSlider({ animate= false, slideTimeout= 5 }) {
+function FeaturesSlider({ authState, animate= false, slideTimeout= 5 }) {
   const [ activeIndex, setActiveIndex ] = useState(0);
   const [ clicked, setClicked ] = useState(false);
   const intervalRef = useRef(null);
   const router = useRouter();
 
   const { t } = useTranslation('about');
+  const { t: commonT } = useTranslation('common')
 
   useEffect( _ => {
     if ( !animate ) return;
@@ -45,7 +46,10 @@ function FeaturesSlider({ animate= false, slideTimeout= 5 }) {
   return (
     <div className={ classes.featureSlider }>
       <h3 className={ classes.title }>
-        Singup and get more from <Link href='/'>Securecall</Link>
+        <Trans 
+          i18nKey='incognitoFeatureSlider:prompt'
+          components={[ <Link key='link' href='/' /> ]}
+        />
       </h3>
       <div className={ classes.sliderBox }>
         <div className={ classes.sliderWrapper }>
@@ -81,9 +85,18 @@ function FeaturesSlider({ animate= false, slideTimeout= 5 }) {
         <FeatureIndicators length={ 3 } activeIndex={ activeIndex } selectEvent={ manualIndexChangeEvent } />
       </div>
       <div className={ classes.buttonSection }>
-        <button onClick={ _ => router.push('/auth') } className={ classes.buttonDarkL }>
-          singup now
-        </button>
+        {
+          authState === 'authenticated' ? 
+          <button onClick={ _ => router.push('/panel') } className={ classes.buttonDarkL }>
+            {commonT('toPanel')}
+          </button> : null
+        }
+        {
+          authState === 'unauthenticated' ? 
+          <button onClick={ _ => router.push('/auth') } className={ classes.buttonDarkL }>
+            {commonT('signUp')}
+          </button> : null
+        }
       </div>
     </div>
   );
