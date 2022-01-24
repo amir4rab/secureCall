@@ -2,10 +2,12 @@
   "endCall": "Anruf beenden ",
   "mute": "mute",
   "unmute": "unmute",
-  "cameraOn": "Kamera einschalten",
-  "cameraOff": "Kamera ausschalten ",
+  "videoOn": "Video einschalten",
+  "videoOff": "Video ausschalten ",
   "audioOn": "Audio einschalten",
   "audioOff": "Audio ausschalten",
   "me": "Mich",
-  "callEnded": "Anruf beendet"
+  "callEnded": "Anruf beendet",
+  "switchToCamera": "Wechseln zu Kamera",
+  "switchToDisplay": "Wechseln zu Anzeige"
 }

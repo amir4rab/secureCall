@@ -2,10 +2,12 @@
   "endCall": "End call",
   "mute": "mute",
   "unmute": "unmute",
-  "cameraOn": "turn camera on",
-  "cameraOff": "turn camera off",
+  "videoOn": "turn video on",
+  "videoOff": "turn video off",
   "audioOn": "turn audio on",
   "audioOff": "turn audio off",
   "me": "Me",
-  "callEnded": "Call ended"
+  "callEnded": "Call ended",
+  "switchToCamera": "Switch to Camera",
+  "switchToDisplay": "Switch to Display"
 }

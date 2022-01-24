@@ -2,10 +2,12 @@
   "endCall": "اتمام تماس",
   "mute": "قطع",
   "unmute": "وصل",
-  "cameraOn": "روشن کردن دوربین",
-  "cameraOff": "خاموش کردن دوربین",
+  "videoOn": "وصل کردن ویدیو",
+  "videoOff": "غطع کردن ویدیو",
   "audioOn": "وصل کردن صدا",
   "audioOff": "قطع کردن صدا",
   "me": "من",
-  "callEnded": "تماس تمام شد"
+  "callEnded": "تماس تمام شد",
+  "switchToCamera": "به دوربین",
+  "switchToDisplay": "به صفحه نمایش"
 }

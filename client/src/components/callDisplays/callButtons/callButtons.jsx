@@ -1,14 +1,16 @@
 import { useState } from 'react';
 
-import { IoMic, IoMicOff, IoVideocam, IoVideocamOff, IoVolumeHigh, IoVolumeMute, IoDesktop } from 'react-icons/io5';
+import { IoMic, IoMicOff, IoVideocam, IoVideocamOff, IoVolumeHigh, IoVolumeMute, IoDesktop, IoCamera } from 'react-icons/io5';
 
 import useTranslation from 'next-translate/useTranslation';
 
 import classes from './callButtons.module.scss';
 
-function CallButtons({ changeMedia, isAudio, setIsAudio, endCall, audioOnly = false, initialVideoStream = 'camera' }) {
-  const [ microphoneState, setMicrophoneState ] = useState(true);
-  const [ cameraState, setCameraState ] = useState(true);
+function CallButtons({
+  changeMedia, isAudio, setIsAudio, endCall, audioOnly = false, initialVideoStream = 'camera', updateMedia, canUpdateMedia 
+}) {
+  const [ microphoneState, setMicrophoneState ] = useState(false);
+  const [ cameraState, setCameraState ] = useState(false);
   const [ isLoading, setIsLoading ] = useState(false);
   const [ videoStream, setVideoStream ] = useState(initialVideoStream);
   const { t } = useTranslation('callDisplay');
@@ -22,20 +24,22 @@ function CallButtons({ changeMedia, isAudio, setIsAudio, endCall, audioOnly = fa
 
   const toggleVideo = async () => {
     setIsLoading(true);
-    const successful = await changeMedia('camera', !cameraState );
+    const successful = await changeMedia('video', !cameraState );
     if ( successful) setCameraState(!cameraState)
     setIsLoading(false);
   };
 
-  // const toggleSharedMedia = async () => {
-  //   if ( videoStream === 'camera' ) {
-  //     await changeMedia('switchToDisplay');
-  //     setVideoStream('display')
-  //   } else if ( videoStream === 'display' ) {
-  //     await changeMedia('switchToCamera');
-  //     setVideoStream('camera')
-  //   }
-  // }
+  const toggleSharedMedia = async () => {
+    if ( videoStream === 'camera' ) {
+      await updateMedia('switchToDisplay');
+      setCameraState(true)
+      setVideoStream('display')
+    } else if ( videoStream === 'display' ) {
+      await updateMedia('switchToCamera');
+      setCameraState(true)
+      setVideoStream('camera')
+    }
+  }
 
   return (
     <div className={ classes.callButtons }>
@@ -51,15 +55,14 @@ function CallButtons({ changeMedia, isAudio, setIsAudio, endCall, audioOnly = fa
             { cameraState ? t('mute') : t('unmute') }
           </div>
         </button>
-        <button 
-          disabled={ isLoading || videoStream !== 'camera' }
+        <button
           onClick={ toggleVideo }
           className={[ classes.controlBtn, cameraState ? classes.active : classes.inactive, audioOnly ? classes.hidden : null ].join(' ')}  
         >
           <IoVideocam className={ classes.activeImg }/>
           <IoVideocamOff className={ classes.inactiveImg }/>
           <div className={ classes.hint }>
-            { cameraState ? t('cameraOff') : t('cameraOn') }
+            { cameraState ? t('videoOff') : t('videoOn') }
           </div>
         </button>
         <button 
@@ -73,17 +76,20 @@ function CallButtons({ changeMedia, isAudio, setIsAudio, endCall, audioOnly = fa
             { isAudio ? t('audioOff') : t('audioOn') }
           </div>
         </button>
-        {/* <button 
-          disabled={ isLoading }
-          onClick={ _ => toggleSharedMedia() }
-          className={[ classes.controlBtn, videoStream !== 'display' ? classes.active : classes.inactive ].join(' ')}  
-        >
-          <IoDesktop className={ classes.activeImg }/>
-          <IoVideocam className={ classes.inactiveImg }/>
-          <div className={ classes.hint }>
-            { initialVideoStream !== 'display' ? 'share your screen' : 'share your camera' }
-          </div>
-        </button> */}
+        {
+          canUpdateMedia ? 
+          <button 
+            disabled={ isLoading }
+            onClick={ _ => toggleSharedMedia() }
+            className={[ classes.controlBtn, videoStream !== 'display' ? classes.active : classes.inactive ].join(' ')}  
+          >
+            <IoDesktop className={ classes.activeImg }/>
+            <IoCamera className={ classes.inactiveImg }/>
+            <div className={ classes.hint }>
+              { initialVideoStream !== 'display' ? t('switchToDisplay') : t('switchToCamera') }
+            </div>
+          </button> : null
+        }
       </div>
       <div className={ classes.right }>
         <button onClick={ endCall } className={ classes.buttonRed }>
