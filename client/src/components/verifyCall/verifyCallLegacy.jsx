@@ -8,7 +8,7 @@ import emojiObj from './emojiObj.json';
 import classes from './verifyCall.module.scss';
 import VerifyCallModalInner from './verifyCallModalInner/verifyCallModalInner';
 
-function VerifyCall({ hashObj }) {
+function VerifyCallLegacy({ selfId= null, otherId= null, isCalling }) {
   const [ emojiArr, setEmojiArr ] = useState([]);
   const [ callIsVerified, setCallIsVerified ] = useState(false);
   const [ isModalOpen, setIsModalOpen ] = useState(false);
@@ -19,12 +19,18 @@ function VerifyCall({ hashObj }) {
     if( e.target.id === 'verifyCallModalWrapper' ) setIsModalOpen(false);
   }
 
-  const generateEmojiString = useCallback(( hash, logTime= false ) => {
+  const generateEmojiString = useCallback(( selfId, otherId, isCalling, logTime= false ) => {
     const startTime = performance.now();
+    let combinedId;
+    isCalling ? combinedId = selfId + otherId : combinedId = otherId + selfId;
 
+    combinedId = combinedId.replaceAll('-', '');
+
+    // const combinedIdArr = [];
     const mappedArr = [];
-    for ( let i = 0 ; i < hash.length ; i = i+2 ) {
-      const char = hash.slice(i, i+2);
+    for ( let i = 0 ; i < combinedId.length ; i = i+2 ) {
+      const char = combinedId.slice(i, i+2);
+      // combinedIdArr.push(char);
       mappedArr.push({ char, emoji: emojiObj[char] })
     }
     setEmojiArr(mappedArr);
@@ -33,12 +39,13 @@ function VerifyCall({ hashObj }) {
   }, []);
 
   useEffect( _ => {
-    if( hashObj !== null ) generateEmojiString( hashObj.hash , true );
-  }, [ generateEmojiString, hashObj ]);
+    console.log(selfId, otherId)
+    if( selfId !== null && otherId !== null ) generateEmojiString( selfId ,otherId , isCalling , true);
+  }, [ generateEmojiString, selfId, otherId, isCalling ]);
 
   useEffect( _ => {
     let timeout;
-    if ( callIsVerified ) setTimeout( _ => {
+    if ( callIsVerified ) setTimeout(_ => {
       setRemoveModal(true);
     }, 500);
     return () => {
@@ -86,4 +93,4 @@ function VerifyCall({ hashObj }) {
   )
 }
 
-export default VerifyCall
+export default VerifyCallLegacy

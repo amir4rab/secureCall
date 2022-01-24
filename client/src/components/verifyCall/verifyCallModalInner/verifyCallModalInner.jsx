@@ -17,9 +17,7 @@ function VerifyCallModalInner({ emojiArr, setIsVerified }) {
 
   const fragmenter = useCallback((emojiArr) => {
     const chunkedArr = [];
-    console.log(emojiArr.length/8);
     for ( let i = 0 ; i < emojiArr.length ; i = i+8 ) {
-      console.log(emojiArr.slice(i, i+7), i, i+7)
       chunkedArr.push(emojiArr.slice(i, i+7));
     }
     setChunks(chunkedArr);
@@ -30,15 +28,12 @@ function VerifyCallModalInner({ emojiArr, setIsVerified }) {
   }, [ emojiArr ]);
 
   const changeActiveIndex = ( input ) => {
-    console.log(input)
     if( input === true ) {
       if ( activeIndex + 1 <= chunks.length ) setActiveIndex( activeIndex + 1 );
     } else {
       if ( activeIndex - 1 >= 0 ) setActiveIndex( activeIndex - 1 );
     }
   };
-
-  console.log( 50 - (( activeIndex / chunks.length ) * 100) );
 
   return (
     <div className={ classes.verifyCallModalInner }>
