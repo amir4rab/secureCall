@@ -4,16 +4,16 @@ import copyToClipboard from '../../../utils/frontend/copyToClipboard/copyToClipb
 
 import classes from './shareOptions.module.scss';
 
-function UrlShare({ selfId, selfSecret }) {
+function UrlShare({ url }) {
   return (
     <div className={ classes.shareItem }>
       <label htmlFor="incognitoId">Url</label>
       <button
-        onClick={ _ => copyToClipboard(`${window.location.href}/incognito/call?calling=true#id=${selfId}&secret=${selfSecret}`) }
+        onClick={ _ => copyToClipboard(url) }
         className={ classes.itemBox }
       >
         <IoGlobeOutline />
-        <p>{`${window.location.href}/incognito/call?calling=true#id=${selfId}&secret=${selfSecret}`}</p>
+        <p>{url}</p>
       </button>
     </div>
   )
