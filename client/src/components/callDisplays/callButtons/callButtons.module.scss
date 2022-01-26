@@ -108,3 +108,21 @@
     }
   }
 }
+
+.videoSettings {
+  padding: 4rem 2rem;
+  .title{
+    padding-bottom: 1.75rem;
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: $highlight;
+  }
+  .settingsBox{
+    label {
+      padding-right: 1rem;
+    }
+    &:not(:last-child) {
+      padding-bottom: 1rem;
+    }
+  }
+}

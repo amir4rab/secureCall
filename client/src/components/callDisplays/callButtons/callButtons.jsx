@@ -1,18 +1,21 @@
 import { useState } from 'react';
 
-import { IoMic, IoMicOff, IoVideocam, IoVideocamOff, IoVolumeHigh, IoVolumeMute, IoDesktop, IoCamera } from 'react-icons/io5';
+import { IoMic, IoMicOff, IoVideocam, IoVideocamOff, IoVolumeHigh, IoVolumeMute, IoDesktop, IoCamera, IoSettings } from 'react-icons/io5';
 
 import useTranslation from 'next-translate/useTranslation';
+
+import VideoResolutionPopup from './videoResolutionPopup';
 
 import classes from './callButtons.module.scss';
 
 function CallButtons({
-  changeMedia, isAudio, setIsAudio, endCall, audioOnly = false, initialVideoStream = 'camera', updateMedia, canUpdateMedia 
+  changeMedia, isAudio, setIsAudio, endCall, audioOnly = false, initialVideoStream = 'camera', updateMedia, canUpdateMedia, updateVideoResolution
 }) {
   const [ microphoneState, setMicrophoneState ] = useState(false);
   const [ cameraState, setCameraState ] = useState(false);
   const [ isLoading, setIsLoading ] = useState(false);
   const [ videoStream, setVideoStream ] = useState(initialVideoStream);
+  const [ videoSettingsPopup, setVideoSettingsPopup ] = useState(false); 
   const { t } = useTranslation('callDisplay');
 
   const toggleAudio = async () => {
@@ -42,6 +45,8 @@ function CallButtons({
   }
 
   return (
+    <>
+    <VideoResolutionPopup displayState={ videoSettingsPopup } setDisplayState={ setVideoSettingsPopup } updateVideoResolution={ updateVideoResolution } />
     <div className={ classes.callButtons }>
       <div className={ classes.left }>
         <button
@@ -76,6 +81,16 @@ function CallButtons({
             { isAudio ? t('audioOff') : t('audioOn') }
           </div>
         </button>
+        <button
+          disabled={ isLoading }
+          onClick={ _ => setVideoSettingsPopup(true) }
+          className={[ classes.controlBtn, classes.active ].join(' ')}  
+        >
+          <IoSettings className={ classes.activeImg }/>
+          <div className={ classes.hint }>
+            { 'Settings' }
+          </div>
+        </button>
         {
           canUpdateMedia ? 
           <button 
@@ -97,6 +112,7 @@ function CallButtons({
         </button>
       </div>
     </div>
+    </>
   )
 }
 
