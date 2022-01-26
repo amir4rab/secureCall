@@ -38,7 +38,13 @@ function CallManager({ callTo, calling, callType }) {
         callHaveEnded ? 
         <EndedDisplay callStartTime={ callStartTime } email={ callTo } /> 
         :
-        <DynamicCallDisplay setCallStartTime={ setCallStartTime } audioOnly={ callType === 'audio' } callTo={ callTo } calling={ calling } />
+        <DynamicCallDisplay 
+          setCallStartTime={ setCallStartTime } 
+          audioOnly={ callType === 'audio' } 
+          callTo={ callTo } 
+          calling={ calling } 
+          setCallEnded={ _ => setCallHaveEnded(true) } 
+        />
       }
     </>
   )

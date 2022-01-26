@@ -17,7 +17,9 @@ const fadeVariants = {
   }
 }
 
-function CallElements({ callTo, recipientName, calling, hashObj, callIsAnswered, selfVideoRef, peerVideoRef, audioOnly, changeMedia, isAudio, setIsAudio, endCallEvent, customWaitingElement = null }) {
+function CallElements({ 
+  callTo, recipientName, calling, hashObj, callIsAnswered, selfVideoRef, peerVideoRef, audioOnly, changeMedia, isAudio, setIsAudio, endCallEvent, customWaitingElement = null, updateMedia= null, canUpdateMedia= false, updateVideoResolution, currentVideoRes
+}) {
   const { t } = useTranslation('callDisplay');
 
   const onLoadedMetadata = (e) => {
@@ -67,7 +69,17 @@ function CallElements({ callTo, recipientName, calling, hashObj, callIsAnswered,
         </div>
       </div>
       <div className={ classes.buttons }>
-        <CallButtons audioOnly={ audioOnly } endCall={ endCallEvent } changeMedia={ changeMedia } isAudio={ isAudio } setIsAudio={ setIsAudio }/>
+        <CallButtons 
+          updateMedia={ updateMedia } 
+          canUpdateMedia={ canUpdateMedia } 
+          audioOnly={ audioOnly } 
+          endCall={ endCallEvent } 
+          changeMedia={ changeMedia } 
+          isAudio={ isAudio } 
+          setIsAudio={ setIsAudio }
+          updateVideoResolution={ updateVideoResolution }
+          currentVideoRes={ currentVideoRes }
+        />
       </div>
     </div>
   )

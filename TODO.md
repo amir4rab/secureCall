@@ -20,4 +20,4 @@
 ## Archived new features
 - [ ] Add e2ee chat
 - [ ] Add camera rotation
-- [ ] Add more options to call display
+- [X] Add more options to call display
