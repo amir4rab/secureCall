@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 
 import classes from './selector.module.scss';
@@ -29,6 +29,7 @@ const optionsVariantsHorizontal = {
 function Selector({ options, event, defaultActiveOption= null, large= false, horizontal, width= '2.5rem' }) {
   const [ optionsState, setOptionsState ] = useState(false);
   const [ selectedOption, setSelectedOption ] = useState( defaultActiveOption === null ? options[0] : defaultActiveOption );
+  const onBlurCallback = useRef(null);
 
   const selectEventHandler = (value) => {
     event(value); 
@@ -37,24 +38,40 @@ function Selector({ options, event, defaultActiveOption= null, large= false, hor
   }
 
   const focusEventHandler = _ => {
+    onBlurCallback.current && clearTimeout(onBlurCallback.current);
     setOptionsState(true);
   }
 
   const blurEventHandler = _ => {
-    setOptionsState(false);
+    onBlurCallback.current = setTimeout(() => {
+      setOptionsState(false);
+    }, 350);
   }
+
+  const onHover = _ => {
+    onBlurCallback.current && clearTimeout(onBlurCallback.current);
+    setOptionsState(true);
+  }
+
+  useEffect(_ => {
+    return () => {
+      onBlurCallback.current && clearTimeout(onBlurCallback.current);
+    }
+  }, []);
 
   return (
     <>   
       <div
         onMouseLeave={ blurEventHandler }
         className={[ classes.selector, horizontal ? classes.horizontal : null ].join(' ')}
+        onMouseEnter={ onHover }
       >
         <button
           onClick={ focusEventHandler }
           className={ classes.activeOption }
           style={{
             minWidth: width,
+            maxWidth: width,
             fontSize: large ? '1rem' : '.8rem'
           }}
         >
@@ -70,7 +87,8 @@ function Selector({ options, event, defaultActiveOption= null, large= false, hor
               exit='hidden'
               className={ classes.options }
               style={{
-                marginLeft: horizontal ? width : 0
+                marginLeft: horizontal ? width : 0,
+                fontSize: large ? '1rem' : '.8rem'
               }}
             >
               {
@@ -80,6 +98,11 @@ function Selector({ options, event, defaultActiveOption= null, large= false, hor
                       onClick={ _ => selectEventHandler(item) } 
                       className={ classes.option } 
                       key={ item }
+                      style={{
+                        minWidth: width,
+                        maxWidth: width,
+                        fontSize: large ? '1rem' : '.8rem'
+                      }}
                     >
                       { item }
                     </button>

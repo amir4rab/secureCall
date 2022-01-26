@@ -5,6 +5,7 @@
   display: inline-block;
   padding: .5rem 0;
   .activeOption{
+    font-size: .9rem;
     padding: .4rem 1rem;
     background: none;
     border: none;
@@ -17,6 +18,8 @@
     }
   }
   .options{
+    font-size: .9rem;
+
     background: transparentize($white-0, .75);
     backdrop-filter: blur(.5rem);
     position: absolute;
@@ -24,6 +27,8 @@
     flex-direction: column;
     border-radius: .4rem;
     .option{
+    font-size: .9rem;
+
       background: none;
       color: $white-0;
       border: none;
