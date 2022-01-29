@@ -9,5 +9,6 @@
   .contacts {
     flex-grow: 1;
     overflow-y: scroll;
+    @include scrollbar;
   }
 }

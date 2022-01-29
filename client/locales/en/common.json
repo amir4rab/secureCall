@@ -13,5 +13,7 @@
   "toPanel": "To panel",
   "home": "home",
   "call": "Call",
-  "receiveCall": "Receive call"
+  "receiveCall": "Receive call",
+  "startIncognitoCall": "Start a incognito call",
+  "goIncognito": "Go Incognito"
 }

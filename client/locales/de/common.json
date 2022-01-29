@@ -13,5 +13,7 @@
   "toPanel": "Zum Panel",
   "home": "Home",
   "call": "Anruf",
-  "receiveCall": "Anruf annehmen"
+  "receiveCall": "Anruf annehmen",
+  "startIncognitoCall": "Starten Sie einen Inkognito-Anruf",
+  "goIncognito": "Gehen inkognito"
 }

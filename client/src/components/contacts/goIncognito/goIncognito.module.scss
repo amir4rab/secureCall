@@ -1,0 +1,26 @@
+@import '../../../../styles/baseStyles';
+
+.incognitoContact {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  align-content: center;
+
+  .svgWrapper{
+    width: 2.5rem;
+    height: 2.5rem;
+    padding: .25rem;
+    svg{
+      @include textImg(2rem);
+    }
+  }
+  p {
+    padding-left: .5rem;
+    height: 2.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    user-select: none;
+  }
+}

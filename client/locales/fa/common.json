@@ -12,5 +12,7 @@
   "toPanel": "به پنل",
   "home": "خانه",
   "call": "تماس",
-  "receiveCall": "دریافت تماس"
+  "receiveCall": "دریافت تماس",
+  "startIncognitoCall": "یک تماس ناشناس شروع کنید",
+  "goIncognito": "به حالت ناشناس بروید"
 }
