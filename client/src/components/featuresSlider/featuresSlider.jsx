@@ -33,7 +33,6 @@ function FeaturesSlider({ authState, animate= false, slideTimeout= 5 }) {
       setActiveIndex( activeIndex => ( activeIndex < 2 || activeIndex === 0 ) ? setActiveIndex( activeIndex + 1 ) : setActiveIndex( 0 ) )
     }, slideTimeout * 1000);
     return () => {
-      console.log('cleared')
       clearInterval(intervalRef.current);
     }
   }, [ clicked, slideTimeout, animate ])

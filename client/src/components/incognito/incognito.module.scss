@@ -1,0 +1,98 @@
+@import '../../../styles/baseStyles';
+
+.incognito {
+  padding: 10vh 2rem;
+  min-height: 100vh;
+  .title{
+    @include title;
+    margin-bottom: 2.5vh;
+  }
+  .description{
+    line-height: 125%;
+    margin-bottom: 5vh;
+  }
+  .warning {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    svg {
+      color: $red-0;
+      min-width: 2rem;
+      min-height: 2rem;
+      margin-right: .75rem;
+    }
+    margin-bottom: 1rem;
+  }
+  .box{
+    &:not(:last-child) {
+      padding-bottom: 1rem;
+      border-bottom: .1rem solid transparentize($white-0, .75);
+    }
+    &:last-child {
+      padding-top: 1rem;
+    }
+    .boxTitle{
+      font-weight: 400;
+      font-size: 1.25rem;
+      padding-bottom: 1rem;
+      color: $highlight;
+    }
+    .inputGroup{
+      padding-bottom: 1rem;
+      .labelArea {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        .error {
+          // background: transparent;
+          padding: 0;
+          color: $red-0;
+          border: none;
+          // user-select: none;
+          font-size: 1rem;
+          cursor: default;
+          width: 50%;
+          border-radius: 0;
+          outline: none;
+          text-align: right;
+          background: transparent;
+        }
+        label {
+          opacity: .8;
+          text-transform: capitalize;
+          display: block;
+        }
+        padding-bottom: .5rem;
+      }
+      input {
+        width: 100%;
+        background-color: $black-2;
+        border: none;
+        color: $highlight;
+      }
+    }
+    .boxInfo{
+      opacity: .8;
+      margin-bottom: 1rem;
+    }
+  }
+}
+
+@include forDesktopUp {
+  .incognito {
+    height: 100vh;
+    padding: 10vh 0;
+    margin: auto;
+    max-width: $desktopMaxWidth;
+    width: $desktopWidth;
+    display: flex;
+    // flex-direction: column;
+    justify-content: space-between;
+    // position: relative;
+    .column{
+      height: 100%;
+      width: 50%;
+      padding-right: 2rem;
+    }
+  }
+}
