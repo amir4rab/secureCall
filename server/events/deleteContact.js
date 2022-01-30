@@ -50,7 +50,7 @@ const deleteContact = async ( data, callback, { client, activeUsers, socket } ) 
 
   const recipientSocketId = getIdFromEmail( email, activeUsers );
   if ( recipientSocketId !== null ) { //** sending recipient the contact accept event **//
-    socket.to(recipientSocketId).emit('contactRemoval', sender.email );
+    socket.to(recipientSocketId).emit('contactRemoval', ({ email: sender.email }) );
   }
 
   try {
