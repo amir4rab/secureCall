@@ -11,7 +11,7 @@
 - [ ] Finish settings
 - [x] Complete translation of call displays
 - [ ] About page
-- [ ] Banning users
+- [X] Banning users
 - [X] Add Translation and Call time to Ended call display
 - [X] adding loading screen
 - [X] verifying call helper added

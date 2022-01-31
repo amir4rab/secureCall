@@ -34,19 +34,21 @@ function ContactCard() {
         <div className={ classes.imageWrapper }>
           <div className={ classes.image }>{ contact.name.slice(0,1).toUpperCase() }</div>
         </div>
-        <div className={ classes.backButton }>
-          <button onClick={ _ => setActiveContact(null) }>
-            <IoArrowBack />
-          </button>
-        </div>
-        <div className={ classes.info }>
-          <h2 className={ classes.email }>{ contact.email }</h2>
-          <h4 className={ classes.name }>{ contact.name }</h4>
-        </div>
-        <div className={ classes.settingsIconWrapper }>
-          <button onClick={ _ => setSettingsState(true) } className={ classes.settingsIcon }>
-            <IoEllipsisVertical />
-          </button>
+        <div className={ classes.headerItems }>
+          <div className={ classes.backButton }>
+            <button onClick={ _ => setActiveContact(null) }>
+              <IoArrowBack />
+            </button>
+          </div>
+          <div className={ classes.info }>
+            <h2 className={ classes.email }>{ contact.email }</h2>
+            <h4 className={ classes.name }>{ contact.name }</h4>
+          </div>
+          <div className={ classes.settingsIconWrapper }>
+            <button onClick={ _ => setSettingsState(true) } className={ classes.settingsIcon }>
+              <IoEllipsisVertical />
+            </button>
+          </div>
         </div>
       </div>
       <div className={ classes.controlGroup }>

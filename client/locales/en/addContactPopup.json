@@ -11,5 +11,7 @@
   "hasReq": "You already have a request from {{email}}!",
   "invite": "{{email}} does not signed up yet, you might want to invite Them?",
   "share": "Share Secure Call url",
-  "invalidInput": "Your input isn't a valid email address!"
+  "invalidInput": "Your input isn't a valid email address!",
+  "blockedYou": "{{email}} have blocked you!",
+  "youBlocked": "you have blocked {{email}}!"
 }

@@ -30,6 +30,20 @@
         @include textImg(3rem)
       }
     }
+    .headerItems {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      .backButton, .settingsIconWrapper {
+        min-width: 10%;
+      }
+      .info {
+        overflow: hidden;
+        width: 80%;
+      }
+    }
     .backButton button {
       border: none;
       background: none;
@@ -58,7 +72,6 @@
       display: flex;
       justify-content: flex-end;
       height: 100%;
-      padding-left: 1rem;
       .settingsIcon{
         background: none;
         border: none;
@@ -127,6 +140,20 @@
     .details {
       padding-top: 0;
       padding-bottom: 5vh;
+      .headerItems {
+        width: auto;
+        display: flex;
+  
+        .backButton, .settingsIconWrapper {
+          min-width: auto;
+        }
+        .settingsIconWrapper {
+          margin-left: 1rem;
+        }
+        .info {
+          width: auto;
+        }
+      }
       .info {
         flex-grow: 0;
         text-align: left;
