@@ -8,5 +8,10 @@
   "account": "اکانت",
   "logout": "خروج",
   "theme": "تم",
-  "bToPanel": "بازگشت به پنل"
+  "bToPanel": "بازگشت به پنل",
+  "blockedUsers": "کاربران مسدود شده",
+  "emptyBlock": "شما کسی را بلاک نکرده اید",
+  "accessTokens": "توکن ها",
+  "multiDeviceComingSoon": "پشتیبانی چند دستگاه به زودی در راه است!",
+  "unblock": "رفع مسدودیت"
 }

@@ -8,5 +8,10 @@
   "account": "Konto",
   "logout": "Ausloggen",
   "theme": "Thema",
-  "bToPanel": "Zurück zum Panel"
+  "bToPanel": "Zurück zum Panel",
+  "blockedUsers": "Blockierte Benutzer",
+  "emptyBlock": "Du hast niemanden blockiert",
+  "accessTokens": "Zugriffstoken",
+  "multiDeviceComingSoon": "Unterstützung für mehrere Geräte ist in Kürze verfügbar!",
+  "unblock": "Entsperren"
 }

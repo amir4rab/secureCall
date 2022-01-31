@@ -8,5 +8,10 @@
   "account": "Account",
   "logout": "Logout",
   "theme": "Theme",
-  "bToPanel": "Back to Panel"
+  "bToPanel": "Back to Panel",
+  "blockedUsers": "Blocked users",
+  "emptyBlock": "You haven't blocked anyone",
+  "accessTokens": "Access tokens",
+  "multiDeviceComingSoon": "multi device support is coming soon!",
+  "unblock": "Unblock"
 }
