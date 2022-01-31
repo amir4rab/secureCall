@@ -10,6 +10,7 @@ const getUserData = async ( email ,client, includeSensitiveData = false ) => {
     return {
       requests: userDBData.requests,
       contacts: userDBData.contacts,
+      banList: userDBData.banList,
       email: userDBData.email,
       name: userDBData.name,
     }

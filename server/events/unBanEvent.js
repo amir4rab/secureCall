@@ -22,9 +22,10 @@ const ubBanEvent = async ( data, callback, { client, activeUsers, socket } ) => 
   const userDbData = await users.findOne({ email: socketEmail });
   const updatedUserDocument = {
     $set: {
-      banList: userDbData.banList.filter( contact => contact.email !== recipientEmail )
+      banList: userDbData.banList.filter( banedUserEmail => banedUserEmail !== recipientEmail )
     },
   };
+  console.log(userDbData.banList, '=>' ,userDbData.banList.filter( banedUserEmail => banedUserEmail !== recipientEmail ))
 
   await users.updateOne({ _id: userDbData._id }, updatedUserDocument );
 
