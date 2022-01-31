@@ -12,9 +12,9 @@ export const copyToClipboard = async (value) => {
 }
 
 export const webShare =  ( value, fileName ) => new Promise( async ( resolve, reject ) => {
+  const fetchedData = await fetch(value);
+  const blob = await fetchedData.blob();
   if (navigator.canShare && navigator.canShare({ file: blob })) {
-    const fetchedData = await fetch(value);
-    const blob = await fetchedData.blob();
 
     const file = new File([blob], `${fileName}.png`, { type: "image/png" });
     const filesArray = [file];
