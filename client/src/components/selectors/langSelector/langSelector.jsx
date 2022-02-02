@@ -10,7 +10,6 @@ function LangSelector({ horizontal= false }) {
     router.replace(router.route, '', {
       locale: value
     })
-    // setLanguage(value);
   };
 
   return (
@@ -24,6 +23,7 @@ function LangSelector({ horizontal= false }) {
           options={ router.locales }
           event={ eventHandler }
           defaultActiveOption={ router.locale }
+          width='7ch'
         />
       </div>
     </div>

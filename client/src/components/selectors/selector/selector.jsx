@@ -65,6 +65,7 @@ function Selector({ options, event, defaultActiveOption= null, large= false, hor
         onMouseLeave={ blurEventHandler }
         className={[ classes.selector, horizontal ? classes.horizontal : null ].join(' ')}
         onMouseEnter={ onHover }
+        onBlur={ blurEventHandler }
       >
         <button
           onClick={ focusEventHandler }
