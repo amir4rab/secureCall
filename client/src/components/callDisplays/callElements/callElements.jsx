@@ -15,7 +15,7 @@ const fadeVariants = {
   hidden: {
     opacity: 0
   }
-}
+};
 
 function CallElements({ 
   callTo, recipientName, calling, hashObj, callIsAnswered, selfVideoRef, peerVideoRef, audioOnly, changeMedia, isAudio, setIsAudio, endCallEvent, customWaitingElement = null, updateMedia= null, canUpdateMedia= false, updateVideoResolution, currentVideoRes
