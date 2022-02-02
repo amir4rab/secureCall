@@ -1,0 +1,10 @@
+{
+  "404Title": "Es scheint, als ob du verloren bist, mein Freund",
+  "404Subtitle": "Hier sind ein paar Seiten, die Sie vielleicht anstelle von hier besuchen möchten",
+  "500Title": "Es scheint, als hätten unsere Server einige Probleme!",
+  "500Subtitle": "Bitte kommen Sie in ein paar Minuten wieder!",
+  "home": "Startseite",
+  "help": "Hilfe",
+  "logout": "Logout",
+  "signin": "Signin"
+}

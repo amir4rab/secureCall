@@ -2,7 +2,7 @@
   "locales": ["en", "de", "fa"],
   "defaultLocale": "en",
   "pages": {
-    "*": [ "common", "auth", "sidebar", "addContactPopup", "contactCard", "contactDisplay", "hero", "about", "qrCodeItem" ],
+    "*": [ "common", "auth", "sidebar", "addContactPopup", "contactCard", "contactDisplay", "hero", "about", "qrCodeItem", "errorPage" ],
     "/panel": [ "requests" ],
     "/about": [ "about" ],
     "/panel/settings": [ "settings" ],
