@@ -53,7 +53,6 @@ function MobileMenu({ setAddContactPopup, setShowRequestsPopup }) {
         </div>
       </div>
       <div className={ classes.overlay } id='mobileMenuOverlay' onClick={ overlayEventHandler }>
-
       </div>
     </div>
   )
