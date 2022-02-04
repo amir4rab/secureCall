@@ -1,0 +1,6 @@
+{
+  "data": [
+    [ "", "safari", "chrome", "firefox", "brave", "chromium", "edge" ],
+    [ "tested", "no", "passed", "passed", "passed", "passed", "no" ]
+  ]
+}

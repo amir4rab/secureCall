@@ -1,0 +1,184 @@
+@import '../../../styles/baseStyles';
+
+.help {
+  .header {
+    padding: 1rem 2rem;
+    background: $black-2;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    position: sticky;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    .mobileTitle {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      min-height: 3rem;
+      font-size: 1.75rem;
+      text-align: center;
+      width: 100%;
+    }
+    .menuToggle {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      right: 2rem;
+      padding: .5rem;
+      border-radius: 50%;
+      background: $black-0;
+      border: none;
+      color: $white-0;
+      height: 2.5rem;
+      width: 2.5rem;
+      svg{
+        height: 1.5rem;
+        width: 1.5rem;
+      }
+      .inactiveIcon, .activeIcon {
+        opacity: 0;
+        transition: opacity .3s ease-in-out;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+      &.active .activeIcon {
+        opacity: 1;
+      } 
+      &.inactive .inactiveIcon {
+        opacity: 1;
+      }
+    }
+    .links {
+      &.open {
+        clip-path: inset(0 0 0 0);
+      }
+      &.close {
+        clip-path: inset(0 0 100% 0);
+      }
+      padding: 1rem 2rem;
+      transition: clip-path .15s ease-in-out;
+      background: $black-2;
+      z-index: 100;
+      left: 0;
+      bottom: 0;
+      position: absolute;
+      width: 100%;
+      transform: translate(0%,100%);
+      overflow: hidden;
+    }
+  }
+  .links, .desktopLinks {
+    .subtitle {
+      padding: 1rem 0 .75rem 0;
+    }
+    a {
+      display: block;
+      &:not(:last-child) {
+        margin-bottom: .5rem;
+      }
+    }
+    button {
+      padding: 0;
+      border: 0;
+      background: none;
+      color: $white-0;
+      text-align: left;
+      font-size: 1rem;
+      text-decoration: underline;
+      width: 100%;
+      text-transform: capitalize;
+      display: block;
+      &:not(:last-child) {
+        margin-bottom: 1rem;
+      }
+      &:hover {
+        cursor: pointer;
+      } 
+      &:hover, &:focus {
+        color: $highlight;
+      }
+    }
+  }
+  .desktopLinks {
+
+    display: none;
+  }
+  .main{
+    padding: 2rem;
+  }
+  .article {
+    overflow-x: hidden;
+    width: 100%;
+
+    &:not(:last-child) {
+      padding-bottom: 2.5rem;
+    }
+
+    @include markdownStyles;
+  }
+}
+
+@include forDesktopUp {
+  .help {
+    max-width: $desktopMaxWidth;
+    margin: auto;
+    position: relative;
+    padding: 10vh 0;
+    .header {
+      display: none;
+      padding: 2rem;
+      background: transparent;
+      width: 100%;
+      position: static;
+      h1 {
+        height: 20vh;
+      }
+      .subtitle {
+        padding: 1rem 0 .75rem 0;
+      }
+      a {
+        display: block;
+        &:not(:last-child) {
+          margin-bottom: .5rem;
+        }
+      }
+      .menuToggle {
+        display: none;
+      }
+      .links {
+        display: none;
+      }
+    }
+    
+    main{
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      .desktopLinks {
+        .desktopTitle {
+          font-size: 3rem;
+          padding-bottom: 1.5rem;
+          color: $highlight;
+        }
+        display: block;
+        width: 25%;
+        position: sticky;
+        top: 10vh;
+        height: auto;
+        background: $black-2;
+        border-radius: 1rem;
+        padding: 2rem;
+        p {
+          font-size: 1.25rem;
+          font-weight: 600;
+        }
+      }
+      .main{
+        width: 70%;
+      }
+    }
+  }
+}

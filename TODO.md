@@ -16,6 +16,8 @@
 - [X] adding loading screen
 - [X] verifying call helper added
 - [ ] Incognito Calls
+- [X] Error Pages
+- [X] Help page
 
 ## Archived new features
 - [ ] Add e2ee chat
