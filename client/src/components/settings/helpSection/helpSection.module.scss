@@ -5,4 +5,7 @@
   .titleBox {
     @include titleBox;
   }
+  main div {
+    @include scrollbar;
+  }
 }
