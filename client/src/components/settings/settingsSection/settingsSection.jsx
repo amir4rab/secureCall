@@ -1,26 +1,13 @@
-import React from 'react';
 import { motion } from 'framer-motion';
 
 import useTranslation from 'next-translate/useTranslation';
 
 import LangSelector from '../../selectors/langSelector/langSelector';
 import { IoChevronBack, IoLanguage, IoContrast } from 'react-icons/io5';
+import { MotionWrapper, parentVariants } from '../settingsAnimations';
 
 import classes from './settingsSection.module.scss';
 
-const parentVariants = {
-  hidden: { opacity: 0, },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.15
-    }
-  }
-}
-
-const MotionWrapper = ({ children, className }) => (
-  <motion.div className={ className } variants={{ 'visible': { opacity: 1, y: '0' }, 'hidden': { opacity: 0, y: '-1rem' } }}>{children}</motion.div>
-);
 
 function SettingsSection({ close }) {
   const { t } = useTranslation('settings')

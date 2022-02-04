@@ -31,10 +31,10 @@ const MotionWrapper = ({ children }) => {
   )
 }
 
-function Settings() {
+function Settings({ data }) {
   const router = useRouter();
   const [ selectedItem, setSelectedItem ] = useState(null);
-  const { t } = useTranslation('settings')
+  const { t } = useTranslation('settings');
 
   const closeItem = () => {
     setSelectedItem(null);
@@ -111,7 +111,7 @@ function Settings() {
               selectedItem === 'about' ? <MotionWrapper><AboutSection close={ closeItem } /></MotionWrapper> : null
             }
             {
-              selectedItem === 'help' ? <MotionWrapper><HelpSection close={ closeItem } /></MotionWrapper> : null
+              selectedItem === 'help' ? <MotionWrapper><HelpSection data={ data.helpData } close={ closeItem } /></MotionWrapper> : null
             }
             {
               selectedItem === 'account' ? <MotionWrapper><AccountSection close={ closeItem } /></MotionWrapper> : null 

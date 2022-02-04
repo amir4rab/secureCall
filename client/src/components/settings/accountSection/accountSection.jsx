@@ -11,19 +11,7 @@ import { SocketsContext } from '../../../providers/socketsProvider/socketsProvid
 
 import classes from './accountSection.module.scss';
 
-const parentVariants = {
-  hidden: { opacity: 0, },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.15
-    }
-  }
-}
-
-const MotionWrapper = ({ children, className }) => (
-  <motion.div className={ className } variants={{ 'visible': { opacity: 1, y: '0' }, 'hidden': { opacity: 0, y: '-1rem' } }}>{children}</motion.div>
-);
+import { parentVariants, MotionWrapper } from '../settingsAnimations';
 
 function AccountSection({ close }) {
   const [ isLoading, setIsLoading ] = useState(false);
