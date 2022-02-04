@@ -1,0 +1,44 @@
+@mixin markdownStyles {
+  h2 {
+    padding-bottom: 1.25rem;
+    color: $highlight;
+    text-transform: capitalize;
+  }
+  
+  h4 {
+    font-weight: 600;
+    font-size: 1.15rem;
+    padding: 1.25rem 0 .75rem 0;
+  }
+  
+  p {
+    opacity: .9;
+    line-height: 135%;
+    padding-bottom: .5rem;
+  }
+  
+  ul {
+    list-style: none;
+    padding-left: .5rem;
+    font-size: .9rem;
+    li:not(:last-child) {
+      padding-bottom: .5rem;
+    }
+  }
+  
+  table {
+    font-size: .9rem;
+    width: 100%;
+    overflow: scroll;
+    border-collapse: collapse;
+  
+    thead {
+      background: $black-2;
+    }
+    th, td {
+      min-width: 12ch;
+      text-align: left;
+      padding: .75rem;
+    }
+  }
+}
