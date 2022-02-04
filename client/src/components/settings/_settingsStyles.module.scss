@@ -27,3 +27,11 @@
     }
   }
 }
+
+
+.markdownChildren {
+  article:not(:last-child) {
+    margin-bottom: 2rem
+  }
+  @include markdownStyles;
+}
