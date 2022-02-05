@@ -1,16 +1,70 @@
 import { useRef, useState, useEffect, useCallback } from 'react';
 
-const shareDisplaySettings = {
-  video: {
-    height: 360,
+const videoQuality = {
+  low: {
+    height: 480,
     width: 640,
+  },
+  medium: {
+    height: 720,
+    width: 1280,
+  },
+  high: {
+    height: 1080,
+    width: 1920,
+  },
+  ultra: {
+    height: 1440,
+    width: 2560,
+  },
+  insane: {
+    height: 2160,
+    width: 3840,
+  }
+}
+
+const shareDisplayDefaultSettings = {
+  video: {
+    ...videoQuality.low,
     aspectRatio: 1.777777778,
     frameRate: { max: 24 },
   },
   audio: true
 };
 
-export const useMediaManager = ({ videoRef, audioOnly = false, requestedMedia = 'camera' }) => {
+const generateShareDisplaySettings = ( resolution = 'medium', maxFramerate= 24 , includeAudio= false ) => {
+  if ( typeof resolution !== 'string' && typeof maxFramerate === 'number' && typeof includeAudio !== 'boolean' ) {
+    console.error('generateShareDisplaySettings received false inputs');
+    return shareDisplayDefaultSettings;
+  }
+
+  let isValidResolution = false
+  Object.keys(videoQuality).forEach( videoQuality => {
+    if ( videoQuality === resolution ) isValidResolution = true;
+  })
+  if ( !isValidResolution ) {
+    console.error('generateShareDisplaySettings received false resolution');
+    return shareDisplayDefaultSettings;
+  }
+
+  return ({
+    video: {
+      ...videoQuality[resolution],
+      aspectRatio: 1.777777778,
+      frameRate: { max: maxFramerate },
+    }, 
+    audio: includeAudio
+  })
+}
+
+
+export const useMediaManager = ({ videoRef, audioOnly = false, requestedMedia = 'camera', disabledByDefault= true }) => {
+  const shareVideoSettings = useRef();
+  const [ currentVideoRes, setCurrentVideoRes ] = useState('medium')
+  const [ isInitialized, setIsInitialized ] = useState(false);
+  const [ currentVideoTrack, setCurrentVideoTrack ] = useState(null);
+  const [ cameraIsGranted, setCameraIsGranted ] = useState(false);
+  const [ AudioIsGranted, setAudioIsGranted ] = useState(false);
   const [ mediaIsGranted, setMediaIsGranted ] = useState(false);
   const [ mediaSettings, setMediaSettings ] = useState({
     video: audioOnly ? false : {
@@ -18,10 +72,13 @@ export const useMediaManager = ({ videoRef, audioOnly = false, requestedMedia = 
       width: 640,
       aspectRatio: 1.777777778,
       facingMode: "user",
+      enabled: false,
       frameRate: { max: 24 },
     },
-    audio: true
-  })
+    audio: {
+      enabled: false,
+    }
+  });
 
   const mediaStreamRef = useRef(null);
   const displayMediaRef = useRef(null);
@@ -45,13 +102,11 @@ export const useMediaManager = ({ videoRef, audioOnly = false, requestedMedia = 
     if ( videoOnly ) {
       const videoTracks = await outputStreamRef.current?.getVideoTracks();
       videoTracks?.forEach( track => {
-        // track.stop();
         removeTrack(track);
       });
     } else {
       const tracks = await outputStreamRef.current?.getTracks();
       tracks?.forEach( track => {
-        // track.stop();
         removeTrack(track);
       });
     }
@@ -74,28 +129,31 @@ export const useMediaManager = ({ videoRef, audioOnly = false, requestedMedia = 
       });
       displayMediaRef.current = null;
     };
-  }, [])
+  }, []);
 
   const getMedia = useCallback(( addToStream = false ) => new Promise( async ( resolve, reject ) => {
     try {
       const mediaStream = await navigator.mediaDevices.getUserMedia(mediaSettings);
       mediaStreamRef.current = mediaStream;
+
       if( addToStream ) {
         mediaStream?.getTracks().forEach( track => {
+          track.enabled = !disabledByDefault;
           addTrack(track)
         });
         setMediaIsGranted(true);
       }
+      setCurrentVideoTrack('webcam');
       resolve(true); 
     } catch(err) {
       console.error('Some thing went wrong when accessing camera!', err);
       resolve(false);
     }
-  }), [ mediaSettings ]);
+  }), [ mediaSettings, disabledByDefault ]);
 
   const getDisplayMedia = useCallback(( addToStream = false ) => new Promise( async ( resolve, reject ) => {
     try {
-      const mediaStream = await navigator.mediaDevices.getDisplayMedia(shareDisplaySettings);
+      const mediaStream = await navigator.mediaDevices.getDisplayMedia(shareVideoSettings.current);
       displayMediaRef.current = mediaStream;
       if( addToStream ) {
         mediaStream?.getTracks().forEach( track => {
@@ -103,6 +161,7 @@ export const useMediaManager = ({ videoRef, audioOnly = false, requestedMedia = 
         });
         setMediaIsGranted(true);
       }
+      setCurrentVideoTrack('display');
       resolve(true);
     } catch(err) {
       console.error('Some thing went wrong when requesting display capture!', err);
@@ -111,7 +170,7 @@ export const useMediaManager = ({ videoRef, audioOnly = false, requestedMedia = 
   }), []);
 
   const switchToDisplay = async () => {
-    const getDisplayMediaResult = await getDisplayMedia();
+    const getDisplayMediaResult = await getDisplayMedia( false );
     if ( !getDisplayMediaResult ) return false;
 
     await removeAllTracks(true);
@@ -125,10 +184,10 @@ export const useMediaManager = ({ videoRef, audioOnly = false, requestedMedia = 
     displayTracks?.forEach( track => {
       addTrack(track);
     });
+    return true;
   };
 
   const switchToCamera = async () => {
-
     let mediaResults = true;
     if ( mediaStreamRef.current === null ) {
       console.log('Getting media')
@@ -147,22 +206,48 @@ export const useMediaManager = ({ videoRef, audioOnly = false, requestedMedia = 
     const mediaTracks = await mediaStreamRef.current?.getVideoTracks();
     mediaTracks?.forEach( track => {
         track.enabled = true;
-        console.log(track);
         addTrack(track);
+    });
+    return true;
+  }
+
+  const clearCurrentDisplayTracks = async () => {
+    displayMediaRef.current && displayMediaRef.current?.getTracks()?.forEach( track => {
+      removeTrack(track);
+      track.stop();
+      displayMediaRef.current.removeTrack(track);
     });
   }
 
-  useEffect( _ => {
-    generateMedia();
-    if ( requestedMedia === 'camera' ) {
-      if( mediaStreamRef.current === null )  getMedia(true)
+  const updateVideoResolution = async ( resolution ) => {
+    shareVideoSettings.current = generateShareDisplaySettings( resolution );
+    setCurrentVideoRes(resolution);
+    if ( currentVideoTrack !== 'display' ) return false; 
+    await clearCurrentDisplayTracks();
+    const response = await getDisplayMedia(true);
+    if ( response ) {
+      return outputStreamRef.current
     } else {
-      if( displayMediaRef.current === null )  getDisplayMedia(true)
-    };
+      return false;
+    }
+  }
+
+  useEffect( _ => {
+    if ( !isInitialized ) {
+      console.log('getting Media')
+      shareVideoSettings.current = generateShareDisplaySettings()
+      generateMedia();
+      if ( requestedMedia === 'camera' ) {
+        if( mediaStreamRef.current === null )  getMedia(true)
+      } else {
+        if( displayMediaRef.current === null )  getDisplayMedia(true)
+      };
+      setIsInitialized(true)
+    }
     return () => {
       closeMedia();
     }
-  }, [ getMedia, getDisplayMedia, requestedMedia, generateMedia, closeMedia ]);
+  }, [ getMedia, getDisplayMedia, requestedMedia, generateMedia, closeMedia, isInitialized ]);
 
   const changeMedia = ( changedItem, newValue ) => new Promise( async ( resolve, reject ) => {
     if ( mediaStreamRef.current === null ) {
@@ -184,12 +269,18 @@ export const useMediaManager = ({ videoRef, audioOnly = false, requestedMedia = 
             track.enabled = newValue
           }
         })
-        resolve(true);
+        resolve(outputStreamRef.current);
         break;
       }
-      case 'camera': {
+      case 'video': {
         let label = 'null';
         mediaStreamRef.current?.getTracks()?.forEach(track => {
+          if( track.kind === 'video' ) {
+            label = track.label
+            track.enabled = newValue
+          }
+        });
+        displayMediaRef.current?.getTracks()?.forEach(track => {
           if( track.kind === 'video' ) {
             label = track.label
             track.enabled = newValue
@@ -200,17 +291,17 @@ export const useMediaManager = ({ videoRef, audioOnly = false, requestedMedia = 
             track.enabled = newValue
           }
         })
-        resolve(true);
+        resolve(outputStreamRef.current);
         break;
       }
       case 'switchToCamera': {
-        await switchToCamera();
-        resolve(true);
+        const result = await switchToCamera();
+        result === true ? resolve(outputStreamRef.current) : resolve(false);
         break;
       }
       case 'switchToDisplay': {
-        await switchToDisplay();
-        resolve(true);
+        const result = await switchToDisplay();
+        result === true ? resolve(outputStreamRef.current) : resolve(false);
         break;
       }
     }
@@ -229,7 +320,9 @@ export const useMediaManager = ({ videoRef, audioOnly = false, requestedMedia = 
     mediaStreamRef,
     mediaIsGranted,
     closeMedia,
-    logOutput
+    logOutput,
+    updateVideoResolution,
+    currentVideoRes
   })
 };
 
