@@ -10,6 +10,8 @@ export const SocketsProvider = ({ children }) => {
     addContact,
     removeContact,
     addRequest,
+    addBlockedUser,
+    removeBlockedUser,
     removeRequest
   } = useContext(ContactsContext);
   const [ isConnected, setIsConnected ] = useState(false);
@@ -33,6 +35,7 @@ export const SocketsProvider = ({ children }) => {
       // console.log(userData);
       addContact( userData.contacts, true );
       addRequest( userData.requests, true );
+      addBlockedUser( userData.banList, true );
       setIsConnected(true)
     });
 
@@ -154,7 +157,7 @@ export const SocketsProvider = ({ children }) => {
       },
       res => {
         resolve(res);
-        removeContact(contactEmail);
+        removeContact({ email: contactEmail });
       })
   });
 
@@ -180,7 +183,35 @@ export const SocketsProvider = ({ children }) => {
       clearCallingInfo();
       resolve(null);
     });
-  })
+  });
+
+  const banUser = ( contactEmail ) => new Promise( async ( resolve ) => {
+    socket.emit(
+      'banRequest', 
+      {
+        email: contactEmail
+      },
+      response => {
+        resolve(response)
+        removeContact({ email: contactEmail });
+        addBlockedUser(contactEmail);
+      }
+    );
+  });
+
+  const unBanUser = ( contactEmail ) => new Promise( async ( resolve ) => {
+    socket.emit(
+      'unBanRequest', 
+      {
+        email: contactEmail
+      },
+      response => {
+        console.log(response);
+        resolve(response)
+        removeBlockedUser(contactEmail);
+      }
+    );
+  });
   
   const value = {
     connect,
@@ -198,7 +229,9 @@ export const SocketsProvider = ({ children }) => {
     endCallEvent: endCall,
     callEnded,
     clearCallingInfo,
-    clearEndedCall
+    clearEndedCall,
+    banUser,
+    unBanUser
   };
 
   return (

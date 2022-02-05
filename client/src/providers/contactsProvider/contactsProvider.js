@@ -5,6 +5,7 @@ export const ContactsContext = createContext();
 export const ContactsProvider = ({ children }) => {
   const [ contacts, setContacts ] = useState([]);
   const [ requests, setRequests ] = useState([]);
+  const [ blockList, setBlockList ] = useState([]);
 
   const [ activeContact, setActiveContact ] = useState(null);
   const addContact = ( newContact, init = false ) => {
@@ -47,13 +48,39 @@ export const ContactsProvider = ({ children }) => {
       return;
     } 
   };
+  const addBlockedUser = ( newBlockedUser, init=false ) => {
+    console.log(newBlockedUser);
+    if ( init ) {
+      setBlockList([ ...newBlockedUser ]);
+      return;
+    }
+    if ( Array.isArray(newBlockedUser) ) {
+      setBlockList (oldBlockedUsers => [
+        ...oldBlockedUsers,
+        ...newBlockedUser
+      ])
+      return;
+    }
+    if( typeof newBlockedUser === 'string' ) {
+      setBlockList( oldBlockedUsers => [
+        ...oldBlockedUsers,
+        newBlockedUser
+      ])
+      return;
+    } 
+  }
 
-  const removeContact = ( contactEmail ) => {
-    setContacts(oldContacts => oldContacts.filter( contact => contact.email !== contactEmail ));
-    if ( contactEmail === activeContact?.email ) setActiveContact(null)
+  const removeContact = (data) => {
+    const { email } = data
+    console.log(email, data);
+    setContacts(oldContacts => oldContacts.filter( contact => contact.email !== email ));
+    if ( email === activeContact?.email ) setActiveContact(null)
   };
   const removeRequest = ( requestEmail ) => {
     setRequests(oldRequests => oldRequests.filter( request => request.email !== requestEmail ));
+  }
+  const removeBlockedUser = ( requestEmail ) => {
+    setBlockList(oldBlockedUsers => oldBlockedUsers.filter( blockedUser => blockedUser !== requestEmail ));
   }
 
   const getContact = (email) => {
@@ -75,7 +102,10 @@ export const ContactsProvider = ({ children }) => {
     requests,
     activeContact,
     contacts,
-    removeContact
+    removeContact,
+    addBlockedUser,
+    removeBlockedUser,
+    blockList
   }
 
   return (
