@@ -1,0 +1,170 @@
+@import '../../../../styles/baseStyles';
+
+.loadingWrapper, .incognitoWaitingDisplay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  min-height: 100vh;
+  left: 0;
+  top: 0;
+  z-index: 1000;
+  background: $black-0;
+}
+.loadingWrapper {
+  overflow: hidden;
+}
+
+.incognitoWaitingDisplay {
+  overflow-y: scroll;
+  padding: 10vh 2rem;
+  .title {
+    @include title;
+    font-size: 2rem;
+    margin-bottom: 5vh;
+  }
+  .boxesWrapper {
+    margin-bottom: 2rem;
+  }
+  .box {
+    &:not(:last-child) {
+      margin-bottom: .75rem;
+      padding-bottom: .75rem;
+      border-bottom: .1rem solid transparentize( $white-0, .75 );
+    }
+    h3 {
+      margin-bottom: 1rem;
+      font-weight: 400;
+      color: $highlight;
+    }
+    label {
+      padding-bottom: .5rem;
+      display: block;
+    }
+    .itemBox {
+      position: relative;
+      &:not(:last-child) {
+        margin-bottom: 2rem;
+      }
+      background: transparent;
+      border: transparent;
+      padding: .75rem;
+      width: 100%;
+      background: transparentize($highlight, .75);
+      color: $white-0;
+      font-size: 1rem;
+      text-align: left;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      overflow: scroll;
+      svg {
+        min-width: 1.25rem;
+        min-height: 1.25rem;
+        margin-right: 1rem;
+      }
+      p {
+        white-space: nowrap;
+        font-size: .8rem;
+        // max-width: 32ch;
+        overflow: hidden;
+      }
+      &:hover {
+        cursor: pointer;
+      }
+      &:focus, &:hover {
+        color: $highlight;
+      }
+      @keyframes animateIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+    }
+  }
+  .footnote {
+    padding-bottom: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    svg {
+      margin-right: 1rem;
+      min-width: 1.25rem;
+      min-height: 1.25rem;
+    }
+  }
+  .helpBox{
+    padding-top: 2rem;
+    .helpTitle{
+      padding-bottom: 1rem;
+      display: flex;
+      justify-content: flex-start;
+      align-content: center;
+      align-items: center;
+      svg {
+        min-width: 1.25rem;
+        min-height: 1.25rem;
+        margin-right: .5rem;
+      }
+    }
+  }
+}
+
+@include forDesktopUp {
+  .incognitoWaitingDisplay {
+    background: linear-gradient(90deg, $black-0 0%, $black-0 50%,$highlight 50.01%, $highlight);
+    overflow-y: hidden;
+    display: flex;
+    margin: auto;
+    justify-content: center;
+    padding: 0;
+    .column {
+      max-width: calc($desktopMaxWidth/2);
+      width: 50%;
+      height: 100%;
+      &:nth-child(1) {
+        padding: 10vh 2rem 10vh 0;
+      }
+      &:nth-child(2) {
+        padding: 10vh 0 10vh 2rem;
+        color: $black-0;
+      }
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .helpBox{
+      color: $white-0;
+      padding: 2rem;
+      border-radius: 1rem;
+      background: transparentize($black-0, .25);
+      .helpTitle{
+        padding-bottom: 1.5rem;
+        svg {
+          min-width: 1.5rem;
+          min-height: 1.5rem;
+        }
+      }
+    }
+    .footnote {
+      padding: .75rem;
+      border-radius: .4rem;
+      background: transparentize($white-0, .85);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      align-content: center;
+      svg {
+        margin-right: 1rem;
+        min-width: 1.25rem;
+        min-height: 1.25rem;
+      }
+    }
+    // .box .itemBox p {
+    //   // max-width: 70ch;
+    // }
+  }
+}
