@@ -1,0 +1,106 @@
+@import '../../../../styles/baseStyles';
+
+.call {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  .hidden {
+    display: none;
+  }
+  .recipientVideoWrapper{
+    width: 100vw;
+    height: 100vh;
+    background-color: $black-2;
+    
+    .recipientVideo{
+      z-index: 20;
+      object-fit: contain;
+      object-position: center;
+      display: block;
+      height: 100%;
+      width: 100%;
+    }
+  }
+  .selfVideoWrapper{
+    z-index: 15;
+    border-radius: 1rem;
+    height: 13.5vw;
+    width: 24vw;
+    overflow: hidden;
+    position: absolute;
+    right: 2rem;
+    top: 2rem;
+    background-color: $black-1;
+    .selfVideo{
+      display: block;
+      z-index: 20;
+      object-fit: contain;
+      object-position: center;
+      height: 100%;
+      min-width: 100%;
+    }
+  }
+  .tagWrapper {
+    display: none;
+  }
+  .recipientVideoWrapper, .selfVideoWrapper {
+    .tagWrapper {
+      z-index: 15;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 3.5rem;
+      height: 3.5rem;
+      border-radius: 50%;
+      background: $highlight;
+      display: flex;
+      justify-content: center;
+      align-content: center;
+      align-items: center;
+      .tag {
+        padding: 1rem;
+        font-size: 1.25rem;
+        color: $black-1;
+      }
+    }
+  }
+}
+.buttons{
+  width: 100%;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  z-index: 25;
+}
+.call .audioOnly {
+  .recipientVideoWrapper, .selfVideoWrapper {
+    display: none;
+  }
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+  margin: auto;
+  height: 100vh;
+  .tagWrapper {
+    display: block;
+    max-width: 300px;
+  }
+  .selfTag, .recipientTag {
+    position: absolute;
+    @include textImg(5rem);
+    transform: translate(-50%, -50%);
+  }
+  .selfTag {
+    top: 47.5%;
+    left: 45%;
+    z-index: 10;
+  }
+  .recipientTag {
+    box-shadow: 0 0 1rem black;
+    z-index: 50;
+    top: 52.5%;
+    left: 55%;
+  }
+}
