@@ -8,9 +8,9 @@ import useTranslation from 'next-translate/useTranslation';
 import waitingAudio from './audio.json';
 import { ContactsContext } from '../../../providers/contactsProvider/contactsProvider';
 
-function WaitingDisplay({ callTo, mutedByDefault = false, isCalling }) {
+function WaitingDisplay({ callTo, mutedByDefault= false, isCalling }) {
   const { getContact } = useContext(ContactsContext);
-  const [ isMuted, setIsMuted ] = useState(false);
+  const [ isMuted, setIsMuted ] = useState(mutedByDefault);
   const audioRef = useRef();
   const { t } = useTranslation('waitingDisplay');
   const { t: tCallDisplay } = useTranslation('callDisplay');
@@ -38,7 +38,7 @@ function WaitingDisplay({ callTo, mutedByDefault = false, isCalling }) {
           !mutedByDefault ?
           <button onClick={ _ => setIsMuted(!isMuted) }>
             {
-              !isMuted ?
+              isMuted ?
               <>
                 <IoVolumeMute />
                 <p>{tCallDisplay('audioOn')}</p>
