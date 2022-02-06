@@ -1,5 +1,8 @@
 const nextTranslate = require('next-translate')
 const withPlugins = require('next-compose-plugins');
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+  enabled: true,
+})
 // const optimizedImages = require('next-optimized-images');
 
 
@@ -9,7 +12,7 @@ const withPlugins = require('next-compose-plugins');
 
 module.exports = withPlugins([
   [ 
-    nextTranslate(),
+    nextTranslate(), withBundleAnalyzer()
     // [
     //   optimizedImages, 
     //   {

@@ -16,7 +16,7 @@
       padding: .5rem;
       border: none;
       color: $white-0;
-      font-size: 1rem;
+      font-size: .8rem;
       font-weight: 400;
       background: transparent;
       transition: background .3s ease-in-out, color .3s ease-in-out;
@@ -53,5 +53,11 @@
       top: 0%;
       left: 50%;
     }
+  }
+}
+
+@include forDesktopUp {
+  .incognitoSelector .titles .title {
+    font-size: 1rem;
   }
 }
