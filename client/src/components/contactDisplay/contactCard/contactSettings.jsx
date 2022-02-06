@@ -1,15 +1,19 @@
 import { useContext } from 'react'
 import { SocketsContext } from '../../../providers/socketsProvider/socketsProvider';
 
-import { IoPersonRemove, IoClose } from 'react-icons/io5'
+import { IoPersonRemove, IoClose, IoTrash } from 'react-icons/io5'
 
 import classes from './contactSettings.module.scss';
 
 function ContactSettings({ state, setState, email }) {
-  const { deleteContact } = useContext(SocketsContext);
+  const { deleteContact, banUser } = useContext(SocketsContext);
 
   const deleteEvent = () => {
     deleteContact(email)
+  }
+
+  const banEvent = async _ => {
+    banUser(email);
   }
 
   return (
@@ -27,8 +31,19 @@ function ContactSettings({ state, setState, email }) {
           </label>
           <div className={ classes.buttonWrapper }>
             <button onClick={ deleteEvent }>
+              <IoTrash />
+              <p>Delete Contact</p>
+            </button>
+          </div>
+        </div>
+        <div className={ classes.settingsGroup }>
+          <label>
+            Ban contact
+          </label>
+          <div className={ classes.buttonWrapper }>
+            <button onClick={ banEvent }>
               <IoPersonRemove />
-              <p>Delete</p>
+              <p>Ban Contact</p>
             </button>
           </div>
         </div>
