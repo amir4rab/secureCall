@@ -1,0 +1,73 @@
+@import '../../../styles/baseStyles';
+
+$max-width: 1200px;
+
+.about {
+  padding: 10vh 2rem 0 2rem;
+  .navbar {
+    display: none;
+  }
+  .infoBox{
+    position: relative;
+    min-height: 90vh;
+    .title{
+      @include title;
+      padding-bottom: 10vh;
+      text-align: center;
+    }
+    .subtitle{
+      line-height: 175%;
+    }
+    .mobileLangSelector {
+      position: absolute;
+      left: 0;
+      bottom: 2rem;
+    }
+  }
+}
+
+@include forDesktopUp {
+  .about {
+    margin: auto;
+    position: relative;
+    max-width: $max-width;
+    margin-top: 15vh;
+    .navbar {
+      z-index: 100;
+      display: block;
+      max-width: $max-width;
+      position: fixed;
+      top: 0;
+      left: 50%;
+      transform: translate(-50%, 0);
+      width: 100%;
+      margin: 0rem 1rem;
+      padding: 1rem;
+      height: 10vh;
+      background-color: transparentize($black-0, .5);
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      .navChild:not(:last-child) {
+        margin-right: 2rem;
+      }
+    }
+    display: flex;
+    justify-content: space-between;
+    max-height: 85vh;
+    height: 85vh;
+    overflow: hidden;
+    .mobileLangSelector {
+      display: none;
+    }
+    .infoBox, .contents {
+      width: 45%;
+      min-height: auto;
+    }
+    .contents {
+      max-height: 75vh;
+      overflow-y: scroll;
+      scroll-behavior: smooth;
+    }
+  }
+}

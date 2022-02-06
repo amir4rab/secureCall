@@ -2,6 +2,7 @@
 client/node_modules/
 server/node_modules/
 signalingServer/node_modules/
+signalingServer/
 client/.pnp
 client/.pnp.js
 
@@ -40,3 +41,7 @@ server/.gitignore
 
 #eslimtrc
 client/.eslintrc.json
+
+signalingServer/
+client/src/utils/frontend/webrtc/trash
+client/pages/test/

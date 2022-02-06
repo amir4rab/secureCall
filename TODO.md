@@ -9,8 +9,8 @@
 ## New features
 - [ ] Add delete account
 - [ ] Finish settings
-- [x] Complete translation of call displays
-- [ ] About page
+- [X] Complete translation of call displays
+- [X] About page
 - [X] Banning users
 - [X] Add Translation and Call time to Ended call display
 - [X] adding loading screen

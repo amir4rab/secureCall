@@ -1,0 +1,24 @@
+@import '../../../../styles/baseStyles';
+
+.aboutBox {
+  overflow: hidden;
+  border-radius: 2rem;
+  background-color: $black-2;
+  width: 100%;
+  box-shadow: 0 0 2rem transparent;
+  transition: 
+    transform .3s ease-in-out,
+    box-shadow .3s ease-in-out
+  ;
+  height: 30vh;
+  &:hover {
+    transform: scale(1.01);
+  }
+  .inner {
+    height: 30vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+  }
+}
