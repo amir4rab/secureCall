@@ -15,7 +15,7 @@
 - [X] Add Translation and Call time to Ended call display
 - [X] adding loading screen
 - [X] verifying call helper added
-- [ ] Incognito Calls
+- [X] Incognito Calls
 - [X] Error Pages
 - [X] Help page
 
