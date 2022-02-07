@@ -3,11 +3,14 @@ const getIdFromEmail = require('../utils/getIdFromEmail');
 
 const deleteContact = async ( data, callback, { client, activeUsers, socket } ) => {
   const socketEmail = activeUsers.get(socket.id);
-  const {
-    email
-  } = data;
-  const validEmail = isEmailValid(email, callback);
+  const { recipientEmail } = data;
+  const validEmail = isEmailValid( recipientEmail, callback );
   if ( !validEmail ) {
+    await client.close();
+    callback && callback({
+      status: 'error',
+      response: 'Invalid email!.'
+    })
     return;
   }
 
@@ -15,17 +18,15 @@ const deleteContact = async ( data, callback, { client, activeUsers, socket } ) 
   const database = client.db('secureCall');
   const users = database.collection('users');
 
-  const receiver = await users.findOne({ email: email });
+  const receiver = await users.findOne({ email: recipientEmail });
   const sender = await users.findOne({ email: socketEmail });
 
   if ( receiver === null || receiver === null ) {
     await client.close();
-    try {
-      callback({
-        status: 'error',
-        response: 'Something went wrong.'
-      })
-    } catch {};
+    callback && callback({
+      status: 'error',
+      response: 'Something went wrong.'
+    })
     return;
   }
 
@@ -48,17 +49,15 @@ const deleteContact = async ( data, callback, { client, activeUsers, socket } ) 
 
   await client.close();
 
-  const recipientSocketId = getIdFromEmail( email, activeUsers );
+  const recipientSocketId = getIdFromEmail( recipientEmail, activeUsers );
   if ( recipientSocketId !== null ) { //** sending recipient the contact accept event **//
     socket.to(recipientSocketId).emit('contactRemoval', ({ email: sender.email }) );
   }
 
-  try {
-    callback({
-      status: 'successful',
-      response: 'Successfully removed the contact.'
-    });
-  } catch {}
+  callback && callback({
+    status: 'successful',
+    response: 'Successfully removed the contact.'
+  });
 };
 
 module.exports = deleteContact

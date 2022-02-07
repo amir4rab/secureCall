@@ -4,7 +4,7 @@ const isEmailValid = require('../utils/isEmailValid');
 const banEvent = async ( data, callback, { client, activeUsers, socket } ) => {
   const socketEmail = activeUsers.get(socket.id);
   const {
-    email: recipientEmail
+    recipientEmail
   } = data;
 
   if ( !isEmailValid( recipientEmail ) ){

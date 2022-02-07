@@ -3,66 +3,52 @@ const isEmailValid = require('../utils/isEmailValid');
 
 const call = async ( data, callback, { client, activeUsers, socket } ) => {
   const socketEmail = activeUsers.get(socket.id);
-  const {
-    to
-  } = data;
+  const { recipientEmail } = data;
 
-  if ( !isEmailValid(to) ){
-    try {
-      callback({
-        status: 'error',
-        response: 'Invalid inputs!',
-        responseCode: 'invalid'
-      })
-    } catch {};
-    return;
+  if ( !isEmailValid(recipientEmail) ){
+    callback && callback({
+      status: 'error',
+      response: 'Invalid inputs!',
+      responseCode: 'invalid'
+    });
   }
 
   await client.connect();
   const database = client.db('secureCall');
   const users = database.collection('users');
-  const query = {
-    email: to
-  };
-  const receiver = await users.findOne(query);
+  const receiver = await users.findOne({ email: recipientEmail });
   const userDbData = await users.findOne({ email: socketEmail });
 
 
   if( receiver === null ) { //** checks if the recipient does not exists **//
     await client.close();
-    try {
-      callback({
-        status: 'error',
-        response: 'User does not exists!',
-        responseCode: 'userDNE'
-      });
-    } catch {}
+    callback && callback({
+      status: 'error',
+      response: 'User does not exists!',
+      responseCode: 'userDNE'
+    });
     return;
   }
 
-  console.log(`Calling ${to} from ${userDbData.email}`)
+  console.log(`Calling ${ recipientEmail } from ${userDbData.email}`)
   if(  typeof receiver.contacts.find( contact => contact.email === userDbData.email ) == 'undefined' ) {
     await client.close();
-    try {
-      callback({
-        status: 'error',
-        response: 'User is not in your contacts!',
-        responseCode: 'userINIYC'
-      });
-    } catch {}
+    callback && callback({
+      status: 'error',
+      response: 'User is not in your contacts!',
+      responseCode: 'userINIYC'
+    });
     return;
   }
 
-  const recipientSocketId = getIdFromEmail(to, activeUsers);
+  const recipientSocketId = getIdFromEmail( recipientEmail , activeUsers);
   if( recipientSocketId === null ) {
     await client.close();
-    try {
-      callback({
-        status: 'error',
-        response: 'User is offline!',
-        responseCode: 'userIsOffline'
-      });
-    } catch {}
+    callback && callback({
+      status: 'error',
+      response: 'User is offline!',
+      responseCode: 'userIsOffline'
+    });
     return;
   }
 

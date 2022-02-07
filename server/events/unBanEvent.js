@@ -3,9 +3,7 @@ const isEmailValid = require('../utils/isEmailValid');
 
 const ubBanEvent = async ( data, callback, { client, activeUsers, socket } ) => {
   const socketEmail = activeUsers.get(socket.id);
-  const {
-    email: recipientEmail
-  } = data;
+  const { recipientEmail } = data;
 
   if ( !isEmailValid( recipientEmail ) ){
     callback && callback({
@@ -25,7 +23,6 @@ const ubBanEvent = async ( data, callback, { client, activeUsers, socket } ) => 
       banList: userDbData.banList.filter( banedUserEmail => banedUserEmail !== recipientEmail )
     },
   };
-  console.log(userDbData.banList, '=>' ,userDbData.banList.filter( banedUserEmail => banedUserEmail !== recipientEmail ))
 
   await users.updateOne({ _id: userDbData._id }, updatedUserDocument );
 

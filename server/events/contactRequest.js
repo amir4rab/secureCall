@@ -3,9 +3,7 @@ const getIdFromEmail = require('../utils/getIdFromEmail');
 
 const contactRequest = async ( data, callback, { client, activeUsers, socket } ) => {
   const socketEmail = activeUsers.get(socket.id);
-  const {
-    recipientEmail
-  } = data;
+  const { recipientEmail } = data;
 
   const recipientEmailIsValid = validator.isEmail(recipientEmail); 
   if ( !recipientEmailIsValid ) { //** verifying recipient email address **//
