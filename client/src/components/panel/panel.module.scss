@@ -23,7 +23,7 @@
 
 @include forDesktopUp {
   .panel {
-    animation: fadeIn .3s ease-in-out forwards;
+    ///animation: fadeIn .3s ease-in-out forwards;
     display: flex;
     justify-content: center;
     align-items: center;
