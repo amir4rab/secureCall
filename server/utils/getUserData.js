@@ -1,4 +1,4 @@
-const getUserData = async ( email ,client, includeSensitiveData = false ) => {
+const getUserData = async ( email ,client, includeSensitiveData= false ) => {
   await client.connect();
   const database = client.db('secureCall');
   const users = database.collection('users');
