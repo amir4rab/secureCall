@@ -3,6 +3,10 @@ import classes from './aboutSection.module.scss';
 import { IoChevronBack, IoShield } from 'react-icons/io5';
 import useTranslation from 'next-translate/useTranslation';
 
+import E2ee from '../../about/section/e2ee/e2ee';
+import OpenSource from '../../about/section/openSource/openSource';
+import Private from '../../about/section/private/private';
+
 
 function AboutSection({ close }) {
   const { t } = useTranslation('settings');
@@ -14,18 +18,9 @@ function AboutSection({ close }) {
         <h3 className={ classes.title }>{t('about')}</h3>
       </div>
       <div className={ classes.aboutText }>
-        <p>
-          Securecall is a e2ee (end to end encrypted), open-source video and audio calling application, available for free.
-        </p>
-      </div>
-      <div className={ classes.aboutText }>
-        <h5 className={ classes.title }>
-          <IoShield/>
-          <p>Encryption in calls</p>
-        </h5>
-        <p>
-          Video calls and audio calls are e2ee, encryption method is provided by WebRTC.
-        </p>
+        <OpenSource />
+        <E2ee />
+        <Private />
       </div>
     </div>
   );
