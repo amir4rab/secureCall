@@ -30,6 +30,7 @@ export const generateUser = async ( user, account ) => {
       name: user.name,
       contacts: [],
       requests: [],
+      banList: [],
       currentOauthProvider: account.provider,
       acceptedProviders: [ account.provider ],
       tokens: [
