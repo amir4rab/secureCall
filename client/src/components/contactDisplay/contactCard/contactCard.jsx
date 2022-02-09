@@ -29,7 +29,7 @@ function ContactCard() {
 
   return (
     <motion.div className={ classes.contactCard }>
-      <ContactSettings state={ settingsState } setState={setSettingsState} email={ contact?.email } />
+      <ContactSettings state={ settingsState } setState={setSettingsState} email={ contact?.email } name={ contact.name } />
       <div className={ classes.details }>
         <div className={ classes.imageWrapper }>
           <div className={ classes.image }>{ contact.name.slice(0,1).toUpperCase() }</div>
