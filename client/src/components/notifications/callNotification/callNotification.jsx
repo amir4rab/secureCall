@@ -10,7 +10,6 @@ import classes from './callNotification.module.scss';
 
 function CallNotification() {
   const [ isClosed, setIsClosed ] = useState(false);
-  console.log(isClosed);
   const router = useRouter();
   const { 
     receivingCall, 
@@ -26,12 +25,14 @@ function CallNotification() {
   }
 
   const declineCallEvent = _ => {
-    declineCall(receivingCall.from);
+    declineCall(receivingCall.from)
   }
 
   useEffect( _ => {
     let timeout;
-    if ( !callIsAnswered && receivingCall !== null ) {
+    if ( receivingCall === null ) {
+      setIsClosed(true);
+    } else if ( !callIsAnswered && receivingCall !== null && isClosed ) {
       setIsClosed(false);
       timeout = setTimeout( _ => {
         declineCall(receivingCall.from);
@@ -40,10 +41,9 @@ function CallNotification() {
     return () => {
       clearTimeout(timeout);
     }
-  }, [ receivingCall, callIsAnswered, declineCall ]);
+  }, [ receivingCall, callIsAnswered, declineCall, isClosed ]);
 
   useEffect( _ => {
-    console.log(callEnded); 
     if( callEnded !== null ) {
       setIsClosed(true);
     }
