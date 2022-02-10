@@ -5,10 +5,12 @@
 - [X] Fix waiting display bug
 - [X] Fix notifications
 - [X] Live background for landing page
+- [X] Hang up calls after decline in notification
 
 ## New features
 - [ ] Add delete account
 - [ ] Finish settings
+- [X] Notification Improvement
 - [X] Complete translation of call displays
 - [X] About page
 - [X] Banning users
