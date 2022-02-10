@@ -15,5 +15,6 @@
   "call": "Anruf",
   "receiveCall": "Anruf annehmen",
   "startIncognitoCall": "Starten Sie einen Inkognito-Anruf",
-  "goIncognito": "Gehen inkognito"
+  "goIncognito": "Gehen inkognito",
+  "settings": "Einstellungen"
 }

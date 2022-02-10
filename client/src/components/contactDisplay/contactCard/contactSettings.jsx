@@ -4,8 +4,12 @@ import { SocketsContext } from '../../../providers/socketsProvider/socketsProvid
 import { IoPersonRemove, IoClose, IoTrash, IoInformationCircle, IoSettingsSharp } from 'react-icons/io5'
 
 import classes from './contactSettings.module.scss';
+import useTranslation from 'next-translate/useTranslation';
 
 function ContactSettings({ state, setState, email, name }) {
+  const { t } = useTranslation('contactCard');
+  const { t: tCommon } = useTranslation('common');
+
   const { deleteContact, banUser } = useContext(SocketsContext);
 
   const deleteEvent = () => {
@@ -26,32 +30,32 @@ function ContactSettings({ state, setState, email, name }) {
           <div className={ classes.settingsGroup }>
             <h3 className={ classes.title }>
               <IoInformationCircle />
-              <p>About</p>
+              <p>{ tCommon('about') }</p>
             </h3>
             <div className={ classes.infoGroup }>
-              <p>Name:</p>
+              <p>{t('name')}:</p>
               <p>{name}</p>
             </div>
             <div className={ classes.infoGroup }>
-              <p>Email Address:</p>
+              <p>{t('emailAddress')}:</p>
               <p>{email}</p>
             </div>
           </div>
           <div className={ classes.settingsGroup }>
             <h3 className={ classes.title }>
               <IoSettingsSharp />
-              <p>Settings</p>
+              <p>{ tCommon('settings') }</p>
             </h3>
             <div className={ classes.buttonWrapper }>
               <button onClick={ deleteEvent }>
                 <IoTrash />
-                <p>Delete Contact</p>
+                <p>{ t('deleteContact') }</p>
               </button>
             </div>
             <div className={ classes.buttonWrapper }>
               <button onClick={ banEvent }>
                 <IoPersonRemove />
-                <p>Ban Contact</p>
+                <p>{ t('deleteContact') }</p>
               </button>
             </div>
           </div>

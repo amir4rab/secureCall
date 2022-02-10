@@ -1,5 +1,9 @@
 {
   "videoCall": "Video call",
   "audioCall": "Audio call",
-  "call": "Call"
+  "call": "Call",
+  "name": "Name",
+  "emailAddress": "Email Address",
+  "deleteContact": "Delete Contact",
+  "banContact": "Ban Contact"
 }

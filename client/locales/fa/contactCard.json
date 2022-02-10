@@ -1,5 +1,9 @@
 {
   "videoCall": "تماس تصویری",
   "audioCall": "تماس صوتی",
-  "call": "تماس"
+  "call": "تماس",
+  "name": "نام",
+  "emailAddress": "آدرس ایمیل",
+  "deleteContact": "حذف مخاطب",
+  "banContact": "بلاک کردن مخاطب"
 }

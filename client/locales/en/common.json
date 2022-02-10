@@ -15,5 +15,6 @@
   "call": "Call",
   "receiveCall": "Receive call",
   "startIncognitoCall": "Start a incognito call",
-  "goIncognito": "Go Incognito"
+  "goIncognito": "Go Incognito",
+  "settings": "Settings"
 }
