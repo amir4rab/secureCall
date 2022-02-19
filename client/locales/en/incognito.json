@@ -1,11 +1,13 @@
 {
   "title": "Incognito Securecall",
-  "subtitle": "Secure call provides, free video calling even without signing up!",
+  "subtitle": "Secure call provides, free video and data connection even without signing up!",
   "warning": "Incognito mood does not cover your Ip address, please you it with a VPN to mask your Ip address.",
   "remoteId": "Their id",
   "remoteIdPlaceholder": "Other peer id",
   "remoteSecret": "Their secret",
   "remoteSecretPlaceholder": "16 words like 9099aef0baf16d8c",
-  "getCall": "Get a Call",
-  "getCallPrompt": "If someone is going to call you start by the button down here."
+  "startConnection": "Start Connection",
+  "startConnectionPrompt": "If someone is going to connect to you start by the button down here.",
+  "connect": "Make Connection",
+  "receiveConnection": "Receive Connection"
 }

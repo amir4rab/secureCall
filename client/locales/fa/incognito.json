@@ -7,5 +7,9 @@
   "remoteSecret": "رمز مخاطب",
   "remoteSecretPlaceholder": "16 words like 9099aef0baf16d8c",
   "getCall": "تماس دریافت کنید",
-  "getCallPrompt": "اگر کسی قرار است با شما تماس بگیرد از اینجا شروع کنید."
+  "getCallPrompt": "اگر کسی قرار است با شما تماس بگیرد از اینجا شروع کنید.",
+  "startConnection": "اتصال را شروع کنید",
+  "startConnectionPrompt": "آگر قصد دارید کسی به شما متصل شود از اینجا شروع کنید.",
+  "connect": "متصل شوید",
+  "receiveConnection": "اتصال دریافت کنید"
 }
