@@ -44,4 +44,4 @@ client/.eslintrc.json
 
 signalingServer/
 client/src/utils/frontend/webrtc/trash
-client/pages/test/
+# client/pages/test/
