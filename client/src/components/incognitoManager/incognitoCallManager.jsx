@@ -8,8 +8,7 @@ import useTranslation from 'next-translate/useTranslation';
 import CallElements from '../callDisplays/callElements/callElements';
 import IncognitoWaitingDisplay from './incognitoWaitingDisplay/incognitoWaitingDisplay';
 
-function IncognitoCallManager({ otherPeerId, otherPeerSecret, calling }) {
-  console.log(`calling is`, calling)
+function IncognitoCallManager({ otherPeerId, otherPeerSecret, isInitializer }) {
   const { t } = useTranslation('callDisplay');
 
   const router = useRouter();
@@ -49,14 +48,13 @@ function IncognitoCallManager({ otherPeerId, otherPeerSecret, calling }) {
   });
 
   const initPeerJs = useCallback(async () => {
-    console.log(`calling: `, calling)
-    if( !calling ) {
+    if( !isInitializer ) {
       webRtc.init( mediaStreamRef.current, setSelfPeerDetails, false );
     } else {
       webRtc.init( mediaStreamRef.current, setSelfPeerDetails, true, { id: otherPeerId, secret: otherPeerSecret } );
     }
     setIsInitialized(true)
-  }, [ calling, mediaStreamRef, webRtc, otherPeerId, otherPeerSecret ])
+  }, [ isInitializer, mediaStreamRef, webRtc, otherPeerId, otherPeerSecret ])
 
   useEffect( _ => {
     if ( !isInitialized && mediaIsGranted ) initPeerJs();
@@ -83,7 +81,7 @@ function IncognitoCallManager({ otherPeerId, otherPeerSecret, calling }) {
     <div>
       <CallElements
         recipientName='Anonyms'
-        calling={ calling }
+        calling={ isInitializer }
         hashObj={ hashObj }
         callIsAnswered={ callIsAnswered }
         selfVideoRef={ selfVideoRef }
@@ -95,7 +93,7 @@ function IncognitoCallManager({ otherPeerId, otherPeerSecret, calling }) {
         isAudio={ isAudio }
         setIsAudio={ setIsAudio }
         endCallEvent={ endCallEvent }
-        customWaitingElement={ <IncognitoWaitingDisplay calling={ calling } selfId={ selfPeerDetails?.id } selfSecret={ selfPeerDetails?.secret } /> }
+        customWaitingElement={ <IncognitoWaitingDisplay calling={ isInitializer } selfId={ selfPeerDetails?.id } selfSecret={ selfPeerDetails?.secret } /> }
         updateVideoResolution={ updateVideoSettings }
         currentVideoRes={ currentVideoRes }
       />

@@ -45,7 +45,7 @@ function IncognitoSelector({ selfSecret,selfId }) {
         <div className={ classes.item } style={{ ...calcStateStyle( 0, activeIndex ) }} >
           <UrlShare 
             selfSecret={ selfSecret } selfId={ selfId }
-            url={`${window.location.href.replace(baseUrl, '')}/incognito/call?calling=true#id=${selfId}&secret=${selfSecret}`}
+            url={`${window.location.href.replace('?initializer=false', '')}?initializer=true#id=${selfId}&secret=${selfSecret}`}
           />
         </div>
         <div className={ classes.item } style={{ ...calcStateStyle( 1, activeIndex ) }} >
@@ -53,7 +53,7 @@ function IncognitoSelector({ selfSecret,selfId }) {
         </div>
         <div className={ classes.item } style={{ ...calcStateStyle( 2, activeIndex ) }} >
           <QrCodeShare 
-            url={`${window.location.href.replace(baseUrl, '')}/incognito/call?calling=true#id=${selfId}&secret=${selfSecret}`}
+            url={`${window.location.href.replace('?initializer=false', '')}?initializer=true#id=${selfId}&secret=${selfSecret}`}
             displayState={ activeIndex === 2 } 
           />
         </div>
