@@ -17,7 +17,7 @@ class MyDocument extends Document {
           <link 
             href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" 
             rel="stylesheet"
-          /> 
+          />
           <meta name="description" content="Secure e2ee video and audio calls" />
           <link rel="icon" href="/favicon.svg" />
         </Head>
