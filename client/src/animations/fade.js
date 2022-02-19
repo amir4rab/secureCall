@@ -87,22 +87,22 @@ export const generateFade = ({ from, distance, duration, delay }) => {
   switch(from) {
     case 'down': {
       visible['y'] = 0;
-      hidden['y'] = `${distance}`;
+      hidden['y'] = `${distance}rem`;
       break;
     }
     case 'up': {
       visible['y'] = 0;
-      hidden['y'] = `-${distance}`;
+      hidden['y'] = `-${distance}rem`;
       break;
     }
     case 'right': {
       visible['x'] = 0;
-      hidden['x'] = `${distance}`;
+      hidden['x'] = `${distance}rem`;
       break;
     }
     case 'left': {
       visible['x'] = 0;
-      hidden['x'] = `-${distance}`;
+      hidden['x'] = `-${distance}rem`;
       break;
     }
   }

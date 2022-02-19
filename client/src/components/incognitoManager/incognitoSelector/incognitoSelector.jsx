@@ -6,7 +6,9 @@ import UrlShare from '../shareOptions/urlShare';
 
 import classes from './incognitoSelector.module.scss';
 
-const baseUrl = '/incognito/call?calling=false';
+const getUrl = () => {
+  return window.location.href.replace('?initializer=false', '').replace('/de', '').replace('/fa', '');
+}
 
 const calcActiveIndex = ( index ) => ({
   "left": `${ index * 33.3333 }%`, 
@@ -45,7 +47,7 @@ function IncognitoSelector({ selfSecret,selfId }) {
         <div className={ classes.item } style={{ ...calcStateStyle( 0, activeIndex ) }} >
           <UrlShare 
             selfSecret={ selfSecret } selfId={ selfId }
-            url={`${window.location.href.replace('?initializer=false', '')}?initializer=true#id=${selfId}&secret=${selfSecret}`}
+            url={`${getUrl()}?initializer=true#id=${selfId}&secret=${selfSecret}`}
           />
         </div>
         <div className={ classes.item } style={{ ...calcStateStyle( 1, activeIndex ) }} >
@@ -53,7 +55,7 @@ function IncognitoSelector({ selfSecret,selfId }) {
         </div>
         <div className={ classes.item } style={{ ...calcStateStyle( 2, activeIndex ) }} >
           <QrCodeShare 
-            url={`${window.location.href.replace('?initializer=false', '')}?initializer=true#id=${selfId}&secret=${selfSecret}`}
+            url={`${getUrl()}?initializer=true#id=${selfId}&secret=${selfSecret}`}
             displayState={ activeIndex === 2 } 
           />
         </div>
