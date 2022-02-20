@@ -2,7 +2,7 @@ import { useEffect, useRef, useState, useContext, useCallback } from 'react';
 import { useRouter } from 'next/router';
 
 import { useMediaManager } from '../../utils/frontend/camera/useMediaManager';
-import useWebRtc from '../../utils/frontend/webrtc/useWebRtc';
+import useWebRtc from '../../utils/hooks/useWebrtc';
 
 import useTranslation from 'next-translate/useTranslation';
 import CallElements from '../callDisplays/callElements/callElements';
@@ -39,7 +39,7 @@ function IncognitoCallManager({ otherPeerId, otherPeerSecret, isInitializer }) {
   const { changeMedia, mediaStreamRef, mediaIsGranted, updateVideoResolution, currentVideoRes } = useMediaManager({ videoRef: selfVideoRef });
   const webRtc = useWebRtc({ 
     peerVideoRef: peerVideoRef.current, 
-    setCallIsAnswered: setCallIsAnswered, 
+    setIsConnected: setCallIsAnswered, 
     setRecipientPeerId: setRemotePeerDetails, 
     emitHash: setHashObj,
     onDisconnect: _ => endCallEvent(true),
@@ -49,9 +49,9 @@ function IncognitoCallManager({ otherPeerId, otherPeerSecret, isInitializer }) {
 
   const initPeerJs = useCallback(async () => {
     if( !isInitializer ) {
-      webRtc.init( mediaStreamRef.current, setSelfPeerDetails, false );
+      webRtc.init({ stream: mediaStreamRef.current, emitPeerDetails: setSelfPeerDetails, isInitializer: false });
     } else {
-      webRtc.init( mediaStreamRef.current, setSelfPeerDetails, true, { id: otherPeerId, secret: otherPeerSecret } );
+      webRtc.init({ stream: mediaStreamRef.current, emitPeerDetails: setSelfPeerDetails, isInitializer: true, recipientDetails: { id: otherPeerId, secret: otherPeerSecret } });
     }
     setIsInitialized(true)
   }, [ isInitializer, mediaStreamRef, webRtc, otherPeerId, otherPeerSecret ])
