@@ -1,0 +1,17 @@
+@import '../../../../../styles/baseStyles';
+
+.fileDetails {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  p {
+    padding-left: .4rem;
+  }
+  .name {
+    font-weight: 600;
+  }
+  .size {
+    font-size: .8rem;
+    opacity: .75;
+  }
+}

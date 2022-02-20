@@ -1,0 +1,50 @@
+@import '../../../../../styles/baseStyles';
+
+.wrapper {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  .progress {
+    flex-grow: 1;
+    min-width: 100%;
+    width: 40vw;
+    padding: .4rem 1rem;
+    background: transparentize( $highlight, .85 );
+    border-radius: .5em;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    height: 1.75rem;
+    p {
+      mix-blend-mode: difference;
+      position: absolute;
+      z-index: 100;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    .bg {
+      position: absolute;
+      top: 0;
+      left: -100%;
+      background: $highlight;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      transition: left 1s ease-out;
+      box-shadow: 0 0 .5rem $highlight;
+    }
+  }
+}
+
+@include forDesktopUp {
+  .wrapper {
+    justify-content: center;
+    .progress {
+      width: 20vw;
+    }
+  }
+}

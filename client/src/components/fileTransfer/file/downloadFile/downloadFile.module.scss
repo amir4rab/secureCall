@@ -1,0 +1,54 @@
+@import '../../../../../styles/baseStyles';
+
+.file {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 100%;
+  padding-bottom: 1.75rem;
+  .fileInfo {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding-bottom: .75rem;
+    p {
+      padding-left: .4rem;
+    }
+    .name {
+      font-weight: 600;
+    }
+    .size {
+      font-size: .8rem;
+      opacity: .75;
+    }
+  }
+  .transferredState {
+    width: 100%;
+    text-align: end;
+  }
+  .progressState {
+    width: 50%;
+  }
+  .actions {
+    width: 50%;
+  }
+}
+
+@include forDesktopUp {
+  .file {
+    .fileInfo {
+      width: 25%;
+      padding-bottom: 0rem;
+    }
+    .transferredState {
+      width: 75%;
+      text-align: end;
+    }
+    .actions {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      width: 25%;
+    }
+  }
+}

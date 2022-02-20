@@ -1,0 +1,24 @@
+@import '../../../../../styles/baseStyles';
+
+.icon {
+  border-radius: .75em;
+  background: $black-1;
+  
+  padding: .5rem;
+  width:  3rem;
+  height: 3rem;
+
+  position: relative;
+  border: none;
+
+  svg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 1.5rem;
+    height: 1.5rem;
+    padding: 0;
+    margin: 0;
+  }
+}
