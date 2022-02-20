@@ -1,0 +1,100 @@
+@import '../../../../styles/baseStyles';
+
+.filePicker {
+  overflow: hidden;
+  .inner{
+    height: calc(35vh);
+    width: 100%;
+    height: calc(32vh - 2rem);
+    padding: 2rem;
+    border-radius: 1rem;
+    background: transparentize( $highlight, .85 );
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    flex-direction: column;
+    position: relative;
+
+    transition: background .15s ease-in-out;
+
+    &:not(.busy).active {
+      background: transparentize( $highlight, .75 );
+    }
+    &.busy {
+      opacity: .5;
+    }
+  }
+
+  .error {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, -250%);
+    padding: 1rem;
+    border-radius: 1rem;
+    background: darken($red-0, 32.5);
+    transition: transform .3s ease-in-out;
+    &.display {
+      transform: translate(-50%, 15%);
+    }
+  }
+
+  .prompt{
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    flex-direction: column;
+    display: flex;
+  }
+  .icon {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: $highlight;
+  }
+  .promptGroup{
+    padding: .4rem 0;
+  }
+  .dragTitle {
+    display: none;
+  }
+  .divider{
+    display: none;
+    padding: 1rem 0;
+    width: 100%;
+    text-align: center;
+    position: relative;
+    color: transparentize( $highlight, .5 );
+    &::before, &::after {
+      content: '';
+      border-radius: 1rem;
+      position: absolute;
+      height: .15rem;
+      background: transparentize( $highlight, .5 );
+      width: calc( 50% - 2ch );
+      transform: translate(0,-50%);
+    }
+
+    &::before {
+      left: 0;
+      top: 50%;
+    }
+    &::after {
+      right: 0;
+      top: 50%;
+    }
+  }
+  .info {
+    padding-top: .75rem;
+    opacity: .5;
+    font-size: .9rem;
+  }
+}
+
+@include forDesktopUp {
+  .filePicker {
+    .dragTitle, .divider {
+      display: block;
+    }
+  }
+}

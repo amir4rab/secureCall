@@ -1,0 +1,9 @@
+@import '../../../../styles/baseStyles';
+
+.filesDisplay {
+  padding: 2rem 0;
+  height: calc(48vh - 2rem);
+  overflow-y: scroll !important;
+  overflow-x: hidden !important;
+  @include scrollbar;
+}
