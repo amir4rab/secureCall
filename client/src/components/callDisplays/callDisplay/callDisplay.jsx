@@ -2,17 +2,10 @@ import { useEffect, useRef, useState, useContext, useCallback } from 'react';
 import { useRouter } from 'next/router';
 
 import { useMediaManager } from '../../../utils/frontend/camera/useMediaManager';
-import useWebRtc from '../../../utils/frontend/webrtc/useWebRtc';
+import useWebRtc from '../../../utils/hooks/useWebrtc';
 import { SocketsContext } from '../../../providers/socketsProvider/socketsProvider';
-
-import classes from './callDisplay.module.scss';
-
-import CallButtons from '../callButtons/callButtons';
-import WaitingDisplay from '../waitingDisplay/waitingDisplay';
 import { ContactsContext } from '../../../providers/contactsProvider/contactsProvider';
 import useTranslation from 'next-translate/useTranslation';
-
-import VerifyCall from '../../verifyCall/verifyCall';
 import CallElements from '../callElements/callElements';
 
 function CallDisplay({ callTo, calling, audioOnly = false, setCallStartTime, setCallEnded }) {
@@ -52,7 +45,7 @@ function CallDisplay({ callTo, calling, audioOnly = false, setCallStartTime, set
   const { changeMedia, mediaStreamRef, mediaIsGranted, currentVideoRes, updateVideoResolution } = useMediaManager({ videoRef: selfVideoRef, audioOnly: audioOnly });
   const peer = useWebRtc({ 
     peerVideoRef: peerVideoRef.current, 
-    setCallIsAnswered: setCallIsAnswered, 
+    setIsConnected: setCallIsAnswered, 
     setRecipientPeerId: setOtherPeerId, 
     emitHash: setHashObj, 
     onDisconnect: setCallEnded,
@@ -61,10 +54,11 @@ function CallDisplay({ callTo, calling, audioOnly = false, setCallStartTime, set
   });
 
   const initPeerJs = useCallback(async () => {
+    console.log(mediaStreamRef.current);
     if( calling === 'true' ) {
-      peer.init( mediaStreamRef.current, setPeerId );
+      peer.init({ stream: mediaStreamRef.current, emitPeerDetails: setPeerId, isInitializer: false });
     } else {
-      peer.init( mediaStreamRef.current, setPeerId, true, receivingCall.peerJsId );
+      peer.init({ stream: mediaStreamRef.current, emitPeerDetails: setPeerId, isInitializer: true, recipientDetails: receivingCall.peerJsId });
       setOtherPeerId(receivingCall.peerJsId)
     }
     setIsInitialized(true)
