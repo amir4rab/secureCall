@@ -1,0 +1,27 @@
+@import '../../../../styles/baseStyles';
+@import '../styles/maxSize';
+
+.fileUpload {
+  @include fileDisplayStyles;
+  .files {
+    padding: 2rem 0;
+    width: 100%;
+    max-height: 70vh;
+    @include scrollbar;
+    overflow-y: scroll !important;
+    overflow-x: hidden !important;
+  }
+}
+@include forDesktopUp {
+  .fileUpload {
+    @include fileDisplayStyles;
+    .files {
+      padding: 2rem 0;
+      width: 100%;
+      max-height: 75vh;
+      @include scrollbar;
+      overflow-y: scroll !important;
+      overflow-x: hidden !important;
+    }
+  }
+}
