@@ -1,0 +1,133 @@
+@import '../../../../styles/baseStyles';
+@import '../styles/maxSize';
+
+.overView {
+  height: $mobileMaxContentHeight;
+  max-height: $mobileMaxContentHeight;
+  @include fileDisplayStyles;
+
+  .info {
+    padding: 2rem 0;
+    width: 100%;
+
+    height: 30vh;
+    overflow: hidden;
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    .infoBox{
+      
+      border-radius: .5rem;
+      width: 100%;
+      background: $black-2;
+      padding: 2rem;
+
+      display: flex;
+      justify-content: space-between;
+
+      &:not(:last-child) {
+        margin-bottom: 1rem;
+      }
+      .subtitle{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        svg {
+          size: 1.5rem;
+          margin-right: .75rem;
+        }
+      }
+    }
+  }
+  .summery{
+    height: 40vh;
+    max-height: 40vh;
+    overflow: hidden;
+
+    background: transparentize( $highlight, .85 );
+    border-radius: .5rem;
+    padding: 2rem 0;
+    .subtitle{
+      padding: 0 2rem;
+      padding-bottom: 1.5rem;
+    }
+    .summeryFiles{
+      height: 90%;
+      max-height: 90%;
+      padding: 0 2rem;
+      @include scrollbar;
+      overflow-y: auto !important;
+      overflow-x: hidden !important;
+    }
+  }
+}
+
+.emptyFileOverView {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  .prompt {
+    margin-bottom: 2rem;
+    .iconWrapper {
+      font-size: 2.5rem;
+      text-align: center;
+      margin-bottom: .5rem;
+    }
+  }
+  .actions {
+    display: flex;
+    .actionButton {
+      &:not(:last-child) {
+        margin-right: .5rem;    
+      }
+      border: none;
+      display: flex;
+      color: $white-0;
+      background: transparentize( $highlight, .85 ) ;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      svg {
+        font-size: 1.25rem;
+        margin-right: .5rem;
+      }
+      &:hover {
+        cursor: pointer;
+      }
+      &:hover, &:focus-visible {
+        background: transparentize( $highlight, .75 ) ;
+      }
+    }
+  }
+}
+
+@include forDesktopUp {
+  .overView {
+    height: 80vh;
+    max-height: 80vh;
+    max-width: $desktopMaxContentWith;
+    .info {
+      padding: 2rem 0;
+      width: 100%;
+  
+      height: 15vh;
+      .infoBox{
+        border-radius: 1rem;
+        width: calc(50% - 1rem);
+        &:not(:last-child) {
+          margin-bottom: 0;
+        }
+      }
+    }
+    .summery{
+      height: 60vh;
+      max-height: 60vh;
+      border-radius: 1rem;
+      padding: 2rem 0;
+    }
+  }
+}
