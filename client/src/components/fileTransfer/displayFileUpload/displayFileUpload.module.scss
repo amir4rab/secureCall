@@ -1,0 +1,19 @@
+@import '../../../../styles/baseStyles';
+@import '../styles/maxSize';
+
+.fileUpload {
+  height: $mobileMaxContentHeight;
+  max-height: $mobileMaxContentHeight;
+  @include fileDisplayStyles;
+  .title {
+    height: 4rem;
+  }
+}
+
+@include forDesktopUp {
+  .fileUpload {
+    height: 80vh;
+    max-height: 80vh;
+    max-width: $desktopMaxContentWith;
+  }
+}
