@@ -1,0 +1,137 @@
+@import '../../../../styles/baseStyles';
+
+.fileSidebar {
+  position: absolute;
+  left: 2rem;
+  bottom: 2rem;
+  width: calc(100vw - 4rem);
+  height: 4rem;
+  z-index: 100;
+  .inner {
+    // padding: 1rem 0;
+    border-radius: 1rem;
+    width: 100%;
+    height: 100%;
+    background: $black-2;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    // flex-direction: column;
+
+    .icon, .exitButton {
+      width: 2.5rem;
+      height: 2.5rem;
+      border: none;
+      position: relative;
+      border-radius: .5rem;
+      transition: opacity .3s ease-in-out, background .3s ease;
+      svg {
+        font-size: 1.25rem;
+        position: absolute;
+        left: 50%;
+        right: 50%;
+        transform: translate(-50%,-50%);
+      }
+    }
+    .icon {
+      background: transparent;
+      color: $highlight;
+      opacity: .5;
+      transform-origin: center;
+      @keyframes notification {
+        0% { transform: translate(-50%,-50%); }
+        25% { transform: translate(-70%,-50%); }
+        50% { transform: translate(-50%,-50%); }
+        75% { transform: translate(-30%,-50%); }
+        0% { transform: translate(-50%,-50%); }
+      }
+      &.active {
+        opacity: 1;
+        background: transparentize( $highlight, .85 );
+        color: $highlight;
+      }
+      &:not(.active):hover {
+        cursor: pointer;
+      }
+      &:not(.active):hover, &:not(.active):focus {
+        opacity: .75;
+      }
+      &:active {
+        background: transparentize( $highlight, .75 );
+      }
+      &.shake {
+        background-color: transparentize( $highlight, .5 );
+        svg {
+          animation: notification .3s ease forwards infinite;
+        }
+      }
+    }
+    .exitButton {
+      background: lighten($black-2, 5);
+      color: $red-0;
+      &:hover {
+        cursor: pointer;
+      }
+      &:hover, &:focus {
+        background: transparentize( $red-0, .75 );
+      }
+      &:active {
+        background: transparentize( $red-0, .5 );
+      }
+    }
+
+    .topContent {
+      width: 75%;
+      justify-content: space-around;
+    }
+
+    .bottomContent {
+      justify-content: center;
+      width: 25%;
+    }
+
+    .bottomContent, .topContent  {
+      display: flex;
+      align-items: center;
+      height: 100%;
+    }
+  }
+}
+
+@include forDesktopUp {
+  .fileSidebar {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    top: 10vh;
+    width: 7.5rem;
+    height: 80vh;
+    .inner {
+      padding: 2rem 0;
+      flex-direction: column;
+  
+      .icon, .exitButton {
+        width: 4rem;
+        height: 4rem;
+        border: none;
+        &:not(:last-child) {
+          margin-bottom: 1rem;
+        }
+      }
+      .bottomContent, .topContent  {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        width: 100%;
+      }
+      .topContent {
+        justify-content: flex-start;
+      }
+      .bottomContent {
+        justify-content: flex-end;
+      }
+    }
+  }
+}
