@@ -8,7 +8,7 @@ const app = express();
 const httpServer = createServer(app);
 const io = new Server(httpServer, {  
   cors: {    
-    origin: "http://localhost:3000",   
+    origin: process.env.ORIGIN, //"http://localhost:3000"// 
     methods: ["GET", "POST"]  
   },
   allowRequest: (req, callback) => {
