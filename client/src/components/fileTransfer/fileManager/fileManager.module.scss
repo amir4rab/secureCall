@@ -1,0 +1,37 @@
+@import '../../../../styles/baseStyles';
+
+.fileManager {
+  padding: 10vh 2rem;
+  min-height: 100vh;
+  .content {
+    max-height: calc( 100vh - 20vh - 2rem );
+    overflow: hidden;
+    .inner {
+      width: calc( 100vw - 4rem );
+      display: flex;
+      transition: transform .3s ease-in-out;
+    }
+  }
+}
+
+@include forDesktopUp {
+  .fileManager {
+    position: relative;
+    padding: 10vh 0;
+  
+    max-width: $desktopMaxWidth;
+    margin: auto;
+    .content {
+      height: 80vh;
+      max-height: 80vh;
+      margin-left: auto;
+      max-width: calc(100% - 9rem);
+      overflow: hidden;
+      .inner {
+        display: block;
+        width: auto;
+        transition: transform .5s ease-in-out;
+      }
+    }
+  }
+}
