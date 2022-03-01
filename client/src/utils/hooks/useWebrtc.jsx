@@ -22,7 +22,7 @@ function useWebRtc({ setIsConnected= null, setRecipientPeerId, emitHash= null, o
     })
 
     webRtcRef.current = new WebRtc({
-      serverUrl: 'localhost:5001',
+      serverUrl: process.env.NEXT_PUBLIC_WEBRTC_CONNECTOR_URL
       // onPeerConnection: _ => setIsConnected(true)
     });
 
