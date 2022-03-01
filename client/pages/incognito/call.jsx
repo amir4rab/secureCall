@@ -1,8 +1,9 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/router';
 import { AnimatePresence, motion } from 'framer-motion';
+import Head from 'next/head';
 
-import IncognitoCallManager from '../../src/components/incognitoCallManager/incognitoCallManager';
+import IncognitoCallManager from '../../src/components/incognitoManager/incognitoCallManager';
 
 import { validateQuery } from '../../src/utils/frontend/validators/validators';
 import { getQueries } from '../../src/utils/frontend/getQueries/getQueries';
@@ -41,23 +42,28 @@ function IncognitoCallPage() {
   }, [ init, router, isReady ]);
 
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-    >
-      <AnimatePresence>
-        {
-          !isReady ?
-          <LoadingDisplay /> :
-          <IncognitoCallManager 
-            otherPeerId={ callDetails.otherPeerId } 
-            otherPeerSecret={ callDetails.otherPeerSecret } 
-            calling={ callDetails.calling } 
-          />
-        }
-      </AnimatePresence>
-    </motion.div>
+    <>
+      <Head>
+        <title>Secure call</title>
+      </Head>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+      >
+        <AnimatePresence>
+          {
+            !isReady ?
+            <LoadingDisplay /> :
+            <IncognitoCallManager 
+              otherPeerId={ callDetails.otherPeerId } 
+              otherPeerSecret={ callDetails.otherPeerSecret } 
+              isInitializer={ callDetails.calling } 
+            />
+          }
+        </AnimatePresence>
+      </motion.div>
+    </>
   )
 }
 

@@ -77,7 +77,6 @@ function useWebRtc({ setIsConnected= null, setRecipientPeerId, emitHash= null, o
 
   useEffect( _ => {
     if( peerId === null || isInitialized ) return;
-
     if ( connectionTypeRef.current === 'stream' ) {
       if ( !sessionDetails.isInitializer ) { //** user is Answering **//
         webRtcRef.current.answerMediaConnection( selfStreamRef.current );
@@ -85,7 +84,6 @@ function useWebRtc({ setIsConnected= null, setRecipientPeerId, emitHash= null, o
         webRtcRef.current.makeMediaConnection( selfStreamRef.current, { id: sessionDetails.id, secret: sessionDetails.secret } )
       }
     } else {
-      console.error(sessionDetails.isInitializer)
       if ( sessionDetails.isInitializer ) {
         webRtcRef.current.dataConnection({ id: sessionDetails.id, secret: sessionDetails.secret });
       }

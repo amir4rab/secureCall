@@ -1,4 +1,4 @@
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
 import { motion } from 'framer-motion';
 import { useRouter } from 'next/router';
 
@@ -13,6 +13,7 @@ import useTranslation from 'next-translate/useTranslation';
 import { IoWarning } from 'react-icons/io5';
 
 import { fadeUp, fadeRight } from '../../animations/fade';
+import ConnectionTypeSwitch from './connectionTypeSwitch/connectionTypeSwitch';
 
 const fadeWithChild = {
   visible: {
@@ -44,6 +45,7 @@ function Incognito() {
   const userSecretRef = useRef('');
   const userIdErrorRef = useRef('');
   const userSecretErrorRef = useRef('');
+  const [ connectionType, setConnectionType ] = useState('video') 
 
   const { t } = useTranslation('incognito');
   const { t: commenT } = useTranslation('common');
@@ -63,11 +65,15 @@ function Incognito() {
       userSecretErrorRef.current.value = '';
     }
 
-    router.push(`/incognito/call?calling=true#id=${userIdRef.current.value}&secret=${userSecretRef.current.value}`);
+    connectionType === 'video' ? 
+      router.push(`/incognito/call?calling=true#id=${userIdRef.current.value}&secret=${userSecretRef.current.value}`):
+      router.push(`/incognito/data?initializer=true#id=${userIdRef.current.value}&secret=${userSecretRef.current.value}`);
   };
 
   const answerEvent = () => {
-    router.push(`/incognito/call?calling=false`);
+    connectionType === 'video' ? 
+      router.push(`/incognito/call?calling=false`):
+      router.push(`/incognito/data?initializer=false`);
   }
 
   return (
@@ -88,6 +94,7 @@ function Incognito() {
             </p>
           </motion.div>
           <motion.div variants={ fadeWithChild } animate='visible' initial='hidden' className={ classes.box }>
+            <ConnectionTypeSwitch connectionType={ connectionType } setConnectionType={ setConnectionType }/>
             <motion.h3 variants={ childVariants } className={ classes.boxTitle }>
               Call someone 
             </motion.h3>
@@ -116,18 +123,18 @@ function Incognito() {
               <input autoComplete='off' ref={ userSecretRef } placeholder={t('remoteSecretPlaceholder')} id='peerSecret' type="text" />
             </motion.div>
             <motion.button variants={ childVariants } onClick={ callEvent } className={ classes.buttonPrimary }>
-            { commenT('call') }
+            { t('connect') }
             </motion.button>
           </motion.div>
           <motion.div variants={ fadeWithChild } animate='visible' initial='hidden' className={ classes.box }>
             <motion.h3 variants={ childVariants } className={ classes.boxTitle }>
-              {t('getCall')}
+              {t('startConnection')}
             </motion.h3>
             <motion.div variants={ childVariants } className={ classes.boxInfo }>
-              {t('getCallPrompt')}
+              {t('startConnectionPrompt')}
             </motion.div>
             <motion.button onClick={ answerEvent } variants={ childVariants } className={ classes.buttonPrimary }>
-              { commenT('receiveCall') }
+              { t('receiveConnection') }
             </motion.button>
           </motion.div>
         </div>
