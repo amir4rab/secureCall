@@ -3,8 +3,10 @@ import GithubProvider from 'next-auth/providers/github'
 import GoogleProvider from 'next-auth/providers/google'
 import TwitterProvider from "next-auth/providers/twitter";
 import NetlifyProvider from "next-auth/providers/netlify";
+// import { MongoDBAdapter } from "@next-auth/mongodb-adapter"
 
 import generateUser from '../../../src/utils/backend/generateUser/generateUser';
+// import clientPromise from '../../../src/utils/lib/mongodb';
 // import getUserJWT from '../../../src/utils/backend/getUserJWT/getUserJWT';
 
 
@@ -20,6 +22,7 @@ export default NextAuth({
     //   clientSecret: process.env.TWITTER_CLIENT_SECRET
     // })
   ],
+  // adapter: MongoDBAdapter(clientPromise),
   callbacks: {
     async signIn({ user, account, profile, email, credentials }) {
       // ** Generating users account and adding them to database **//
@@ -35,5 +38,6 @@ export default NextAuth({
         }
       }
     }
-  }
+  },
+  secret: process.env.NEXTAUTH_SECRET
 })
