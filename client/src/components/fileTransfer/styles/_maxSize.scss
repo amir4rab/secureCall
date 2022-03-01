@@ -1,0 +1,21 @@
+$mobileMaxContentHeight: calc( 100vh - 20vh - 2rem );
+$desktopMaxContentWith: calc(100% - 9rem);
+
+@mixin fileDisplayStyles {
+  .title {
+    font-size: 2rem;
+    padding-bottom: 1rem;
+    color: $highlight;
+
+    height: 3rem;
+    overflow: hidden;
+  }
+  transition: opacity 0.65s ease-in-out;
+  min-width: calc( 100vw - 4rem );
+  &.hidden {
+    opacity: 0;
+  }
+  @include forDesktopUp {
+    min-width: auto;
+  }
+}
