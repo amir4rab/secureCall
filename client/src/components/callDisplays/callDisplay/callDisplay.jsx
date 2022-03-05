@@ -92,6 +92,8 @@ function CallDisplay({ callTo, calling, audioOnly = false, setCallStartTime, set
     router.push('/panel');
   }
 
+  
+
   const updateMedia = async ( mediaMode ) => {
     const newStreamRef = await changeMedia(mediaMode);
     if( newStreamRef === false ) return;
@@ -120,6 +122,7 @@ function CallDisplay({ callTo, calling, audioOnly = false, setCallStartTime, set
       audioOnly={ audioOnly } 
       changeMedia={ changeMedia } 
       isAudio={ isAudio } 
+      updateMedia={ updateMedia }
       setIsAudio={ setIsAudio } 
       endCallEvent={ endCallEvent }
       recipientName={ getContact(callTo).name.slice(0, 1) }
